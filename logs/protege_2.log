@@ -1,0 +1,3 @@
+2015.05.01 11:00:25.557 CST INFO: *** SYSTEM START ***
+2015.05.01 11:00:26.044 CST WARNING: [Local Folder Repository] The specified file must be a directory. (E:\workspacefortest\workspace\MyGraduatePro\plugins\edu.stanford.smi.protegex.owl) -- LocalFolderRepository.update()
+2015.05.01 11:00:26.190 CST WARNING: [Local Folder Repository] The specified file must be a directory. (E:\workspacefortest\workspace\MyGraduatePro\plugins\edu.stanford.smi.protegex.owl) -- LocalFolderRepository.update()
