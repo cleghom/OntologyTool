@@ -5446,3 +5446,36 @@
 2015.09.21 23:27:13.986 CST INFO: *** SYSTEM START ***
 2015.09.21 23:27:15.240 CST WARNING: [Local Folder Repository] The specified file must be a directory. (E:\workspacefortest\workspace\MyGraduatePro\plugins\edu.stanford.smi.protegex.owl) -- LocalFolderRepository.update()
 2015.09.21 23:27:15.448 CST WARNING: [Local Folder Repository] The specified file must be a directory. (E:\workspacefortest\workspace\MyGraduatePro\plugins\edu.stanford.smi.protegex.owl) -- LocalFolderRepository.update()
+2015.11.07 19:02:27.714 CST INFO: *** SYSTEM START ***
+2015.11.07 19:02:28.635 CST WARNING: [Local Folder Repository] The specified file must be a directory. (E:\workspacefortest\workspace\MyGraduatePro\plugins\edu.stanford.smi.protegex.owl) -- LocalFolderRepository.update()
+2015.11.07 19:02:28.792 CST WARNING: [Local Folder Repository] The specified file must be a directory. (E:\workspacefortest\workspace\MyGraduatePro\plugins\edu.stanford.smi.protegex.owl) -- LocalFolderRepository.update()
+2015.11.07 19:04:13.860 CST WARNING: [Local Folder Repository] The specified file must be a directory. (E:\workspacefortest\workspace\MyGraduatePro\plugins\edu.stanford.smi.protegex.owl) -- LocalFolderRepository.update()
+2015.11.07 19:04:13.892 CST WARNING: [Local Folder Repository] The specified file must be a directory. (E:\workspacefortest\workspace\MyGraduatePro\plugins\edu.stanford.smi.protegex.owl) -- LocalFolderRepository.update()
+2015.11.07 19:05:07.758 CST INFO: *** SYSTEM START ***
+2015.11.07 19:05:09.570 CST WARNING: [Local Folder Repository] The specified file must be a directory. (E:\workspacefortest\workspace\MyGraduatePro\plugins\edu.stanford.smi.protegex.owl) -- LocalFolderRepository.update()
+2015.11.07 19:05:09.993 CST WARNING: [Local Folder Repository] The specified file must be a directory. (E:\workspacefortest\workspace\MyGraduatePro\plugins\edu.stanford.smi.protegex.owl) -- LocalFolderRepository.update()
+2015.11.07 19:05:37.640 CST WARNING: [Local Folder Repository] The specified file must be a directory. (E:\workspacefortest\workspace\MyGraduatePro\plugins\edu.stanford.smi.protegex.owl) -- LocalFolderRepository.update()
+2015.11.07 19:05:37.687 CST WARNING: [Local Folder Repository] The specified file must be a directory. (E:\workspacefortest\workspace\MyGraduatePro\plugins\edu.stanford.smi.protegex.owl) -- LocalFolderRepository.update()
+2015.11.07 19:08:51.505 CST INFO: *** SYSTEM START ***
+2015.11.07 19:08:52.113 CST WARNING: [Local Folder Repository] The specified file must be a directory. (E:\workspacefortest\workspace\MyGraduatePro\plugins\edu.stanford.smi.protegex.owl) -- LocalFolderRepository.update()
+2015.11.07 19:08:52.255 CST WARNING: [Local Folder Repository] The specified file must be a directory. (E:\workspacefortest\workspace\MyGraduatePro\plugins\edu.stanford.smi.protegex.owl) -- LocalFolderRepository.update()
+2015.11.07 19:08:55.727 CST WARNING: [Local Folder Repository] The specified file must be a directory. (E:\workspacefortest\workspace\MyGraduatePro\plugins\edu.stanford.smi.protegex.owl) -- LocalFolderRepository.update()
+2015.11.07 19:08:55.815 CST WARNING: [Local Folder Repository] The specified file must be a directory. (E:\workspacefortest\workspace\MyGraduatePro\plugins\edu.stanford.smi.protegex.owl) -- LocalFolderRepository.update()
+2016.01.21 18:25:17.065 CST INFO: *** SYSTEM START ***
+2016.01.21 18:25:17.755 CST WARNING: [Local Folder Repository] The specified file must be a directory. (E:\workspacefortest\workspace\MyGraduatePro\plugins\edu.stanford.smi.protegex.owl) -- LocalFolderRepository.update()
+2016.01.21 18:25:17.885 CST WARNING: [Local Folder Repository] The specified file must be a directory. (E:\workspacefortest\workspace\MyGraduatePro\plugins\edu.stanford.smi.protegex.owl) -- LocalFolderRepository.update()
+2016.01.21 18:25:20.424 CST WARNING: Wrong type: DefaultOWLNamedClass(http://base#食物) -- DefaultKnowledgeBase.getFrameOfType()
+2016.01.21 20:40:22.079 CST WARNING: [Local Folder Repository] The specified file must be a directory. (E:\workspacefortest\workspace\MyGraduatePro\plugins\edu.stanford.smi.protegex.owl) -- LocalFolderRepository.update()
+2016.01.21 20:40:22.126 CST WARNING: [Local Folder Repository] The specified file must be a directory. (E:\workspacefortest\workspace\MyGraduatePro\plugins\edu.stanford.smi.protegex.owl) -- LocalFolderRepository.update()
+2016.01.21 20:40:22.685 CST WARNING: Wrong type: DefaultOWLNamedClass(http://base#食物) -- DefaultKnowledgeBase.getFrameOfType()
+2016.01.21 20:40:40.544 CST WARNING: [Local Folder Repository] The specified file must be a directory. (E:\workspacefortest\workspace\MyGraduatePro\plugins\edu.stanford.smi.protegex.owl) -- LocalFolderRepository.update()
+2016.01.21 20:40:40.625 CST WARNING: [Local Folder Repository] The specified file must be a directory. (E:\workspacefortest\workspace\MyGraduatePro\plugins\edu.stanford.smi.protegex.owl) -- LocalFolderRepository.update()
+2016.01.21 20:40:41.735 CST WARNING: Wrong type: DefaultOWLNamedClass(http://base#食物) -- DefaultKnowledgeBase.getFrameOfType()
+2016.01.21 20:40:53.920 CST WARNING: [Local Folder Repository] The specified file must be a directory. (E:\workspacefortest\workspace\MyGraduatePro\plugins\edu.stanford.smi.protegex.owl) -- LocalFolderRepository.update()
+2016.01.21 20:40:53.972 CST WARNING: [Local Folder Repository] The specified file must be a directory. (E:\workspacefortest\workspace\MyGraduatePro\plugins\edu.stanford.smi.protegex.owl) -- LocalFolderRepository.update()
+2016.01.21 20:40:54.665 CST WARNING: Wrong type: DefaultOWLNamedClass(http://base#食物) -- DefaultKnowledgeBase.getFrameOfType()
+2016.01.21 20:46:08.741 CST INFO: *** SYSTEM START ***
+2016.01.21 20:46:09.565 CST WARNING: [Local Folder Repository] The specified file must be a directory. (E:\workspacefortest\workspace\MyGraduatePro\plugins\edu.stanford.smi.protegex.owl) -- LocalFolderRepository.update()
+2016.01.21 20:46:09.729 CST WARNING: [Local Folder Repository] The specified file must be a directory. (E:\workspacefortest\workspace\MyGraduatePro\plugins\edu.stanford.smi.protegex.owl) -- LocalFolderRepository.update()
+2016.01.21 20:46:29.018 CST WARNING: [Local Folder Repository] The specified file must be a directory. (E:\workspacefortest\workspace\MyGraduatePro\plugins\edu.stanford.smi.protegex.owl) -- LocalFolderRepository.update()
+2016.01.21 20:46:29.083 CST WARNING: [Local Folder Repository] The specified file must be a directory. (E:\workspacefortest\workspace\MyGraduatePro\plugins\edu.stanford.smi.protegex.owl) -- LocalFolderRepository.update()

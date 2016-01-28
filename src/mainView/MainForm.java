@@ -1192,21 +1192,6 @@ public class MainForm {
 		gbc_label_2.gridx = 0;
 		gbc_label_2.gridy = 3;
 		panel_2.add(label_2, gbc_label_2);
-
-		JPanel panel_3 = new JPanel();
-		tabbedPane.addTab("利用已有OWL文件建模", null, panel_3, null);
-		GridBagLayout gbl_panel_3 = new GridBagLayout();
-		gbl_panel_3.columnWidths = new int[] { 0, 0 };
-		gbl_panel_3.rowHeights = new int[] { 0, 0 };
-		gbl_panel_3.columnWeights = new double[] { 0.0, Double.MIN_VALUE };
-		gbl_panel_3.rowWeights = new double[] { 0.0, Double.MIN_VALUE };
-		panel_3.setLayout(gbl_panel_3);
-
-		JLabel label_4 = new JLabel("\u6587\u4EF6");
-		GridBagConstraints gbc_label_4 = new GridBagConstraints();
-		gbc_label_4.gridx = 0;
-		gbc_label_4.gridy = 0;
-		panel_3.add(label_4, gbc_label_4);
 		frame.getContentPane().setLayout(groupLayout);
 	}
 }
