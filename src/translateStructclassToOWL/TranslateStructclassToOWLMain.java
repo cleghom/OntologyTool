@@ -125,15 +125,14 @@ public class TranslateStructclassToOWLMain {
 			while (scIndividualSize-- > 0) {
 				String individualname = sc.get(scClassSize).ontObjectIndividual.get(scIndividualSize).ontObjectIndividualName;
 				System.out.println("实例名称为->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" + individualname);
-				 tryToAddObjectIndividualIntoOWLModel(o, classname,
-				 individualname);
+				tryToAddObjectIndividualIntoOWLModel(o, classname, individualname);
 			}
 			while (scPropertySize-- > 0) {
 				// 尝试将类的属性添加进模型
 				String propertyname = sc.get(scClassSize).ontObjectProperty.get(scPropertySize).ontObjectPropertyName;
 				String propertyvalue = sc.get(scClassSize).ontObjectProperty.get(scPropertySize).ontObjectPropertyValue;
 				tryToAddObjectPropertyIntoOWLModel(o, propertyname);
-				attachPropertyTOClassOrIndividual(o, classname, propertyname,	 propertyvalue);
+				attachPropertyTOClassOrIndividual(o, classname, propertyname, propertyvalue);
 			}
 		}
 		owlModel = o;
