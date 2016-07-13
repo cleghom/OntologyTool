@@ -13,11 +13,6 @@ import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.Statement;
 
-/**
- * @author Zhao Hang
- * @date:2015-4-2обнГ1:12:16
- * @email:1610227688@qq.com
- */
 public class Get3NFormat {
 	public static String N3_SUBJECT;
 	public static String N3_PREDICATE;
