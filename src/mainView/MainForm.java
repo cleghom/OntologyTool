@@ -155,6 +155,15 @@ public class MainForm {
 		JMenu menu = new JMenu("\u4FE1\u606F\u68C0\u7D22");
 		menuBar.add(menu);
 
+		JMenu menu_2 = new JMenu("\u65AD\u8A00\u6A21\u677F");
+		menu_2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				System.out.println("menu3");
+			}
+		});
+		menuBar.add(menu_2);
+
 		JPanel panel = new JPanel();
 
 		JPanel panel_4 = new JPanel();

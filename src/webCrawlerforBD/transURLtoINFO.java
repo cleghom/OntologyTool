@@ -16,11 +16,6 @@ import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
-/**
- * @author Zhao Hang
- * @date:2015-3-26下午1:08:03
- * @email:1610227688@qq.com
- */
 public class transURLtoINFO {
 	/*
 	 * 匹配消除html元素
@@ -36,7 +31,8 @@ public class transURLtoINFO {
 
 	public static void main(String[] args) throws FailingHttpStatusCodeException, MalformedURLException, IOException {
 		String temp = null;
-		trans("http://www.baidu.com/link?url=LZK7A1cq32a6lPruqJdcoRegkcrnKTCS33JDYpCaCdlOwZfR9BJG1VrwSmjd1Yzi_3lm8fVh_H-jgSCVNYTGya", temp);
+		temp = trans("http://www.169it.com/article/13284450410759638056.html", temp);
+		System.out.println(temp);
 		System.out.println("over");
 	}
 
@@ -108,7 +104,6 @@ public class transURLtoINFO {
 		}
 		return hrefList;
 	}
-
 	/*
 	 * 从一行开始清除标签
 	 * 

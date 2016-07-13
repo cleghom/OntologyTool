@@ -21,11 +21,6 @@ import java.awt.FocusTraversalPolicy;
  * 
  * @author scheglov_ke
  */
-/**
- * @author Zhao Hang
- * @date:2015-3-13обнГ1:06:22
- * @email:1610227688@qq.com
- */
 public class FocusTraversalOnArray extends FocusTraversalPolicy {
 	private final Component m_Components[];
 

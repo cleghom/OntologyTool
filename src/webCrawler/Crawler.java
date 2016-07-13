@@ -18,11 +18,6 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 
-/**
- * @author Zhao Hang
- * @date:2015-3-23обнГ1:07:29
- * @email:1610227688@qq.com
- */
 public class Crawler {
 	private String title;
 	private volatile static int threadNum = 0;

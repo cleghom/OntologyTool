@@ -23,13 +23,6 @@ public class Get3NFormat {
 	public static String N3_PREDICATE;
 	public static String N3_OBJECT;
 
-	public static void main(String[] args) throws IOException {
-		// String fileurl = "C:/Users/ZH/Desktop/get3N.txt";
-		String fileurl = "C:/Users/ZH/Desktop/bird/bird∂œ—‘–≈œ¢.txt";
-
-		contentFromFile(fileurl);
-	}
-
 	@SuppressWarnings("resource")
 	public static String contentFromFile(String filename) throws IOException {
 		OntModel om = ModelFactory.createOntologyModel();

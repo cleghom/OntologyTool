@@ -1810,3 +1810,8 @@
 	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:138)
 	at java.awt.EventDispatchThread.run(EventDispatchThread.java:91)
 
+2016.01.29 17:25:43.131 CST INFO: *** SYSTEM START ***
+2016.01.29 17:25:44.109 CST WARNING: [Local Folder Repository] The specified file must be a directory. (E:\workspacefortest\workspace\MyGraduatePro\plugins\edu.stanford.smi.protegex.owl) -- LocalFolderRepository.update()
+2016.01.29 17:25:44.261 CST WARNING: [Local Folder Repository] The specified file must be a directory. (E:\workspacefortest\workspace\MyGraduatePro\plugins\edu.stanford.smi.protegex.owl) -- LocalFolderRepository.update()
+2016.01.29 17:25:54.602 CST WARNING: [Local Folder Repository] The specified file must be a directory. (E:\workspacefortest\workspace\MyGraduatePro\plugins\edu.stanford.smi.protegex.owl) -- LocalFolderRepository.update()
+2016.01.29 17:25:54.864 CST WARNING: [Local Folder Repository] The specified file must be a directory. (E:\workspacefortest\workspace\MyGraduatePro\plugins\edu.stanford.smi.protegex.owl) -- LocalFolderRepository.update()
