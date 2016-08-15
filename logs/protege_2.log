@@ -1,3 +1,73 @@
 2015.05.01 11:00:25.557 CST INFO: *** SYSTEM START ***
 2015.05.01 11:00:26.044 CST WARNING: [Local Folder Repository] The specified file must be a directory. (E:\workspacefortest\workspace\MyGraduatePro\plugins\edu.stanford.smi.protegex.owl) -- LocalFolderRepository.update()
 2015.05.01 11:00:26.190 CST WARNING: [Local Folder Repository] The specified file must be a directory. (E:\workspacefortest\workspace\MyGraduatePro\plugins\edu.stanford.smi.protegex.owl) -- LocalFolderRepository.update()
+2016.08.02 23:14:07.104 CST INFO: *** SYSTEM START ***
+2016.08.02 23:14:07.841 CST WARNING: [Local Folder Repository] The specified file must be a directory. (E:\workspacefortest\workspace\OntologyTool - 0725\plugins\edu.stanford.smi.protegex.owl) -- LocalFolderRepository.update()
+2016.08.02 23:14:07.871 CST INFO: Loading triples for: null -- ProtegeOWLParser.loadTriples()
+2016.08.02 23:14:08.617 CST INFO:     Completed triple loading after 565 ms -- ProtegeOWLParser.loadTriples()
+2016.08.02 23:14:08.617 CST INFO: Postprocess: Process entities with incorrect Java type (0 entities) ...  -- TriplePostProcessor.processFramesWithWrongJavaType()
+2016.08.02 23:14:08.617 CST INFO: 0 ms
+ -- TriplePostProcessor.processFramesWithWrongJavaType()
+2016.08.02 23:14:08.617 CST INFO: Postprocess: Process metaclasses (3 metaclasses) ...  -- TriplePostProcessor.processMetaclasses()
+2016.08.02 23:14:08.617 CST INFO: 0 ms
+ -- TriplePostProcessor.processMetaclasses()
+2016.08.02 23:14:08.617 CST INFO: Postprocess: Process subclasses of rdf:List (1 classes) ...  -- TriplePostProcessor.processSubclassesOfRdfList()
+2016.08.02 23:14:08.617 CST INFO: 0 ms
+ -- TriplePostProcessor.processSubclassesOfRdfList()
+2016.08.02 23:14:08.617 CST INFO: Postprocess: Instances with multiple types (1 instances) ...  -- TriplePostProcessor.processInstancesWithMultipleTypes()
+2016.08.02 23:14:08.617 CST INFO: 0 ms
+ -- TriplePostProcessor.processInstancesWithMultipleTypes()
+2016.08.02 23:14:08.617 CST INFO: Postprocess: Add inferred superclasses ...  -- TriplePostProcessor.processInferredSuperclasses()
+2016.08.02 23:14:08.617 CST INFO: 0 ms
+ -- TriplePostProcessor.processInferredSuperclasses()
+2016.08.02 23:14:08.627 CST INFO: Postprocess: Process orphan classes (23 classes) ...  -- TriplePostProcessor.processOrphanClses()
+2016.08.02 23:14:08.627 CST INFO: 0 ms
+ -- TriplePostProcessor.processOrphanClses()
+2016.08.02 23:14:08.627 CST INFO: Postprocess: Generalized Concept Inclusion (0 axioms) ...  -- TriplePostProcessor.processGeneralizedConceptInclusions()
+2016.08.02 23:14:08.627 CST INFO: 0 ms
+ -- TriplePostProcessor.processGeneralizedConceptInclusions()
+2016.08.02 23:14:08.627 CST INFO: Postprocess: Abstract classes...  -- TriplePostProcessor.processAbstractClasses()
+2016.08.02 23:14:08.627 CST INFO: 0 ms
+ -- TriplePostProcessor.processAbstractClasses()
+2016.08.02 23:14:08.627 CST INFO: Postprocess: Domain and range of properties...  -- TriplePostProcessor.processDomainAndRange()
+2016.08.02 23:14:08.637 CST INFO: 10 ms
+ -- TriplePostProcessor.processDomainAndRange()
+2016.08.02 23:14:08.637 CST INFO: Postprocess: Possibly typed entities (0 resources) ...  -- TriplePostProcessor.processPossiblyTypedResources()
+2016.08.02 23:14:08.637 CST INFO: 0 ms
+ -- TriplePostProcessor.processPossiblyTypedResources()
+2016.08.02 23:14:08.637 CST INFO: Updating underlying frames model in 0 ms -- ProtegeOWLParser.doFinalPostProcessing()
+2016.08.02 23:14:32.788 CST INFO: *** SYSTEM START ***
+2016.08.02 23:14:33.508 CST WARNING: [Local Folder Repository] The specified file must be a directory. (E:\workspacefortest\workspace\OntologyTool - 0725\plugins\edu.stanford.smi.protegex.owl) -- LocalFolderRepository.update()
+2016.08.02 23:14:33.529 CST INFO: Loading triples for: null -- ProtegeOWLParser.loadTriples()
+2016.08.02 23:14:34.274 CST INFO:     Completed triple loading after 567 ms -- ProtegeOWLParser.loadTriples()
+2016.08.02 23:14:34.274 CST INFO: Postprocess: Process entities with incorrect Java type (0 entities) ...  -- TriplePostProcessor.processFramesWithWrongJavaType()
+2016.08.02 23:14:34.274 CST INFO: 0 ms
+ -- TriplePostProcessor.processFramesWithWrongJavaType()
+2016.08.02 23:14:34.274 CST INFO: Postprocess: Process metaclasses (3 metaclasses) ...  -- TriplePostProcessor.processMetaclasses()
+2016.08.02 23:14:34.274 CST INFO: 0 ms
+ -- TriplePostProcessor.processMetaclasses()
+2016.08.02 23:14:34.274 CST INFO: Postprocess: Process subclasses of rdf:List (1 classes) ...  -- TriplePostProcessor.processSubclassesOfRdfList()
+2016.08.02 23:14:34.274 CST INFO: 0 ms
+ -- TriplePostProcessor.processSubclassesOfRdfList()
+2016.08.02 23:14:34.274 CST INFO: Postprocess: Instances with multiple types (1 instances) ...  -- TriplePostProcessor.processInstancesWithMultipleTypes()
+2016.08.02 23:14:34.274 CST INFO: 0 ms
+ -- TriplePostProcessor.processInstancesWithMultipleTypes()
+2016.08.02 23:14:34.274 CST INFO: Postprocess: Add inferred superclasses ...  -- TriplePostProcessor.processInferredSuperclasses()
+2016.08.02 23:14:34.274 CST INFO: 0 ms
+ -- TriplePostProcessor.processInferredSuperclasses()
+2016.08.02 23:14:34.284 CST INFO: Postprocess: Process orphan classes (23 classes) ...  -- TriplePostProcessor.processOrphanClses()
+2016.08.02 23:14:34.284 CST INFO: 0 ms
+ -- TriplePostProcessor.processOrphanClses()
+2016.08.02 23:14:34.284 CST INFO: Postprocess: Generalized Concept Inclusion (0 axioms) ...  -- TriplePostProcessor.processGeneralizedConceptInclusions()
+2016.08.02 23:14:34.284 CST INFO: 0 ms
+ -- TriplePostProcessor.processGeneralizedConceptInclusions()
+2016.08.02 23:14:34.284 CST INFO: Postprocess: Abstract classes...  -- TriplePostProcessor.processAbstractClasses()
+2016.08.02 23:14:34.284 CST INFO: 0 ms
+ -- TriplePostProcessor.processAbstractClasses()
+2016.08.02 23:14:34.284 CST INFO: Postprocess: Domain and range of properties...  -- TriplePostProcessor.processDomainAndRange()
+2016.08.02 23:14:34.294 CST INFO: 10 ms
+ -- TriplePostProcessor.processDomainAndRange()
+2016.08.02 23:14:34.294 CST INFO: Postprocess: Possibly typed entities (0 resources) ...  -- TriplePostProcessor.processPossiblyTypedResources()
+2016.08.02 23:14:34.294 CST INFO: 0 ms
+ -- TriplePostProcessor.processPossiblyTypedResources()
+2016.08.02 23:14:34.294 CST INFO: Updating underlying frames model in 0 ms -- ProtegeOWLParser.doFinalPostProcessing()

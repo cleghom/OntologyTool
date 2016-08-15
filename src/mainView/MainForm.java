@@ -1,5 +1,12 @@
 package mainView;
 
+import edu.stanford.smi.protege.exception.OntologyLoadException;
+import edu.stanford.smi.protegex.owl.ProtegeOWL;
+import edu.stanford.smi.protegex.owl.model.OWLModel;
+import getContent.GetContent;
+import hanLP._object;
+import ioOperation.WriteToFile;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -16,14 +23,19 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.io.Reader;
 import java.io.Writer;
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Enumeration;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -35,7 +47,6 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
@@ -52,6 +63,7 @@ import javax.swing.text.StyleConstants;
 
 import org.eclipse.wb.swing.FocusTraversalOnArray;
 
+import staticvariable.staticvalue;
 import translateTo3N.Get3NFormat;
 import webCrawler.Crawler;
 import webCrawlerforBD.HtmlUnitforBD;
@@ -60,37 +72,16 @@ import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.hp.hpl.jena.ontology.OntModel;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 
-import edu.stanford.smi.protege.exception.OntologyLoadException;
-import edu.stanford.smi.protegex.owl.ProtegeOWL;
-import edu.stanford.smi.protegex.owl.model.OWLModel;
-import getContent.GetContent;
-
-/**
- * @author Zhao Hang
- * @date:2015-3-13下午1:06:14
- * @email:1610227688@qq.com
- */
 public class MainForm {
 	/**
 	 * 自定义部分变量
 	 */
 	Crawler crawler;
-	private String deftitle = "云计算";
-	private int defurlCount = 1000;
-	private int defthreadCount = 5;// 表示最多同时允许运行多少个线程
-	private double defthreshold = 0.91;
-	private String defstartURL = "http://www.csdn.net/article/2015-03-25/2824310";
 	// baidu搜素部分的初始变量定义
 	private int baidu_num = 10;
 	private String baidu_word = "鸟";
 	HtmlUnitforBD hu;
 	private JFrame frame;
-
-	private JTextField textField_threadNum;
-	private JTextField textField_index;
-	private JTextField textField_title;
-	private JTextField textField_starturl;
-	private JTextField textField_links;
 	private static ArrayList<String> temp3N = new ArrayList<>();// 保存暂存的3N范式
 	private JTextField txtOwlBase;
 
@@ -123,9 +114,6 @@ public class MainForm {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		String newtitle = "http://www.csdn.net/article/2015-03-25/2824310";
-		JLabel label_6 = new JLabel("\u5F53\u524D\u67E5\u627E\u6570");
-
 		frame = new JFrame();
 		int windowsWedth = 1200;
 		int windowsHeight = 768;
@@ -133,7 +121,7 @@ public class MainForm {
 		int h = (Toolkit.getDefaultToolkit().getScreenSize().height - windowsHeight) / 2;
 		System.out.println("居中frame操作\t坐标：(" + w + ":" + h + ")\t大小：" + windowsWedth + "×" + windowsHeight);
 
-		frame.setTitle("\u57FA\u4E8E\u672C\u4F53\u8BED\u8A00\u7684\u673A\u5668\u5B66\u4E60\u81EA\u52A8\u6784\u5EFA\u7CFB\u7EDF\u7814\u7A76\u6A21\u62DF\u7CFB\u7EDF");
+		frame.setTitle("\u4E2D\u6587\u672C\u4F53\u81EA\u52A8\u6784\u5EFA\u5DE5\u5177");
 		frame.setBounds(w, h, windowsWedth, windowsHeight);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -143,7 +131,7 @@ public class MainForm {
 		JMenu menu_1 = new JMenu("\u6587\u4EF6");
 		menuBar.add(menu_1);
 
-		JMenuItem menuItem = new JMenuItem("\u6253\u5F00");
+		JMenuItem menuItem = new JMenuItem("\u8BBE\u7F6E");
 		menuItem.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -152,17 +140,14 @@ public class MainForm {
 		});
 		menu_1.add(menuItem);
 
-		JMenu menu = new JMenu("\u4FE1\u606F\u68C0\u7D22");
-		menuBar.add(menu);
+		JMenuItem menuItem_2 = new JMenuItem("\u6E05\u7406\u5168\u90E8");
+		menu_1.add(menuItem_2);
 
-		JMenu menu_2 = new JMenu("\u65AD\u8A00\u6A21\u677F");
-		menu_2.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				System.out.println("menu3");
-			}
-		});
-		menuBar.add(menu_2);
+		JSeparator separator_1 = new JSeparator();
+		menu_1.add(separator_1);
+
+		JMenuItem menuItem_1 = new JMenuItem("\u9000\u51FA");
+		menu_1.add(menuItem_1);
 
 		JPanel panel = new JPanel();
 
@@ -264,23 +249,27 @@ public class MainForm {
 		JButton btnNewButton_3 = new JButton("\u5F00\u59CB\u6267\u884C\u64CD\u4F5C");
 		btnNewButton_3.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
-				String temp = "temp_updated";// 保存在D:/owlModel/文件夹下的temp中
-				String base = txtOwlBase.getText();
 				String info = textPane_6.getText();
 
 				String newinfo = GetContent.getcontent(info, info);
 
 				try {
-					OWLModel owlmodel = ProtegeOWL.createJenaOWLModel();
-					translateStructclassToOWL.TranslateStructclassToOWLMain.mainfunction(owlmodel, newinfo, base, temp);
+					String filePath = staticvalue.localaddr + "\\" + staticvalue.tempfilename + ".owl";
+					FileInputStream file = new FileInputStream(filePath);
+					Reader in = new InputStreamReader(file, "UTF-8");
+
+					OWLModel oldowl = ProtegeOWL.createJenaOWLModelFromReader(in);
+					OWLModel newowl = ProtegeOWL.createJenaOWLModel();
+					newowl = translateStructclassToOWL.TranslateStructclassToOWLMain.mainfunction(oldowl, newinfo);
 					SimpleAttributeSet set = new SimpleAttributeSet();
 					StyleConstants.setBackground(set, Color.YELLOW);
+					WriteToFile.writetoFile(newowl, staticvalue.localaddr + "\\" + staticvalue.tempfilename + "-update.owl");
 				} catch (OntologyLoadException | IOException e1) {
 					e1.printStackTrace();
 				}
 				try {
-					Desktop.getDesktop().open(new File("D:/owlmodel/temp_updated.owl"));
-					label_14.setText("执行反馈：执行结束并已经输出到文件D:/owlmodel/temp_updated.owl");
+					Desktop.getDesktop().open(new File(staticvalue.localaddr + "\\" + staticvalue.tempfilename + "-update.owl"));
+					label_14.setText("执行反馈：执行结束并已经输出到文件" + staticvalue.localaddr);
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
@@ -348,7 +337,7 @@ public class MainForm {
 				if (rdbtnrdf.isSelected()) {
 					OntModel ontmodel = ModelFactory.createOntologyModel();
 					textPane_5.setText("新建OntModel模型结束\n");
-					String outFileuri = "D:/owlmodel/temp.rdf";
+					String outFileuri = staticvalue.localaddr + "\\" + staticvalue.tempfilename + ".rdf";
 					String content = textPane_1.getText();
 					String newcontent = "";
 					GetContent.getcontent(content, newcontent);
@@ -377,48 +366,30 @@ public class MainForm {
 						e1.printStackTrace();
 					}
 				}
+
 				if (rdbtnowl.isSelected()) {
 					textPane_5.setText("开始建立owl模型。。。");
-					String temp = "temp";// 保存在D:/owlModel/文件夹下的temp中
+
+					Format format = new SimpleDateFormat("yyMMdd-hhmmss");
+					String time = format.format(new Date());
+					staticvalue.tempfilename = time;
 					String base = txtOwlBase.getText();
 					String info = textPane_1.getText();
 					info = GetContent.getcontent(info, info);
 					System.out.println(info);
 					try {
-						OWLModel owlmodel = ProtegeOWL.createJenaOWLModel();
-						translateStructclassToOWL.TranslateStructclassToOWLMain.mainfunction(owlmodel, info, base, temp);
+						OWLModel newowlmodel = ProtegeOWL.createJenaOWLModel();// 本处是新建一个新的owl本体，实际上可以调出原有的owl本体文件，只需要把此处的owlmodel采用文件打开的方式打开即可
+						newowlmodel = translateStructclassToOWL.TranslateStructclassToOWLMain.mainfunction(info, base);
 						SimpleAttributeSet set = new SimpleAttributeSet();
 						StyleConstants.setBackground(set, Color.YELLOW);
+						WriteToFile.writetoFile(newowlmodel, staticvalue.localaddr + "\\" + staticvalue.tempfilename + ".owl");
 						textPane_5.getDocument().insertString(
 								textPane_5.getDocument().getLength(),
 								"\n由于java protege的API直接解析OWL文件到java项目中的过程中utf-8格式存在与Unicode编码格式乱码不兼容，处理过程较麻烦，因为该处只做展示过程，故此处使用可解析owl的浏览器打开并显示文件。"
-										+ "\n输出到文件D:/owlmodel/temp.owl", set);
+										+ "\n输出到文件" + staticvalue.localaddr + "\\" + staticvalue.tempfilename + ".owl", set);
 					} catch (OntologyLoadException | IOException | BadLocationException e1) {
 						e1.printStackTrace();
 					}
-
-					/*
-					 * 由于解析OWL到文本格式出现问题，只以浏览器形式打开。
-					 */
-					// String charsetName = "Unicode";
-					// File f = new File("D:/owlmodel/temp.owl.txt");
-					// try {
-					// InputStreamReader insReader = new InputStreamReader(new
-					// FileInputStream(f), charsetName);
-					// BufferedReader bufReader = new BufferedReader(insReader);
-					// String aline = "";
-					// SimpleAttributeSet set = new SimpleAttributeSet();
-					//
-					// while ((aline = bufReader.readLine()) != null) {
-					// System.out.println(aline);
-					// textPane_5.getDocument().insertString(textPane_5.getDocument().getLength(),
-					// aline + "\n", set);
-					// }
-					// bufReader.close();
-					// } catch (IOException | BadLocationException e2) {
-					// //
-					// e2.printStackTrace();
-					// }
 				}
 			}
 		});
@@ -447,21 +418,10 @@ public class MainForm {
 		btnNewButton_2.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				try {
-					Desktop.getDesktop().open(new File("D:/owlmodel/temp.owl"));
+					Desktop.getDesktop().open(new File(staticvalue.localaddr + "//" + staticvalue.tempfilename + ".owl"));
 				} catch (IOException e1) {
-					//
 					e1.printStackTrace();
 				}
-			}
-		});
-
-		JButton btnowl = new JButton("\u70B9\u6B64\u6E05\u7406\u6B64owl\u6587\u6863");
-		btnowl.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				File file = new File("D:/owlmodel/temp.owl");
-				file.delete();
-				textPane_5.setText("文档缓存已经清除！");
 			}
 		});
 
@@ -486,14 +446,12 @@ public class MainForm {
 																						.addComponent(txtOwlBase, 233, 233, 233))
 																		.addGroup(
 																				gl_panel_10.createSequentialGroup().addGap(18)
-																						.addComponent(btnNewButton_2)
-																						.addPreferredGap(ComponentPlacement.RELATED)
-																						.addComponent(btnowl))))
+																						.addComponent(btnNewButton_2))))
 										.addGroup(
 												gl_panel_10.createSequentialGroup().addContainerGap()
 														.addComponent(separator, GroupLayout.PREFERRED_SIZE, 404, GroupLayout.PREFERRED_SIZE))
 										.addComponent(rdbtnowl).addGroup(gl_panel_10.createSequentialGroup().addGap(21).addComponent(lblOel)))
-						.addContainerGap(851, Short.MAX_VALUE)));
+						.addContainerGap(857, Short.MAX_VALUE)));
 		gl_panel_10.setVerticalGroup(gl_panel_10.createParallelGroup(Alignment.LEADING).addGroup(
 				gl_panel_10
 						.createSequentialGroup()
@@ -506,10 +464,8 @@ public class MainForm {
 						.addGroup(
 								gl_panel_10.createParallelGroup(Alignment.BASELINE).addComponent(lblOel)
 										.addComponent(txtOwlBase, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-						.addGap(1)
-						.addGroup(
-								gl_panel_10.createParallelGroup(Alignment.BASELINE).addComponent(button_2).addComponent(btnNewButton_2)
-										.addComponent(btnowl)).addContainerGap()));
+						.addGap(1).addGroup(gl_panel_10.createParallelGroup(Alignment.BASELINE).addComponent(button_2).addComponent(btnNewButton_2))
+						.addContainerGap()));
 		panel_10.setLayout(gl_panel_10);
 
 		scrollPane_5.setViewportView(textPane_5);
@@ -538,6 +494,7 @@ public class MainForm {
 					radioButton_2.setSelected(false);
 			}
 		});
+
 		radioButton_2.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				if (radioButton_3.isSelected())
@@ -556,15 +513,17 @@ public class MainForm {
 					String[] eachstring = temp.split("\r\n");
 					int alsize = al.size();
 					int num = 0;
+					String inf = "";
 					while (num < alsize) {
-						String newtemp = hanLP.HanLPMain.getObject(hanLP.HanLPMain.getAdvancedTermOfthisSentencs(hanLP.HanLPMain
-								.getBaseTermOfthisSentence(eachstring[num])));
-						System.out.println("newtemp is" + newtemp);
+						@SuppressWarnings("unused")
+						ArrayList<_object> newtemp = hanLP.HanLPMain.getObject(
+								hanLP.HanLPMain.getAdvancedTermOfthisSentencs(hanLP.HanLPMain.getBaseTermOfthisSentence(eachstring[num])), inf);
+						String info = hanLP.HanLPMain.getinf();
+						System.out.println("YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY");
 						SimpleAttributeSet set = new SimpleAttributeSet();
 						try {
-							textPane_4.getDocument().insertString(textPane_4.getDocument().getLength(), newtemp + "\n", set);
+							textPane_4.getDocument().insertString(textPane_4.getDocument().getLength(), info + "\n", set);
 						} catch (BadLocationException e1) {
-							//
 							e1.printStackTrace();
 						}
 						num++;
@@ -589,15 +548,11 @@ public class MainForm {
 		panel_6.setLayout(gl_panel_6);
 
 		JScrollPane scrollPane = new JScrollPane();
-
-		final JButton crawlerbt = new JButton("开始");
 		JLabel lblNewLabel_2 = new JLabel("网络建模读取过程反馈");
 		scrollPane.setColumnHeaderView(lblNewLabel_2);
 
 		final JTextPane textPane = new JTextPane();
 		scrollPane.setViewportView(textPane);
-		// System.out.println(newtitle);
-		crawler = new Crawler("云计算", newtitle, textPane, label_6, crawlerbt);
 		frame.getContentPane().setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[] { scrollPane }));
 
 		JScrollPane scrollPane_1 = new JScrollPane();
@@ -813,227 +768,6 @@ public class MainForm {
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		panel.add(tabbedPane, BorderLayout.CENTER);
 
-		final JPanel textField_keyword = new JPanel();
-		tabbedPane.addTab("利用爬虫建模", null, textField_keyword, null);
-		GridBagLayout gbl_textField_keyword = new GridBagLayout();
-		gbl_textField_keyword.columnWidths = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-		gbl_textField_keyword.rowHeights = new int[] { 0, 0, 0, 0, 0, 0 };
-		gbl_textField_keyword.columnWeights = new double[] { 0.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
-		gbl_textField_keyword.rowWeights = new double[] { 1.0, 1.0, 1.0, 1.0, 1.0, Double.MIN_VALUE };
-		textField_keyword.setLayout(gbl_textField_keyword);
-
-		JLabel lblNewLabel_4 = new JLabel("主题");
-		GridBagConstraints gbc_lblNewLabel_4 = new GridBagConstraints();
-		gbc_lblNewLabel_4.anchor = GridBagConstraints.EAST;
-		gbc_lblNewLabel_4.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel_4.gridx = 0;
-		gbc_lblNewLabel_4.gridy = 0;
-		textField_keyword.add(lblNewLabel_4, gbc_lblNewLabel_4);
-
-		textField_title = new JTextField();
-		// textField_title.setText(crawler.getStartURL());
-		GridBagConstraints gbc_textField_title = new GridBagConstraints();
-		gbc_textField_title.gridwidth = 8;
-		gbc_textField_title.insets = new Insets(0, 0, 5, 0);
-		gbc_textField_title.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField_title.gridx = 1;
-		gbc_textField_title.gridy = 0;
-		textField_keyword.add(textField_title, gbc_textField_title);
-		textField_title.setColumns(10);
-
-		JLabel lblUrl = new JLabel("初始URL");
-		GridBagConstraints gbc_lblUrl = new GridBagConstraints();
-		gbc_lblUrl.anchor = GridBagConstraints.EAST;
-		gbc_lblUrl.insets = new Insets(0, 0, 5, 5);
-		gbc_lblUrl.gridx = 0;
-		gbc_lblUrl.gridy = 1;
-		textField_keyword.add(lblUrl, gbc_lblUrl);
-
-		textField_starturl = new JTextField();
-		GridBagConstraints gbc_textField_starturl = new GridBagConstraints();
-		gbc_textField_starturl.gridwidth = 8;
-		gbc_textField_starturl.insets = new Insets(0, 0, 5, 0);
-		gbc_textField_starturl.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField_starturl.gridx = 1;
-		gbc_textField_starturl.gridy = 1;
-		textField_keyword.add(textField_starturl, gbc_textField_starturl);
-		textField_starturl.setColumns(10);
-
-		JLabel label = new JLabel("\u5173\u952E\u8BCD");
-		GridBagConstraints gbc_label = new GridBagConstraints();
-		gbc_label.anchor = GridBagConstraints.EAST;
-		gbc_label.insets = new Insets(0, 0, 5, 5);
-		gbc_label.gridx = 0;
-		gbc_label.gridy = 2;
-		textField_keyword.add(label, gbc_label);
-
-		final JTextArea textArea_keywords = new JTextArea();
-		textArea_keywords.setColumns(10);
-		GridBagConstraints gbc_textArea_keywords = new GridBagConstraints();
-		gbc_textArea_keywords.gridwidth = 8;
-		gbc_textArea_keywords.insets = new Insets(0, 0, 5, 0);
-		gbc_textArea_keywords.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textArea_keywords.gridx = 1;
-		gbc_textArea_keywords.gridy = 2;
-		textField_keyword.add(textArea_keywords, gbc_textArea_keywords);
-
-		JLabel lblLinks = new JLabel("访问总数");
-		GridBagConstraints gbc_lblLinks = new GridBagConstraints();
-		gbc_lblLinks.anchor = GridBagConstraints.EAST;
-		gbc_lblLinks.insets = new Insets(0, 0, 5, 5);
-		gbc_lblLinks.gridx = 0;
-		gbc_lblLinks.gridy = 3;
-		textField_keyword.add(lblLinks, gbc_lblLinks);
-
-		textField_links = new JTextField();
-		GridBagConstraints gbc_textField_links = new GridBagConstraints();
-		gbc_textField_links.insets = new Insets(0, 0, 5, 5);
-		gbc_textField_links.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField_links.gridx = 1;
-		gbc_textField_links.gridy = 3;
-		textField_keyword.add(textField_links, gbc_textField_links);
-		textField_links.setColumns(10);
-
-		JLabel label_1 = new JLabel("线程数");
-		GridBagConstraints gbc_label_1 = new GridBagConstraints();
-		gbc_label_1.fill = GridBagConstraints.VERTICAL;
-		gbc_label_1.insets = new Insets(0, 0, 5, 5);
-		gbc_label_1.gridx = 2;
-		gbc_label_1.gridy = 3;
-		textField_keyword.add(label_1, gbc_label_1);
-
-		textField_threadNum = new JTextField();
-		GridBagConstraints gbc_textField_threadNum = new GridBagConstraints();
-		gbc_textField_threadNum.insets = new Insets(0, 0, 5, 5);
-		gbc_textField_threadNum.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField_threadNum.gridx = 3;
-		gbc_textField_threadNum.gridy = 3;
-		textField_keyword.add(textField_threadNum, gbc_textField_threadNum);
-		textField_threadNum.setColumns(10);
-
-		JLabel label_5 = new JLabel("\u9600\u503C");
-		GridBagConstraints gbc_label_5 = new GridBagConstraints();
-		gbc_label_5.fill = GridBagConstraints.VERTICAL;
-		gbc_label_5.insets = new Insets(0, 0, 0, 5);
-		gbc_label_5.gridx = 0;
-		gbc_label_5.gridy = 4;
-		textField_keyword.add(label_5, gbc_label_5);
-
-		textField_index = new JTextField();
-		GridBagConstraints gbc_textField_index = new GridBagConstraints();
-		gbc_textField_index.insets = new Insets(0, 0, 0, 5);
-		gbc_textField_index.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField_index.gridx = 1;
-		gbc_textField_index.gridy = 4;
-		textField_keyword.add(textField_index, gbc_textField_index);
-		textField_index.setColumns(10);
-
-		GridBagConstraints gbc_label_6 = new GridBagConstraints();
-		gbc_label_6.insets = new Insets(0, 0, 0, 5);
-		gbc_label_6.gridx = 2;
-		gbc_label_6.gridy = 4;
-		textField_keyword.add(label_6, gbc_label_6);
-
-		final JButton crawlerstopbt = new JButton("停止");
-		crawlerstopbt.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				crawler.stopSearch();
-				crawlerstopbt.setEnabled(true);
-			}
-		});
-
-		crawlerbt.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				// crawlerbt.setText("开始");
-				textPane.setText("*******************start*******************\n");
-				crawler.initialize();
-				crawler.parallelhandle();
-				// crawlerbt.setEnabled(false);
-			}
-		});
-
-		JButton button_setbt = new JButton("应用");
-		button_setbt.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				crawler.setTitle(textField_title.getText());
-				crawler.setStartURL(textField_starturl.getText());
-				try {
-					int urlcount = Integer.parseInt(textField_links.getText());
-					crawler.setUrlCount(urlcount);
-				} catch (NumberFormatException ee) {
-					JOptionPane.showMessageDialog(null, "Format Error of Url Count!", "Error", JOptionPane.ERROR_MESSAGE);
-				}
-				try {
-					int threadCount = Integer.parseInt(textField_threadNum.getText());
-					crawler.setThreadCount(threadCount);
-				} catch (NumberFormatException ee) {
-					JOptionPane.showMessageDialog(null, "Format Error of thread Count!", "Error", JOptionPane.ERROR_MESSAGE);
-				}
-				try {
-					double threshold = Double.parseDouble(textField_index.getText());
-					crawler.setThreshold(threshold);
-				} catch (NumberFormatException ee) {
-					JOptionPane.showMessageDialog(null, "Format Error of threshold!", "Error", JOptionPane.ERROR_MESSAGE);
-				}
-				crawler.removeAllKeyWords();
-				String[] keywords = textArea_keywords.getText().split("\\|");
-				for (int i = 0; i < keywords.length; i++) {
-					crawler.addKeyWord(keywords[i], 0);
-				}
-				JOptionPane.showMessageDialog(null, "Succeed to set the configuration!", "Set", JOptionPane.INFORMATION_MESSAGE);
-			}
-		});
-		GridBagConstraints gbc_button_setbt = new GridBagConstraints();
-		gbc_button_setbt.insets = new Insets(0, 0, 0, 5);
-		gbc_button_setbt.gridx = 4;
-		gbc_button_setbt.gridy = 4;
-		textField_keyword.add(button_setbt, gbc_button_setbt);
-
-		crawler.setStartURL(newtitle);
-		crawler.setTitle(deftitle);
-		crawler.setThreadCount(defthreadCount);
-		crawler.setThreshold(defthreshold);
-		crawler.setUrlCount(defurlCount);
-
-		textField_title.setText(deftitle);
-		textField_starturl.setText(defstartURL);
-		textField_links.setText("" + defurlCount);
-		textField_threadNum.setText("" + defthreadCount);
-		textField_index.setText("" + defthreshold);
-		crawler.addKeyWord("云计算", 0);
-		crawler.addKeyWord("数据中心", 0);
-		crawler.addKeyWord("平台", 0);
-		crawler.addKeyWord("架构", 0);
-		crawler.addKeyWord("数据库", 0);
-		crawler.addKeyWord("安全", 0);
-		crawler.addKeyWord("Hadoop", 0);
-		crawler.addKeyWord("存储", 0);
-		crawler.addKeyWord("虚拟化", 0);
-		crawler.addKeyWord("隐私", 0);
-		crawler.addKeyWord("黑客", 0);
-		crawler.addKeyWord("分布式", 0);
-		crawler.addKeyWord("MapReduce", 0);
-		crawler.addKeyWord("cloud", 0);
-		Enumeration<String> keywords = crawler.getKeyWords();
-		while (keywords.hasMoreElements()) {
-			(textArea_keywords).append(keywords.nextElement() + "|");
-		}
-
-		GridBagConstraints gbc_crawlerbt = new GridBagConstraints();
-		gbc_crawlerbt.insets = new Insets(0, 0, 0, 5);
-		gbc_crawlerbt.gridwidth = 2;
-		gbc_crawlerbt.gridx = 5;
-		gbc_crawlerbt.gridy = 4;
-		textField_keyword.add(crawlerbt, gbc_crawlerbt);
-		GridBagConstraints gbc_crawlerstopbt = new GridBagConstraints();
-		gbc_crawlerstopbt.gridwidth = 2;
-		gbc_crawlerstopbt.gridx = 7;
-		gbc_crawlerstopbt.gridy = 4;
-		textField_keyword.add(crawlerstopbt, gbc_crawlerstopbt);
-
 		JPanel panel_1 = new JPanel();
 		tabbedPane.addTab("百度搜索引擎", null, panel_1, null);
 		GridBagLayout gbl_panel_1 = new GridBagLayout();
@@ -1090,12 +824,6 @@ public class MainForm {
 				try {
 					textPane.setText("start!\n");
 					HtmlUnitforBD.mainFunction(num, word, textPane, textPane_1);
-
-					// SimpleAttributeSet set = new SimpleAttributeSet();
-					// StyleConstants.setUnderline(set, true);
-					// hu.insertWeb(textPane);
-					// textPane.getDocument().insertString(textPane.getDocument().getLength(),
-					// "\n", set);
 				} catch (FailingHttpStatusCodeException | IOException e1) {
 					e1.printStackTrace();
 				}
@@ -1168,7 +896,6 @@ public class MainForm {
 					label_fname.setText(file1.getAbsolutePath());
 					String aline;
 					SimpleAttributeSet set2 = new SimpleAttributeSet();
-					// StyleConstants.setUnderline(set, true);
 					while ((aline = br.readLine()) != null)
 						// 按行读取文本
 						textPane_1.getDocument().insertString(textPane_1.getDocument().getLength(), aline + "\n", set2);

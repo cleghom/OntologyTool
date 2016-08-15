@@ -1,156 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tag>
-	区别语素 bg,
-	数语素 mg,
-	名词性惯用语 nl,
-	字母专名 nx,
-	量词语素 qg,
-	助词 ud,
-	助词 uj,
-	着 uz,
-	过 ug,
-	连词ul,
-	连词 uv,
-	语气语素 yg,
-	状态词 zg,
-
-	// 以上标签来自ICT，以下标签来自北大
-	名词 n,
-	人名 nr,
-	日语人名 nrj,
-	音译人名nrf,
-	复姓 nr1,
-	蒙古姓名 nr2,
-	地名 ns,
-	音译地名 nsf,
-	机构团体名 nt,
-	公司名 ntc,
-	工厂 ntcf,
-	银行 ntcb,
-	酒店宾馆 ntch,
-	政府机构 nto,
-	大学 ntu,
-	中小学 nts,
-	医院 nth,
-	医药疾病等健康相关名词 nh,
-	药品 nhm,
-	疾病 nhd,
-	工作相关名词 nn,
-	职务职称 nnt,
-	职业nnd,
-	名词性语素ng,
-	食品，比如“薯片”nf,
-	机构相关（不是独立机构名）ni,
-	教育相关机构nit,
-	下属机构 nic,
-	机构后缀 nis,
-	物品名 nm,
-	化学品名nmc,
-	生物名nb,
-	动物名nba,
-	动物纲目nbc,
-	植物名nbp,
-	其他专名nz,
-	学术词汇g,
-	数学相关词汇gm,
-	物理相关词汇gp,
-	化学相关词汇gc,
-	生物相关词汇gb,
-	生物类别gbc,
-	地理地质相关词汇gg,
-	计算机相关词汇gi,
-	简称略语j,
-	成语i,
-	习用语l,
-	时间词t,
-	时间词性语素tg,
-	处所词s,
-	方位词f,
-	动词v,
-	副动词vd,
-	名动词vn,
-	动词“是”vshi,
-	动词“有”vyou,
-	趋向动词vf,
-	形式动词vx,
-	不及物动词（内动词）vi,
-	动词性惯用语vl,
-	动词性语素vg,
-	形容词a,
-	副形词ad,
-	名形词an,
-	形容词性语素ag,
-	形容词性惯用语al,
-	区别词b,
-	区别词性惯用语bl,
-	状态词z,
-	代词r,
-	人称代词rr,
-	指示代词rz,
-	时间指示代词rzt,
-	处所指示代词rzs,
-	谓词性指示代词rzv,
-	疑问代词ry,
-	时间疑问代词ryt,
-	处所疑问代词rys,
-	谓词性疑问代词ryv,
-	代词性语素rg,
-	古汉语代词性语素Rg,
-	数词m,
-	数量词mq,
-	甲乙丙丁之类的数词Mg,
-	量词q,
-	动量词qv,
-	时量词qt,
-	副词d,
-	辄,俱,复之类的副词dg,
-	连语dl,
-	介词p,
-	介词“把”pba,
-	介词“被”pbei,
-	连词c,
-	并列连词cc,
-	助词u,
-	着uzhe,
-	了 喽ule,
-	过uguo,
-	的 底ude1,
-	地ude2,
-	得ude3,
-	所usuo,
-	等 等等 云云udeng,
-	一样 一般 似的 般uyy,
-	的话udh,
-	来讲 来说 而言 说来uls,
-	之uzhi,
-	连 （“连小学生都会”）ulian,
-	叹词 e,
-	语气词(delete yg) y,
-	拟声词 o,
-	前缀 h,
-	后缀 k,
-	字符串 x,
-	非语素字 xx,
-	网址URL xu,
-	标点符号 w,
-	左括号，全角：（ 〔 ［ ｛ 《 【 〖 〈
-	半角：( [ { < wkz,
-	右括号，全角：） 〕］ ｝ 》 】 〗 〉 半角： ) ] { > wky,
-	左引号，全角：“ ‘ 『 wyz,
-	右引号，全角：” ’ 』 wyy,
-	句号，全角：。wj,
-	问号，全角：？ 半角：? ww,
-	叹号，全角：！ 半角：! wt,
-	逗号，全角：，
-	半角：, wd,
-	分号，全角：； 半角： ; wf,
-	顿号，全角：、 wn,
-	冒号，全角：： 半角： : wm,
-	省略号，全角：…… … ws,
-	破折号，全角：—— －－ ——－ 半角：--- ----wp,
-	百分号千分号，全角：％ ‰ 半角：% wb,
-	单位符号，全角：￥ ＄ ￡ ° ℃
-	半角：$ wh,
-	仅用于始##始 end,
-	仅用于终##终begin,
+	<node nature="n" parent="n"><meaning>名词</meaning></node>
+	<node nature="nr" parent="n"><meaning>人名</meaning></node>
+	<node nature="nrj" parent="n"><meaning>日语人名</meaning></node>
+	<node nature="nrf" parent="n"><meaning>音译人名</meaning></node>
+	<node nature="nr1" parent="n"><meaning>复姓</meaning></node>
+	<node nature="nr2" parent="n"><meaning>蒙古姓名</meaning></node>
+	<node nature="ns" parent="n"><meaning>地名</meaning></node>
+	<node nature="nsf" parent="n"><meaning>音译地名</meaning></node>
+	<node nature="nt" parent="n"><meaning>机构团体名</meaning></node>
+	<node nature="ntc" parent="n"><meaning>公司名</meaning></node>
+	<node nature="ntcf" parent="n"><meaning>工厂 </meaning></node>
+	<node nature="ntcb" parent="n"><meaning>银行</meaning></node>
+	<node nature="ntch" parent="n"><meaning>酒店宾馆 </meaning></node>
+	<node nature="nto" parent="n"><meaning>政府机构</meaning></node>
+	<node nature="ntu" parent="n"><meaning>大学</meaning></node>
+	<node nature="nts" parent="n"><meaning>中小学</meaning></node>
+	<node nature="nth" parent="n"><meaning>医院</meaning></node>
+	<node nature="nh" parent="n"><meaning>医药疾病等健康相关名词</meaning></node>
+	<node nature="nhm" parent="n"><meaning>药品</meaning></node>
+	<node nature="nhd" parent="n"><meaning>疾病</meaning></node>
+	<node nature="nn" parent="n"><meaning>工作相关名词</meaning></node>
+	<node nature="nnt" parent="n"><meaning>职务职称</meaning></node>
+	<node nature="nnd" parent="n"><meaning>职务</meaning></node>
+	<node nature="ng" parent="n"><meaning>名词性语素</meaning></node>
+	<node nature="nf" parent="n"><meaning>食品，比如“薯片”</meaning></node>
+	<node nature="ni" parent="n"><meaning>机构相关（不是独立机构名）</meaning></node>
+	<node nature="nit" parent="n"><meaning>教育相关机构</meaning></node>
+	<node nature="nic" parent="n"><meaning>下属机构</meaning></node>
+	<node nature="nis" parent="n"><meaning>机构后缀</meaning></node>
+	<node nature="nm" parent="n"><meaning>物品名</meaning></node>
+	<node nature="nmc" parent="n"><meaning>化学品名</meaning></node>
+	<node nature="nb" parent="n"><meaning>生物名</meaning></node>
+	<node nature="nba" parent="n"><meaning>动物名</meaning></node>
+	<node nature="nbc" parent="n"><meaning>动物纲目</meaning></node>
+	<node nature="nbp" parent="n"><meaning>植物名</meaning></node>
+	<node nature="nz" parent="n"><meaning>其他专名</meaning></node>
+	<node nature="g" parent="n"><meaning>学术词汇</meaning></node>
+	<node nature="gm" parent="n"><meaning>数学相关词汇</meaning></node>
+	<node nature="gp" parent="n"><meaning>物理相关词汇</meaning></node>
+	<node nature="gc" parent="n"><meaning>化学相关词汇</meaning></node>
+	<node nature="gb" parent="n"><meaning>生物相关词汇</meaning></node>
+	<node nature="gbc" parent="n"><meaning>生物类别</meaning></node>
+	<node nature="gg" parent="n"><meaning>地理地质相关词汇</meaning></node>
+	<node nature="gi" parent="n"><meaning>计算机相关词汇</meaning></node>
+	<node nature="j" parent="n"><meaning>简称略语</meaning></node>
+	<node nature="i" parent="n"><meaning>成语</meaning></node>
+	<node nature="xu" parent="n"><meaning>网址URL</meaning></node>
+	<node nature="t" parent="n"><meaning>网址URL</meaning></node>
+	<node nature="s" parent="n"><meaning></meaning></node>
+	<node nature="v" parent="v"><meaning>网址URL</meaning></node>
+	<node nature="vn" parent="n"><meaning>动名词</meaning></node>
+	<node nature="ude1" parent="ude1"><meaning>"的"</meaning></node>
+	<node nature="vshi" parent="vshi"><meaning>"是"</meaning></node>
+	<node nature="vyou" parent="vyou"><meaning>动词“有”</meaning></node>
 </tag>

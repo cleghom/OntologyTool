@@ -1,7 +1,8 @@
 package translateStructclassToRDF;
 
 import hanLP.HanLPMain;
-import hanLP.StructClass;
+import hanLP._object;
+import hanLP._objectproperty;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -14,15 +15,10 @@ import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.Property;
 import com.hp.hpl.jena.rdf.model.Resource;
 
-/**
- * @author Zhao Hang
- * @date:2015-4-23下午5:27:11
- * @email:1610227688@qq.com
- */
 public class TranslateStructclassToRDFMain {
 
 	/**
-	 * @param 
+	 * @param
 	 */
 	static String myontologymodelclass = "http://myontologymodelclass/";
 	static String myontologymodelproperty = "http://myontologymodelproperty/";
@@ -33,31 +29,44 @@ public class TranslateStructclassToRDFMain {
 		OntModel oo = mainfunction(ontModel, s, "D:/213542354345654435545.txt");
 		write(oo, "D:/213542354345654435545.txt");
 	}
+
 	/*
-	 * 主函数以每行句子为单位执�?
+	 * 主函数以每行句子为单位执行
 	 */
 	public static OntModel mainfunction(OntModel ontmodel, String string, String fileuri) {
-		ArrayList<StructClass> sc = new ArrayList<StructClass>();
-		sc = HanLPMain.mainfunction(string);// 处理后的句子生成的结构体类赋值给sc
-		int x = sc.size();
-		while (x-- > 0) {
-			System.out.println("类关系");
-			String classname = sc.get(x).ontObjectName;
-			String parentclassname = sc.get(x).ontObjectParentName;
-			int classpropertynumber = sc.get(x).ontObjectProperty.size();
-			System.out.println("子类：" + classname + "---->父类：" + parentclassname + "---->类的属性个数:" + classpropertynumber);
 
-			Resource newResource = ontmodel.createProperty(myontologymodelclass + classname);
+		ArrayList<_object> _ol = new ArrayList<_object>();
+		HanLPMain.mainfunction(string);// 处理后的句子生成的结构体类赋值给sc
+		_ol = HanLPMain.getStructclass();
 
-			int y = sc.get(x).ontObjectProperty.size();
-			while (y-- > 0) {
-				System.out.println("属性关系");
-				String propertyname = sc.get(x).ontObjectProperty.get(y).ontObjectPropertyName.toString();
-				String propertyvalue = sc.get(x).ontObjectProperty.get(y).ontObjectPropertyValue.toString();
-				System.out.println(propertyname + "---->" + propertyvalue);
-				Property newproperty = ontmodel.createProperty(myontologymodelclass, propertyname);
-				newResource.addProperty(newproperty, propertyvalue);
-			}
+		for (_object _o : _ol) {
+			@SuppressWarnings("unused")
+			int _object_type = _o.objecttype;
+			@SuppressWarnings("unused")
+			String _object_name = _o.objectname;
+			ArrayList<_object> _object_parent = _o.parent_object;
+			ArrayList<_object> _object_sub = _o.sub_object;
+			ArrayList<_objectproperty> _object_property = _o.objectproperty;
+
+			Resource newResource = ontmodel.createProperty(myontologymodelclass + _o.objectname);
+
+			if (_object_parent != null)
+				for (_object _o_parent : _object_parent) {
+					System.out.println(_o_parent.objectname);
+				}
+
+			if (_object_sub != null)
+				for (_object _o_sub : _object_sub) {
+					System.out.println(_o_sub.objectname);
+				}
+
+			if (_object_property != null)
+				for (_objectproperty _o_property : _object_property) {
+					String propertyname = _o_property.propertyname;
+					String propertyvalue = _o_property.propertyvalue;
+					Property newproperty = ontmodel.createProperty(myontologymodelclass, propertyname);
+					newResource.addProperty(newproperty, propertyvalue);
+				}
 		}
 		return ontmodel;
 	}

@@ -1,31 +1,33 @@
 package translateStructclassToOWL;
 
 import hanLP.HanLPMain;
-import hanLP.StructClass;
+import hanLP._object;
+import hanLP._objectproperty;
+import ioOperation.WriteToFile;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.Iterator;
 
+import staticvariable.staticvalue;
 import edu.stanford.smi.protege.exception.OntologyLoadException;
 import edu.stanford.smi.protegex.owl.ProtegeOWL;
 import edu.stanford.smi.protegex.owl.model.OWLIndividual;
 import edu.stanford.smi.protegex.owl.model.OWLModel;
 import edu.stanford.smi.protegex.owl.model.OWLNamedClass;
 import edu.stanford.smi.protegex.owl.model.OWLObjectProperty;
+import edu.stanford.smi.protegex.owl.model.OWLProperty;
 import edu.stanford.smi.protegex.owl.writer.rdfxml.rdfwriter.OWLModelWriter;
 
 /*
  * 本方法主要使用了smi的protege3.5的相关jar包
- */
-/**
- * @author Zhao Hang
- * @date:2015-5-2下午2:55:23
- * @email:1610227688@qq.com
  */
 public class TranslateStructclassToOWLMain {
 	/**
@@ -34,353 +36,357 @@ public class TranslateStructclassToOWLMain {
 	 * @throws IOException
 	 */
 
-	/*
-	 * 
-	 * 测试主方法
-	 * 
-	 * 
-	 * public static void main(String[] args) throws OntologyLoadException,
-	 * IOException { String s =
-	 * "植物是生物。人是智慧生物。人是劳动工具。智慧生物是生物。劳动工具是工具。人是动物，动物是生物。刘晓涛是一个中国人。德国是一个政权组织。Eclipse是一个代码工具，代码工具是工具。胡锦涛是中华人民共和国的主席,中国人是人。美国人是人。胡锦涛是一个中国人。奥巴马是一个美国人。德国是一个国家。奥巴马是一个美国人。中华人民共和国是一个国家。"
-	 * ; String ss =
-	 * "赵航是云南大学的学生。小刘的昵称是刘二，小刘是一个厨师，刘大伟的昵称是伟伟。刘大伟是一个厨师。小王的性别是男，小王的年龄是27.小王的父亲是老王，小王的母亲是张丽。张丽是一个教师。老王是一个工人。小王是一个厨师，小王是一个裁缝。植物是生物。人是智慧生物。人是劳动工具。智慧生物是生物。德国是一个政权组织,德国是国家。张强是我校的学生会主席。刘涛的电话号码是13866655333。赵航的电话号码是14787806414。赵航的学生证封面颜色是红的。赵航是一个中国人。"
-	 * ; String sss =
-	 * "鹅是鸟。癌症的致死率是高的。癌症的潜伏期是5年的。癌症是一个疾病。艾滋病的潜伏期是12年。艾滋病的感染性是强的。艾滋病的疾病传播方式是性传播。艾滋病是一个疾病。毛毛的羽毛颜色是黑色的。毛毛是一个麻雀。鸟的翅膀个数是2，大雁是鸟。牛牛的年龄是10.大雁的羽毛颜色是白色的。鹅的羽毛颜色是白色的。牛牛是一个大雁，麻雀的翅膀个数是2，麻雀是鸟。"
-	 * ; String ssss = "Eclipse的性能是ok的。感冒的潜伏期是2天。感冒是一个疾病。"; String sssss = "";
-	 * String fileuri = "D:/owlmodel/aaaaaaaa.owl"; mainfunction(s + ss + sss +
-	 * ssss + sssss, fileuri, "base", "kkkkkkk"); }
-	 */
+	public static void main(String[] args) throws OntologyLoadException, IOException {
+//		String s = "植物是生物。人是智慧生物。人是劳动工具。智慧生物是生物。劳动工具是工具。人是动物，动物是生物。刘晓涛是一个中国人。德国是一个政权组织。Eclipse是一个代码工具，代码工具是工具中国人是人。美国人是人。奥巴马是一个美国人。德国是一个国家。奥巴马是一个美国人。";
+		String ss = "小刘的昵称是刘二，小刘是一个厨师，刘大伟的昵称是伟伟。刘大伟是一个厨师。小王的性别是男，小王的年龄是27.小王的父亲是老王，小王的母亲是张丽。张丽是一个教师。老王是一个工人。小王是一个厨师，小王是一个裁缝。植物是生物。人是智慧生物。人是劳动工具。智慧生物是生物。刘涛的电话号码是13866655333。赵航的电话号码是14787806414。赵航的学生证封面颜色是红的。赵航是一个中国人。";
+		String sss = "鸡是鸣禽，鸡是鸟。鸣禽是鸟。艾滋病的存活率是低的。鹅是鸟。癌症的致死率是高的。癌症的潜伏期是5年的。癌症是一个疾病。艾滋病的潜伏期是12年。艾滋病的感染性是强的。艾滋病的疾病传播方式是性传播。毛毛是一个麻雀。鸟的翅膀个数是2，大雁是鸟。牛牛的年龄是10.牛牛是一个大雁，麻雀的翅膀个数是2，麻雀是鸟。";
+		String ssss = "Eclipse的性能是ok的。感冒的潜伏期是2天。感冒是一个疾病。植物是生物。鹅是鸟。大雁是鸟。鹊雁是鸟。黑长尾雉是台湾的野生鸟类。大雁的羽毛颜色是白色的。鹅的羽毛颜色是白色的.小美洲黑雁头颈部呈黑色。燕隼属隼形目隼科隼属，燕隼上体是深蓝褐色的，燕隼是中国国家二级保护动物。四川灌木莺是新物种。绿翅雁是濒危鸟类。鸟有漂亮的翅膀。";
+		mainfunction(sss+"鸟有美丽的翅膀。", "base");
+	}
 	
-	/*
-	 * 携入 操作
-	 */
-	public static void writetoFile(String s, OWLModel o) throws IOException {
-		
-		String filePathOut01 = "D:/owlmodel/" + s + ".owl";
-		// 写入：
+	public static void writetotempFile(OWLModel o) throws IOException{
+		String localaddr = staticvalue.localaddr;
+		String filePathOut01 = localaddr + "/" + "tempowl.owl";
 		FileOutputStream outFile = new FileOutputStream(filePathOut01);
 		Writer out = new OutputStreamWriter(outFile, "UTF-8");
 		OWLModelWriter omw = new OWLModelWriter(o, o.getTripleStoreModel().getActiveTripleStore(), out);
 		omw.write();
 		out.close();
 	}
+	
+	public static boolean class_exist(OWLModel o, String class_) {
+		boolean flag = false;
+		OWLNamedClass on = o.getOWLNamedClass(class_);
+		if (on == null)
+			flag = false;
+		else
+			flag = true;
+		return flag;
+	}
+	
+	public static boolean individual_exist(OWLModel o, String individual_) {
+		boolean flag = false;
+		if(!class_exist(o, individual_)){
+			OWLIndividual on = o.getOWLIndividual(individual_);
+			if (on == null)
+				flag = false;
+			else
+				flag = true;
+		}
+		return flag;
+	}
+	
+	public static boolean property_exist(OWLModel o,String prop){
+		boolean flag = false;
+		OWLProperty op = o.getOWLProperty(prop);
+		if (op == null){
+			flag = false;
+		}
+		else
+			flag = true;
+		
+		return flag;
+	}
 
-	public static OWLModel mainfunction(String string, String fileuri, String Resource, String filename) throws OntologyLoadException, IOException {
-		OWLModel o = ProtegeOWL.createJenaOWLModel();
+	public static boolean c_i_conflict(OWLModel o ,String instance){// new instance is conflicted with the class existing in ont
+		boolean flag = false;
+		OWLNamedClass on = o.getOWLNamedClass(instance);
+		if (on == null)
+			flag = false;
+		else
+			flag = true;
+		return flag;
+	}
+	
+	public static boolean i_c_conflict(OWLModel o ,String cls){// new class is conflicted with the instance existing in ont
+		boolean flag = false;
+		if (!class_exist(o, cls)){
+			OWLIndividual on = o.getOWLIndividual(cls);
+			if (on == null)
+				flag = false;
+			else
+				flag = true;
+		}
+		return flag;
+	}
+	
+	public static void donothing(){}
+	
+	public static OWLModel mainfunction(OWLModel o, String string) throws IOException {
+		/*
+		 * 输入本体，另一部分为新的文本，在原来的model基础上继续添加新的本体
+		 * 二次建立本体
+		 */
+		ArrayList<_object> _objlist = new ArrayList<_object>();
+		HanLPMain.mainfunction(string);// 处理后的句子生成的结构体类赋值给sc
+		_objlist = HanLPMain.getStructclass();
+		
+		for (_object _o : _objlist) {
+			int _object_type = _o.objecttype;
+			String _object_name = _o.objectname;
+			ArrayList<_object> _object_parent = _o.parent_object;
+			ArrayList<_object> _object_sub = _o.sub_object;
+			ArrayList<_objectproperty> _object_property = _o.objectproperty;
 
-		o.getNamespaceManager().setDefaultNamespace("http://" + Resource + "#");
-		ArrayList<StructClass> sc = new ArrayList<StructClass>();// 新建ArrayList准备保存从string中获取到并已处理的表。
-		sc = HanLPMain.mainfunction(string);// 处理后的句子生成的结构体类赋值给sc
-		int scClassSize = sc.size();
-
-		while (scClassSize-- > 0) {
-			System.out.println(scClassSize + ":");
-			String classname = sc.get(scClassSize).ontObjectName;
-			String parentclassname = sc.get(scClassSize).ontObjectParentName;
-			int classpropertynumber = sc.get(scClassSize).ontObjectProperty.size();
-			int classindividualnumber = sc.get(scClassSize).ontObjectIndividual.size();
-			if (!parentclassname.equals("root") & parentclassname != null) {// 以下试将此类添加进本体
-				tryToAddClassIntoOWLModel(o, classname);
-				// 以下试将父类添加进本体
-				tryToAddClassIntoOWLModel(o, parentclassname);
-				// 以下试将此类和父类构造一个父子类的关系
-				tryToAddSubclassIntoOWLModel(o, classname, parentclassname);
+			boolean hasproperty = false;
+			if (_object_property != null) {// if property exists in this ont
+				hasproperty = true;
+				for (_objectproperty _op : _object_property)
+					if (!property_exist(o, _op.propertyname))
+						o.createOWLObjectProperty(_op.propertyname);
 			}
-			int scPropertySize = classpropertynumber;
-			int scIndividualSize = classindividualnumber;
-			while (scIndividualSize-- > 0) {
-				String individualname = sc.get(scClassSize).ontObjectIndividual.get(scIndividualSize).ontObjectIndividualName;
-				System.out.println("实例名称为->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" + individualname);
-				tryToAddObjectIndividualIntoOWLModel(o, classname, individualname);
+			if (_object_type == 0) {// if object is a class
+				if (!class_exist(o, _object_name)) {// if class does't exists
+					o.createOWLNamedClass(_object_name);// create this class
+					if (_object_parent != null) {// if parent classes exist
+						for (_object oparent : _object_parent) {// add this class's parent classes
+							if (!class_exist(o, oparent.objectname)) {// if parent classes don't exist
+								o.createOWLNamedClass(oparent.objectname);// add parent classes
+							}
+							if (!(oparent.objectname).equals("root")) {
+								o.getOWLNamedClass(_object_name).addSuperclass(o.getOWLNamedClass(oparent.objectname));
+								o.getOWLNamedClass(_object_name).removeSuperclass(o.getOWLThingClass());
+							}
+						}
+					}
+					if (hasproperty) {// if this class has properties
+						for (_objectproperty oprop : _object_property) {// add
+																		// properties
+							OWLObjectProperty oop = o.getOWLObjectProperty(oprop.propertyname);
+							o.getOWLNamedClass(_object_name).setPropertyValue(oop, oprop.propertyvalue);
+						}
+					}
+					if (_object_sub != null) {// if subclasses exist
+						for (_object osub : _object_sub) {// add sub classes
+							if (osub.objecttype == 0) {// sub is class
+								if (!class_exist(o, osub.objectname)) {// if this class not exist
+									o.createOWLNamedClass(osub.objectname); // create this class
+								}
+								o.getOWLNamedClass(osub.objectname).addSuperclass(o.getOWLNamedClass(_object_name));
+							}
+							if (osub.objecttype == 1) {// sub is anindividual
+								if (!individual_exist(o, osub.objectname) & !class_exist(o, osub.objectname)) {
+									o.getOWLNamedClass(_object_name).createOWLIndividual(osub.objectname);
+								}
+							}
+						}
+					}
+				} else if (class_exist(o, _object_name)) {// if class exists
+					if (i_c_conflict(o, _object_name)) {// if this class does't have a instance-class conflict
+						donothing();
+					} else if (!i_c_conflict(o, _object_name)) {// if this class doesn't have a instance-class conflict
+						if (_object_parent != null) {
+							for (_object oparent : _object_parent) {// add this class's parent classes
+								if (!class_exist(o, oparent.objectname)) {// if parent classes don't exist
+									o.createOWLNamedClass(oparent.objectname);// add parent classes
+								}
+								if (!(oparent.objectname).equals("root")) {
+									o.getOWLNamedClass(_object_name).addSuperclass(o.getOWLNamedClass(oparent.objectname));
+									o.getOWLNamedClass(_object_name).removeSuperclass(o.getOWLThingClass());
+								}
+							}
+						}
+						if (hasproperty) {// if this class has properties
+							for (_objectproperty oprop : _object_property) {// add properties
+								OWLObjectProperty oop = o.getOWLObjectProperty(oprop.propertyname);
+								o.getOWLNamedClass(_object_name).setPropertyValue(oop, oprop.propertyvalue);
+							}
+						}
+					}
+				}
 			}
-			while (scPropertySize-- > 0) {
-				// 尝试将类的属性添加进模型
-				String propertyname = sc.get(scClassSize).ontObjectProperty.get(scPropertySize).ontObjectPropertyName;
-				String propertyvalue = sc.get(scClassSize).ontObjectProperty.get(scPropertySize).ontObjectPropertyValue;
-				tryToAddObjectPropertyIntoOWLModel(o, propertyname);
-				attachPropertyTOClassOrIndividual(o, classname, propertyname, propertyvalue);
+			if (_object_type == 1) {// if object is an instance
+				if (individual_exist(o, _object_name)) {// if this instance exists in ont'
+					System.out.println("instance exists.");
+					if (c_i_conflict(o, _object_name)) {// if this instance has a class-instance conflict
+						@SuppressWarnings("unchecked")
+						Collection<OWLNamedClass> onc = o.getOWLNamedClass(_object_name).getNamedSuperclasses();
+						for (OWLNamedClass _onc : onc) {
+							_onc.createOWLIndividual(_object_name);
+						}
+						Collection op = o.getOWLNamedClass(_object_name).getRDFProperties();
+						System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"+op);
+
+						o.getOWLNamedClass(_object_name).delete();
+						if (_object_parent != null) {
+							for (_object oparent : _object_parent) {// add this class's parent classes
+								if (!class_exist(o, oparent.objectname)) {// if parent classes don't exist
+									o.createOWLNamedClass(oparent.objectname);// add parent classes
+								}
+								o.getOWLNamedClass(_object_name).addSuperclass(o.getOWLNamedClass(oparent.objectname));
+							}
+						}
+						if (hasproperty) {// if this class has properties
+							for (_objectproperty oprop : _object_property) {// add properties
+								OWLObjectProperty oop = o.getOWLObjectProperty(oprop.propertyname);
+								o.getOWLIndividual(_object_name).setPropertyValue(oop, oprop.propertyvalue);
+							}
+						}
+					}
+				} else if (!individual_exist(o, _object_name)) {
+					if (_object_parent != null) {
+						for (_object oparent : _object_parent) {// add this class's parent classes
+							if (!class_exist(o, oparent.objectname)) {// if parent classes don't exist
+								o.createOWLNamedClass(oparent.objectname);// add parent classes
+							}
+							// o.getOWLNamedClass(_object_name).addSuperclass(o.getOWLNamedClass(oparent.objectname));
+							o.getOWLNamedClass(oparent.objectname).createOWLIndividual(_object_name);
+						}
+					}
+					if (hasproperty) {// if this class has properties
+						for (_objectproperty oprop : _object_property) {// add properties
+							OWLObjectProperty oop = o.getOWLObjectProperty(oprop.propertyname);
+							o.getOWLIndividual(_object_name).setPropertyValue(oop, oprop.propertyvalue);
+						}
+					}
+				}
 			}
 		}
-		writetoFile(filename, o);
+		Format format = new SimpleDateFormat("yyMMdd-hhmmss");
+		String time = format.format(new Date());
+		staticvalue.tempfilename = time;
+		// writetoFile(o);
+		WriteToFile.writetoFile(o);
 		return o;
 	}
 
-	public static OWLModel mainfunction(OWLModel owlModel, String info, String OwlOntBaseURI, String writetoFileName) throws OntologyLoadException,
-			IOException {
-		// 要更改的模型
-		// 输入的信息
-		// 根目录
-		// 输出到文件名
+	public static OWLModel mainfunction(String string, String Resource) throws OntologyLoadException, IOException {
+		/*
+		 * 首次建立 string:文本内容 Resource:本体的根节点内容（文本词汇形式）
+		 */
 		OWLModel o = ProtegeOWL.createJenaOWLModel();
-		o = owlModel;
+		o.getNamespaceManager().setDefaultNamespace("http://" + Resource + "#");
 
-		o.getNamespaceManager().setDefaultNamespace("http://" + OwlOntBaseURI + "#");
-		ArrayList<StructClass> sc = new ArrayList<StructClass>();// 新建ArrayList准备保存从string中获取到并已处理的表。
-		sc = HanLPMain.mainfunction(info);// 处理后的句子生成的结构体类赋值给sc
-		int scClassSize = sc.size();
+		ArrayList<_object> _objlist = new ArrayList<_object>();
+		HanLPMain.mainfunction(string);// 处理后的句子生成的结构体类赋值给sc
+		_objlist = HanLPMain.getStructclass();
 
-		while (scClassSize-- > 0) {
-			System.out.println(scClassSize + ":");
-			String classname = sc.get(scClassSize).ontObjectName;
-			String parentclassname = sc.get(scClassSize).ontObjectParentName;
-			int classpropertynumber = sc.get(scClassSize).ontObjectProperty.size();
-			int classindividualnumber = sc.get(scClassSize).ontObjectIndividual.size();
-			tryToAddClassIntoOWLModel(o, classname);
-			if (!parentclassname.equals("root") & parentclassname != null) {
-				tryToAddClassIntoOWLModel(o, parentclassname);
-				tryToAddSubclassIntoOWLModel(o, classname, parentclassname);
-			}
-			int scPropertySize = classpropertynumber;
-			int scIndividualSize = classindividualnumber;
-			while (scIndividualSize-- > 0) {
-				String individualname = sc.get(scClassSize).ontObjectIndividual.get(scIndividualSize).ontObjectIndividualName;
-				System.out.println("实例名称为->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" + individualname);
-				tryToAddObjectIndividualIntoOWLModel(o, classname, individualname);
-			}
-			while (scPropertySize-- > 0) {
-				// 尝试将类的属性添加进模型
-				String propertyname = sc.get(scClassSize).ontObjectProperty.get(scPropertySize).ontObjectPropertyName;
-				String propertyvalue = sc.get(scClassSize).ontObjectProperty.get(scPropertySize).ontObjectPropertyValue;
-				tryToAddObjectPropertyIntoOWLModel(o, propertyname);
-				attachPropertyTOClassOrIndividual(o, classname, propertyname, propertyvalue);
-			}
-		}
-		owlModel = o;
-		writetoFile(writetoFileName, owlModel);
-		return owlModel;
-	}
+		for (_object _o : _objlist) {
+			int _object_type = _o.objecttype;
+			String _object_name = _o.objectname;
+			ArrayList<_object> _object_parent = _o.parent_object;
+			ArrayList<_object> _object_sub = _o.sub_object;
+			ArrayList<_objectproperty> _object_property = _o.objectproperty;
 
-	/*
-	 * 关于添加类的操作
-	 */
-	public static void tryToAddClassIntoOWLModel(OWLModel o, String s) {
-		try {
-			if (!checkClass(o, s)) {
-				System.out.println("无此类" + s);
-				operatorforClass(o, s);
-			} else {
-				System.out.println("有此类" + s);
+			boolean hasproperty = false;
+			if (_object_property != null) {// if property exists in this ont
+				hasproperty = true;
+				for (_objectproperty _op : _object_property)
+					if (!property_exist(o, _op.propertyname))
+						o.createOWLObjectProperty(_op.propertyname);
 			}
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-	}
+			if (_object_type == 0) {// if object is a class
+				if (!class_exist(o, _object_name)) {// if class does't exists
+					o.createOWLNamedClass(_object_name);// create this class
+					if (_object_parent != null) {// if parent classes exist
+						for (_object oparent : _object_parent) {// add this class's parent classes
+							if (!class_exist(o, oparent.objectname)) {// if parent classes don't exist
+								o.createOWLNamedClass(oparent.objectname);// add parent classes
+							}
+							if (!(oparent.objectname).equals("root")) {
+								o.getOWLNamedClass(_object_name).addSuperclass(o.getOWLNamedClass(oparent.objectname));
+								o.getOWLNamedClass(_object_name).removeSuperclass(o.getOWLThingClass());
+							}
+						}
+					}
+					if (hasproperty) {// if this class has properties
+						for (_objectproperty oprop : _object_property) {// add
+																		// properties
+							OWLObjectProperty oop = o.getOWLObjectProperty(oprop.propertyname);
+							o.getOWLNamedClass(_object_name).setPropertyValue(oop, oprop.propertyvalue);
+						}
+					}
+					if (_object_sub != null) {// if subclasses exist
+						for (_object osub : _object_sub) {// add sub classes
+							if (osub.objecttype == 0) {// sub is class
+								if (!class_exist(o, osub.objectname)) {// if this class not exist
+									o.createOWLNamedClass(osub.objectname); // create this class
+								}
+								o.getOWLNamedClass(osub.objectname).addSuperclass(o.getOWLNamedClass(_object_name));
+							}
+							if (osub.objecttype == 1) {// sub is anindividual
+								if (!individual_exist(o, osub.objectname) & !class_exist(o, osub.objectname)) {
+									o.getOWLNamedClass(_object_name).createOWLIndividual(osub.objectname);
+								}
+							}
+						}
+					}
+				} else if (class_exist(o, _object_name)) {// if class exists
+					if (i_c_conflict(o, _object_name)) {// if this class does't have a instance-class conflict
+						donothing();
+					} else if (!i_c_conflict(o, _object_name)) {// if this class doesn't have a instance-class conflict
+						if (_object_parent != null) {
+							for (_object oparent : _object_parent) {// add this class's parent classes
+								if (!class_exist(o, oparent.objectname)) {// if parent classes don't exist
+									o.createOWLNamedClass(oparent.objectname);// add parent classes
+								}
+								if (!(oparent.objectname).equals("root")) {
+									o.getOWLNamedClass(_object_name).addSuperclass(o.getOWLNamedClass(oparent.objectname));
+									o.getOWLNamedClass(_object_name).removeSuperclass(o.getOWLThingClass());
+								}
+							}
+						}
+						if (hasproperty) {// if this class has properties
+							for (_objectproperty oprop : _object_property) {// add properties
+								OWLObjectProperty oop = o.getOWLObjectProperty(oprop.propertyname);
+								o.getOWLNamedClass(_object_name).setPropertyValue(oop, oprop.propertyvalue);
+							}
+						}
+					}
+				}
+			}
+			if (_object_type == 1) {// if object is an instance
+				if (individual_exist(o, _object_name)) {// if this instance exists in ont'
+					System.out.println("instance exists.");
+					if (c_i_conflict(o, _object_name)) {// if this instance has a class-instance conflict
+						@SuppressWarnings("unchecked")
+						Collection<OWLNamedClass> onc = o.getOWLNamedClass(_object_name).getNamedSuperclasses();
+						for (OWLNamedClass _onc : onc) {
+							_onc.createOWLIndividual(_object_name);
+						}
+						Collection op = o.getOWLNamedClass(_object_name).getRDFProperties();
+						System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"+op);
 
-	@SuppressWarnings("rawtypes")
-	public static boolean checkClass(OWLModel o, String s) {
-		boolean flag = false;
-		Collection classes = o.getUserDefinedOWLNamedClasses();
-		for (Iterator it = classes.iterator(); it.hasNext();) {
-			OWLNamedClass cls = (OWLNamedClass) it.next();
-			System.out.println("^^^^^^^^^^^^^" + cls.getBrowserText());
-			if (cls.getBrowserText().equals(s)) {
-				flag = true;
-				break;
-			}
-		}
-		Collection classes2 = o.getUserDefinedRDFSNamedClasses();
-		for (Iterator it = classes2.iterator(); it.hasNext();) {
-			OWLNamedClass cls = (OWLNamedClass) it.next();
-			if (cls.getBrowserText().equals(s)) {
-				flag = true;
-				break;
-			}
-		}
-		return flag;
-	}
-
-	@SuppressWarnings("unused")
-	public static void operatorforClass(OWLModel o, String s) {
-		OWLNamedClass tempclass;
-		if (!checkIfClassIsAnIndividual(o, s)) {
-			if (!checkClass(o, s)) {
-				if (!checkIndividual(o, s)) {
-					System.out.println("start to add class" + s);
-					tempclass = o.createOWLNamedClass(s);
+						o.getOWLNamedClass(_object_name).delete();
+						if (_object_parent != null) {
+							for (_object oparent : _object_parent) {// add this class's parent classes
+								if (!class_exist(o, oparent.objectname)) {// if parent classes don't exist
+									o.createOWLNamedClass(oparent.objectname);// add parent classes
+								}
+								o.getOWLNamedClass(_object_name).addSuperclass(o.getOWLNamedClass(oparent.objectname));
+							}
+						}
+						if (hasproperty) {// if this class has properties
+							for (_objectproperty oprop : _object_property) {// add properties
+								OWLObjectProperty oop = o.getOWLObjectProperty(oprop.propertyname);
+								o.getOWLIndividual(_object_name).setPropertyValue(oop, oprop.propertyvalue);
+							}
+						}
+					}
+				} else if (!individual_exist(o, _object_name)) {
+					if (_object_parent != null) {
+						for (_object oparent : _object_parent) {// add this class's parent classes
+							if (!class_exist(o, oparent.objectname)) {// if parent classes don't exist
+								o.createOWLNamedClass(oparent.objectname);// add parent classes
+							}
+							// o.getOWLNamedClass(_object_name).addSuperclass(o.getOWLNamedClass(oparent.objectname));
+							o.getOWLNamedClass(oparent.objectname).createOWLIndividual(_object_name);
+						}
+					}
+					if (hasproperty) {// if this class has properties
+						for (_objectproperty oprop : _object_property) {// add properties
+							OWLObjectProperty oop = o.getOWLObjectProperty(oprop.propertyname);
+							o.getOWLIndividual(_object_name).setPropertyValue(oop, oprop.propertyvalue);
+						}
+					}
 				}
 			}
 		}
-	}
-
-	/*
-	 * 添加子类
-	 */
-	private static void tryToAddSubclassIntoOWLModel(OWLModel o, String subclassName, String parentClassName) {
-		if (checkClass(o, parentClassName) & !checkIndividual(o, subclassName)) {
-			System.out.println("有此 父类");
-			operatorforSubclass(o, subclassName, parentClassName);
-		} else {
-			System.out.println("无此父类");
-		}
-	}
-
-	private static void operatorforSubclass(OWLModel o, String subclassName, String parentClassName) {
-		o.getOWLNamedClass(subclassName).addSuperclass(o.getOWLNamedClass(parentClassName));
-		o.getOWLNamedClass(subclassName).removeSuperclass(o.getOWLThingClass());
-	}
-
-	/*
-	 * 判断一个类是否为个体
-	 */
-	private static boolean checkIfClassIsAnIndividual(OWLModel o, String classname) {
-		boolean flag = checkIndividual(o, classname);
-		return flag;
-	}
-
-	@SuppressWarnings("rawtypes")
-	private static boolean checkIndividual(OWLModel o, String classname) {
-		boolean flag = false;
-		Collection classes = o.getOWLIndividuals();
-		for (Iterator it = classes.iterator(); it.hasNext();) {
-			OWLIndividual oi = (OWLIndividual) it.next();
-			if (oi.getBrowserText().equals(classname)) {
-				flag = true;
-				break;
-			}
-		}
-		return flag;
-	}
-
-	private static void tryToAddObjectIndividualIntoOWLModel(OWLModel o, String classname, String individualname) {
-		tryToAddClassIntoOWLModel(o, classname);
-		System.out.println("准备添加“" + individualname + "”这个个体");
-		if (!checkClass(o, individualname)) {
-			System.out.println("当前不存在以个体名“" + individualname + "”的这个类");
-			if (!checkIfIndividualExistsInModel(o, individualname))
-				if (!checkIfIndividualIsAClass(o, individualname))
-					tryToAddIndividualIntoOWLNamedClass(o, classname, individualname);
-		}
-
-	}
-
-	private static boolean checkIfIndividualIsAClass(OWLModel o, String individualname) {
-		// 若最終返回true説明
-		// 检查这个个体是否是一个类，若是，返回true
-		boolean flag = checkClass(o, individualname);
-		// 检查个体是否存在于这个本体，若存在返回true
-		flag = checkIfIndividualExistsInModel(o, individualname);
-		return flag;
-	}
-
-	@SuppressWarnings("unused")
-	private static void tryToAddIndividualIntoOWLNamedClass(OWLModel o, String classname, String individualname) {
-		OWLIndividual oi = o.getOWLNamedClass(classname).createOWLIndividual(individualname);
-	}
-
-	@SuppressWarnings("rawtypes")
-	private static boolean checkIfIndividualExistsInModel(OWLModel o, String individualname) {
-
-		boolean flag = false;
-
-		Collection classes = o.getUserDefinedOWLNamedClasses();
-		for (Iterator it = classes.iterator(); it.hasNext();) {
-			OWLNamedClass cls = (OWLNamedClass) it.next();
-			Collection instances = cls.getInstances(true);
-			for (Iterator it2 = instances.iterator(); it2.hasNext();) {
-				OWLIndividual oi = (OWLIndividual) it2.next();
-				if (oi.getBrowserText().equals(individualname)) {
-					flag = true;
-					break;
-
-				}
-			}
-		}
-		return flag;
-	}
-
-	/*
-	 * 添加属性的操作
-	 */
-	private static void tryToAddObjectPropertyIntoOWLModel(OWLModel o, String s) {
-		if (!checkProperty(o, s)) {
-			if (!checkClass(o, s)) {
-				System.out.println("无此 属性");
-				operatorforProperty(o, s);
-			}
-		} else {
-			System.out.println("有此属性");
-		}
-	}
-
-	@SuppressWarnings("rawtypes")
-	private static boolean checkProperty(OWLModel o, String s) {
-		boolean flag = false;
-		Collection c1 = o.getUserDefinedOWLDatatypeProperties();
-		for (Iterator it = c1.iterator(); it.hasNext();) {
-			try {
-				OWLObjectProperty oop = (OWLObjectProperty) it.next();
-				if (oop.getBrowserText().equals(s)) {
-					flag = true;
-					break;
-				}
-			} catch (Exception e) {
-			}
-		}
-
-		Collection c2 = o.getUserDefinedRDFProperties();
-		for (Iterator it = c2.iterator(); it.hasNext();) {
-			try {
-				OWLObjectProperty oop = (OWLObjectProperty) it.next();
-				if (oop.getBrowserText().equals(s)) {
-					flag = true;
-					break;
-				}
-			} catch (Exception e) {
-			}
-		}
-		Collection c3 = o.getUserDefinedOWLObjectProperties();
-		for (Iterator it = c3.iterator(); it.hasNext();) {
-			try {
-				OWLObjectProperty oop = (OWLObjectProperty) it.next();
-				if (oop.getBrowserText().equals(s)) {
-					flag = true;
-					break;
-				}
-			} catch (Exception e) {
-			}
-		}
-		return flag;
-	}
-
-	private static void operatorforProperty(OWLModel o, String s) {
-		System.out.println("start to add");
-		@SuppressWarnings("unused")
-		OWLObjectProperty oop = o.createOWLObjectProperty(s);
-	}
-
-	// public static boolean checkIndividualInClass(OWLModel o, String
-	// classname, String individualname) {
-	// boolean flag = false;
-	// Collection classes = o.getUserDefinedOWLNamedClasses();
-	// for (Iterator it = classes.iterator(); it.hasNext();) {
-	// OWLNamedClass cls = (OWLNamedClass) it.next();
-	// if (cls.getBrowserText().equals(classname)) {
-	// Collection instances = cls.getInstances(true);
-	// for (Iterator it2 = instances.iterator(); it2.hasNext();) {
-	// OWLIndividual oi = (OWLIndividual) it2.next();
-	// if (oi.getBrowserText().equals(individualname)) {
-	// flag = true;
-	// break;
-	// }
-	// }
-	// }
-	// }
-	// return flag;
-	// }
-
-	private static void attachPropertyTOClassOrIndividual(OWLModel o, String classname, String propertyname, String propertyvalue) {
-		tryToAddObjectPropertyIntoOWLModel(o, propertyname);
-		tryToAddClassIntoOWLModel(o, classname);
-		System.out.println("添加属性成功");
-		OWLObjectProperty oop = o.getOWLObjectProperty(propertyname);
-
-		if (checkClass(o, classname)) {
-			System.out.println("##########################类名存在");
-			oop.addUnionDomainClass(o.getOWLNamedClass(classname));
-		}
-		if (checkIndividual(o, classname)) {
-			System.out.println("##########################个体名存在");
-			o.getOWLIndividual(classname).setPropertyValue(oop, propertyvalue);
-		}
+		Format format = new SimpleDateFormat("yyMMdd-hhmmss");
+		String time = format.format(new Date());
+		staticvalue.tempfilename = time;
+		// writetoFile(o);
+		WriteToFile.writetoFile(o);
+		return o;
 	}
 }
