@@ -14,7 +14,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
-import java.util.Iterator;
 
 import staticvariable.staticvalue;
 import edu.stanford.smi.protege.exception.OntologyLoadException;
@@ -38,9 +37,9 @@ public class TranslateStructclassToOWLMain {
 
 	public static void main(String[] args) throws OntologyLoadException, IOException {
 //		String s = "植物是生物。人是智慧生物。人是劳动工具。智慧生物是生物。劳动工具是工具。人是动物，动物是生物。刘晓涛是一个中国人。德国是一个政权组织。Eclipse是一个代码工具，代码工具是工具中国人是人。美国人是人。奥巴马是一个美国人。德国是一个国家。奥巴马是一个美国人。";
-		String ss = "小刘的昵称是刘二，小刘是一个厨师，刘大伟的昵称是伟伟。刘大伟是一个厨师。小王的性别是男，小王的年龄是27.小王的父亲是老王，小王的母亲是张丽。张丽是一个教师。老王是一个工人。小王是一个厨师，小王是一个裁缝。植物是生物。人是智慧生物。人是劳动工具。智慧生物是生物。刘涛的电话号码是13866655333。赵航的电话号码是14787806414。赵航的学生证封面颜色是红的。赵航是一个中国人。";
+//		String ss = "小刘的昵称是刘二，小刘是一个厨师，刘大伟的昵称是伟伟。刘大伟是一个厨师。小王的性别是男，小王的年龄是27.小王的父亲是老王，小王的母亲是张丽。张丽是一个教师。老王是一个工人。小王是一个厨师，小王是一个裁缝。植物是生物。人是智慧生物。人是劳动工具。智慧生物是生物。刘涛的电话号码是13866655333。赵航的电话号码是14787806414。赵航的学生证封面颜色是红的。赵航是一个中国人。";
 		String sss = "鸡是鸣禽，鸡是鸟。鸣禽是鸟。艾滋病的存活率是低的。鹅是鸟。癌症的致死率是高的。癌症的潜伏期是5年的。癌症是一个疾病。艾滋病的潜伏期是12年。艾滋病的感染性是强的。艾滋病的疾病传播方式是性传播。毛毛是一个麻雀。鸟的翅膀个数是2，大雁是鸟。牛牛的年龄是10.牛牛是一个大雁，麻雀的翅膀个数是2，麻雀是鸟。";
-		String ssss = "Eclipse的性能是ok的。感冒的潜伏期是2天。感冒是一个疾病。植物是生物。鹅是鸟。大雁是鸟。鹊雁是鸟。黑长尾雉是台湾的野生鸟类。大雁的羽毛颜色是白色的。鹅的羽毛颜色是白色的.小美洲黑雁头颈部呈黑色。燕隼属隼形目隼科隼属，燕隼上体是深蓝褐色的，燕隼是中国国家二级保护动物。四川灌木莺是新物种。绿翅雁是濒危鸟类。鸟有漂亮的翅膀。";
+//		String ssss = "Eclipse的性能是ok的。感冒的潜伏期是2天。感冒是一个疾病。植物是生物。鹅是鸟。大雁是鸟。鹊雁是鸟。黑长尾雉是台湾的野生鸟类。大雁的羽毛颜色是白色的。鹅的羽毛颜色是白色的.小美洲黑雁头颈部呈黑色。燕隼属隼形目隼科隼属，燕隼上体是深蓝褐色的，燕隼是中国国家二级保护动物。四川灌木莺是新物种。绿翅雁是濒危鸟类。鸟有漂亮的翅膀。";
 		mainfunction(sss+"鸟有美丽的翅膀。", "base");
 	}
 	
@@ -204,6 +203,7 @@ public class TranslateStructclassToOWLMain {
 						for (OWLNamedClass _onc : onc) {
 							_onc.createOWLIndividual(_object_name);
 						}
+						@SuppressWarnings("rawtypes")
 						Collection op = o.getOWLNamedClass(_object_name).getRDFProperties();
 						System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"+op);
 
@@ -344,6 +344,7 @@ public class TranslateStructclassToOWLMain {
 						for (OWLNamedClass _onc : onc) {
 							_onc.createOWLIndividual(_object_name);
 						}
+						@SuppressWarnings("rawtypes")
 						Collection op = o.getOWLNamedClass(_object_name).getRDFProperties();
 						System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"+op);
 
