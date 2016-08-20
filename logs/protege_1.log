@@ -1921,3 +1921,6 @@
  -- TriplePostProcessor.processPossiblyTypedResources()
 2016.08.07 08:44:02.037 CST INFO: Updating underlying frames model in 0 ms -- ProtegeOWLParser.doFinalPostProcessing()
 2016.08.07 08:44:02.084 CST WARNING: [Local Folder Repository] The specified file must be a directory. (E:\workspacefortest\workspace\OntologyTool - 0725\plugins\edu.stanford.smi.protegex.owl) -- LocalFolderRepository.update()
+2016.08.20 16:06:39.285 CST INFO: *** SYSTEM START ***
+2016.08.20 16:06:39.939 CST WARNING: [Local Folder Repository] The specified file must be a directory. (E:\workspacefortest\workspace\OntologyTool - 0725\plugins\edu.stanford.smi.protegex.owl) -- LocalFolderRepository.update()
+2016.08.20 16:06:40.065 CST WARNING: [Local Folder Repository] The specified file must be a directory. (E:\workspacefortest\workspace\OntologyTool - 0725\plugins\edu.stanford.smi.protegex.owl) -- LocalFolderRepository.update()

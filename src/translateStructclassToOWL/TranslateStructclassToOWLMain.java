@@ -2,6 +2,7 @@ package translateStructclassToOWL;
 
 import hanLP.HanLPMain;
 import hanLP._object;
+import hanLP._objectpredicate;
 import hanLP._objectproperty;
 import ioOperation.WriteToFile;
 
@@ -40,7 +41,7 @@ public class TranslateStructclassToOWLMain {
 //		String ss = "小刘的昵称是刘二，小刘是一个厨师，刘大伟的昵称是伟伟。刘大伟是一个厨师。小王的性别是男，小王的年龄是27.小王的父亲是老王，小王的母亲是张丽。张丽是一个教师。老王是一个工人。小王是一个厨师，小王是一个裁缝。植物是生物。人是智慧生物。人是劳动工具。智慧生物是生物。刘涛的电话号码是13866655333。赵航的电话号码是14787806414。赵航的学生证封面颜色是红的。赵航是一个中国人。";
 //		String sss = "鸡是鸣禽，鸡是鸟。鸣禽是鸟。艾滋病的存活率是低的。鹅是鸟。癌症的致死率是高的。癌症的潜伏期是5年的。癌症是一个疾病。艾滋病的潜伏期是12年。艾滋病的感染性是强的。艾滋病的疾病传播方式是性传播。毛毛是一个麻雀。鸟的翅膀个数是2，大雁是鸟。牛牛的年龄是10.牛牛是一个大雁，麻雀的翅膀个数是2，麻雀是鸟。";
 //		String ssss = "Eclipse的性能是ok的。感冒的潜伏期是2天。感冒是一个疾病。植物是生物。鹅是鸟。大雁是鸟。鹊雁是鸟。黑长尾雉是台湾的野生鸟类。大雁的羽毛颜色是白色的。鹅的羽毛颜色是白色的.小美洲黑雁头颈部呈黑色。燕隼属隼形目隼科隼属，燕隼上体是深蓝褐色的，燕隼是中国国家二级保护动物。四川灌木莺是新物种。绿翅雁是濒危鸟类。鸟有漂亮的翅膀。";
-		mainfunction("绿翅雁是濒危鸟类。鸟有漂亮的翅膀。鸡是鸣禽，鸡是鸟。鸣禽是鸟。麻雀是鸟。啄木鸟是鸟。微生物是生物。乌鸦是鸟。动物是生物。鸟是动物。鹊雁是鸟。", "base");
+		mainfunction("生物吃食物。绿翅雁是濒危鸟类。鸟有漂亮的翅膀。鸡是鸣禽，鸡是鸟。鸣禽是鸟。麻雀是鸟。啄木鸟是鸟。微生物是生物。乌鸦是鸟。动物是生物。鸟是动物。鹊雁是鸟。鸟吃昆虫。蚂蚱是昆虫。", "base");
 	}
 	
 	public static void writetotempFile(OWLModel o) throws IOException{
@@ -126,14 +127,24 @@ public class TranslateStructclassToOWLMain {
 			ArrayList<_object> _object_parent = _o.parent_object;
 			ArrayList<_object> _object_sub = _o.sub_object;
 			ArrayList<_objectproperty> _object_property = _o.objectproperty;
-
+			ArrayList<_objectpredicate> _object_predicate = _o.objectpredicate;
+			
 			boolean hasproperty = false;
+			boolean haspredicate = false;
 			if (_object_property != null) {// if property exists in this ont
 				hasproperty = true;
 				for (_objectproperty _op : _object_property)
 					if (!property_exist(o, _op.propertyname))
 						o.createOWLObjectProperty(_op.propertyname);
 			}
+			
+			if(_object_predicate != null){//添加非关系型属性列表
+				haspredicate = true;
+				for(_objectpredicate _opre:_object_predicate)
+					if (!property_exist(o, _opre.objectpredicateverb))
+						o.createOWLObjectProperty(_opre.objectpredicateverb);
+			}
+			
 			if (_object_type == 0) {// if object is a class
 				if (!class_exist(o, _object_name)) {// if class does't exists
 					o.createOWLNamedClass(_object_name);// create this class
@@ -149,10 +160,18 @@ public class TranslateStructclassToOWLMain {
 						}
 					}
 					if (hasproperty) {// if this class has properties
-						for (_objectproperty oprop : _object_property) {// add
-																		// properties
+						for (_objectproperty oprop : _object_property) {// add properties
 							OWLObjectProperty oop = o.getOWLObjectProperty(oprop.propertyname);
 							o.getOWLNamedClass(_object_name).setPropertyValue(oop, oprop.propertyvalue);
+						}
+					}
+					if(haspredicate){
+						for(_objectpredicate opre:_object_predicate){
+							OWLObjectProperty oopre = o.getOWLObjectProperty(opre.objectpredicateverb);//获取非关系型属性谓词
+							oopre.addUnionDomainClass(o.getOWLNamedClass(_object_name));
+							if(!class_exist(o, opre.objectpredicateobject))
+								o.createOWLNamedClass(opre.objectpredicateobject);
+							oopre.addUnionRangeClass(o.getOWLNamedClass(opre.objectpredicateobject));
 						}
 					}
 					if (_object_sub != null) {// if subclasses exist
@@ -191,6 +210,15 @@ public class TranslateStructclassToOWLMain {
 								o.getOWLNamedClass(_object_name).setPropertyValue(oop, oprop.propertyvalue);
 							}
 						}
+						if(haspredicate){
+							for(_objectpredicate opre:_object_predicate){
+								OWLObjectProperty oopre = o.getOWLObjectProperty(opre.objectpredicateverb);//获取非关系型属性谓词
+								oopre.addUnionDomainClass(o.getOWLNamedClass(_object_name));
+								if(!class_exist(o, opre.objectpredicateobject))
+									o.createOWLNamedClass(opre.objectpredicateobject);
+								oopre.addUnionRangeClass(o.getOWLNamedClass(opre.objectpredicateobject));
+							}
+						}
 						if (_object_sub != null) {// if subclasses exist
 							for (_object osub : _object_sub) {// add sub classes
 								if (osub.objecttype == 0) {// sub is class
@@ -218,9 +246,8 @@ public class TranslateStructclassToOWLMain {
 						for (OWLNamedClass _onc : onc) {
 							_onc.createOWLIndividual(_object_name);
 						}
-						@SuppressWarnings("rawtypes")
+						@SuppressWarnings({ "rawtypes", "unused" })
 						Collection op = o.getOWLNamedClass(_object_name).getRDFProperties();
-						System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"+op);
 
 						o.getOWLNamedClass(_object_name).delete();
 						if (_object_parent != null) {
@@ -282,13 +309,21 @@ public class TranslateStructclassToOWLMain {
 			ArrayList<_object> _object_parent = _o.parent_object;
 			ArrayList<_object> _object_sub = _o.sub_object;
 			ArrayList<_objectproperty> _object_property = _o.objectproperty;
-
+			ArrayList<_objectpredicate> _object_predicate = _o.objectpredicate;
+			
 			boolean hasproperty = false;
+			boolean haspredicate = false;
 			if (_object_property != null) {// if property exists in this ont
 				hasproperty = true;
 				for (_objectproperty _op : _object_property)
 					if (!property_exist(o, _op.propertyname))
 						o.createOWLObjectProperty(_op.propertyname);
+			}
+			if(_object_predicate != null){//添加非关系型属性列表
+				haspredicate = true;
+				for(_objectpredicate _opre:_object_predicate)
+					if (!property_exist(o, _opre.objectpredicateverb))
+						o.createOWLObjectProperty(_opre.objectpredicateverb);
 			}
 			if (_object_type == 0) {// if object is a class
 				if (!class_exist(o, _object_name)) {// if class does't exists
@@ -309,6 +344,15 @@ public class TranslateStructclassToOWLMain {
 																		// properties
 							OWLObjectProperty oop = o.getOWLObjectProperty(oprop.propertyname);
 							o.getOWLNamedClass(_object_name).setPropertyValue(oop, oprop.propertyvalue);
+						}
+					}
+					if(haspredicate){
+						for(_objectpredicate opre:_object_predicate){
+							OWLObjectProperty oopre = o.getOWLObjectProperty(opre.objectpredicateverb);//获取非关系型属性谓词
+							oopre.addUnionDomainClass(o.getOWLNamedClass(_object_name));
+							if(!class_exist(o, opre.objectpredicateobject))
+								o.createOWLNamedClass(opre.objectpredicateobject);
+							oopre.addUnionRangeClass(o.getOWLNamedClass(opre.objectpredicateobject));
 						}
 					}
 					if (_object_sub != null) {// if subclasses exist
@@ -345,6 +389,15 @@ public class TranslateStructclassToOWLMain {
 							for (_objectproperty oprop : _object_property) {// add properties
 								OWLObjectProperty oop = o.getOWLObjectProperty(oprop.propertyname);
 								o.getOWLNamedClass(_object_name).setPropertyValue(oop, oprop.propertyvalue);
+							}
+						}
+						if(haspredicate){
+							for(_objectpredicate opre:_object_predicate){
+								OWLObjectProperty oopre = o.getOWLObjectProperty(opre.objectpredicateverb);//获取非关系型属性谓词
+								oopre.addUnionDomainClass(o.getOWLNamedClass(_object_name));
+								if(!class_exist(o, opre.objectpredicateobject))
+									o.createOWLNamedClass(opre.objectpredicateobject);
+								oopre.addUnionRangeClass(o.getOWLNamedClass(opre.objectpredicateobject));
 							}
 						}
 						if (_object_sub != null) {// if subclasses exist

@@ -122,7 +122,7 @@ public class MainForm {
 		System.out.println("居中frame操作\t坐标：(" + w + ":" + h + ")\t大小：" + windowsWedth + "×" + windowsHeight);
 
 		frame.setTitle("\u4E2D\u6587\u672C\u4F53\u81EA\u52A8\u6784\u5EFA\u5DE5\u5177");
-		frame.setBounds(w, h, windowsWedth, windowsHeight);
+		frame.setBounds(w, h, 1017, 768);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		JMenuBar menuBar = new JMenuBar();
@@ -155,29 +155,29 @@ public class MainForm {
 
 		JPanel panel_6 = new JPanel();
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
-		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(
-				groupLayout
-						.createSequentialGroup()
-						.addContainerGap()
-						.addGroup(
-								groupLayout.createParallelGroup(Alignment.LEADING)
-										.addComponent(panel_4, GroupLayout.PREFERRED_SIZE, 598, GroupLayout.PREFERRED_SIZE)
-										.addComponent(panel, GroupLayout.PREFERRED_SIZE, 491, GroupLayout.PREFERRED_SIZE))
-						.addPreferredGap(ComponentPlacement.RELATED).addComponent(panel_6, GroupLayout.DEFAULT_SIZE, 560, Short.MAX_VALUE)
-						.addContainerGap()));
-		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(
-				groupLayout
-						.createSequentialGroup()
-						.addContainerGap()
-						.addGroup(
-								groupLayout
-										.createParallelGroup(Alignment.LEADING)
-										.addComponent(panel_6, GroupLayout.DEFAULT_SIZE, 689, Short.MAX_VALUE)
-										.addGroup(
-												groupLayout.createSequentialGroup()
-														.addComponent(panel, GroupLayout.PREFERRED_SIZE, 148, GroupLayout.PREFERRED_SIZE)
-														.addPreferredGap(ComponentPlacement.RELATED)
-														.addComponent(panel_4, GroupLayout.DEFAULT_SIZE, 535, Short.MAX_VALUE))).addContainerGap()));
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addComponent(panel, GroupLayout.PREFERRED_SIZE, 491, GroupLayout.PREFERRED_SIZE)
+						.addComponent(panel_4, GroupLayout.PREFERRED_SIZE, 500, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addComponent(panel_6, GroupLayout.PREFERRED_SIZE, 484, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap())
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addComponent(panel_6, GroupLayout.DEFAULT_SIZE, 689, Short.MAX_VALUE)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(panel, GroupLayout.PREFERRED_SIZE, 148, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(panel_4, GroupLayout.DEFAULT_SIZE, 535, Short.MAX_VALUE)))
+					.addContainerGap())
+		);
 
 		JPanel panel_7 = new JPanel();
 
@@ -532,17 +532,28 @@ public class MainForm {
 			}
 		});
 		GroupLayout gl_panel_8 = new GroupLayout(panel_8);
-		gl_panel_8.setHorizontalGroup(gl_panel_8.createParallelGroup(Alignment.LEADING).addGroup(
-				gl_panel_8.createSequentialGroup().addComponent(label_12).addPreferredGap(ComponentPlacement.RELATED).addComponent(radioButton_2)
-						.addPreferredGap(ComponentPlacement.RELATED).addComponent(radioButton_3).addGap(48).addComponent(button_1)
-						.addContainerGap(119, Short.MAX_VALUE)));
-		gl_panel_8.setVerticalGroup(gl_panel_8.createParallelGroup(Alignment.LEADING).addGroup(
-				gl_panel_8
-						.createSequentialGroup()
-						.addGroup(
-								gl_panel_8.createParallelGroup(Alignment.BASELINE).addComponent(label_12).addComponent(radioButton_2)
-										.addComponent(radioButton_3).addComponent(button_1))
-						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+		gl_panel_8.setHorizontalGroup(
+			gl_panel_8.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_8.createSequentialGroup()
+					.addComponent(label_12)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(radioButton_2)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(radioButton_3)
+					.addGap(18)
+					.addComponent(button_1)
+					.addContainerGap(149, Short.MAX_VALUE))
+		);
+		gl_panel_8.setVerticalGroup(
+			gl_panel_8.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_8.createSequentialGroup()
+					.addGroup(gl_panel_8.createParallelGroup(Alignment.BASELINE)
+						.addComponent(label_12)
+						.addComponent(radioButton_2)
+						.addComponent(radioButton_3)
+						.addComponent(button_1))
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
 		panel_8.setLayout(gl_panel_8);
 		panel_7.setLayout(gl_panel_7);
 		panel_6.setLayout(gl_panel_6);

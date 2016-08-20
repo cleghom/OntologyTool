@@ -49,7 +49,7 @@
 	<node nature="xu" parent="n"><meaning>网址URL</meaning></node>
 	<node nature="t" parent="n"><meaning>网址URL</meaning></node>
 	<node nature="s" parent="n"><meaning></meaning></node>
-	<node nature="v" parent="v"><meaning>网址URL</meaning></node>
+	<node nature="v" parent="v"><meaning>动词</meaning></node>
 	<node nature="vn" parent="n"><meaning>动名词</meaning></node>
 	<node nature="ude1" parent="ude1"><meaning>"的"</meaning></node>
 	<node nature="vshi" parent="vshi"><meaning>"是"</meaning></node>

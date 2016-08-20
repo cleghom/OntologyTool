@@ -28,7 +28,7 @@ public class HanLPMain {
 	// 主方法实现从字符串和文件中读入文本，连续即可。
 	public static void main(String[] args) {
 		// mainfunction("鸟有两个翅膀，中华人民共和国是国家，麻雀是鸟，鸟有漂亮的翅膀。鸟有强壮的翅膀。麻雀是鸟。鸟的翅膀是毛绒绒的。百度的url是www-baidu-com.南海的岛屿是中国的。南海的边境线是12海里。");
-		mainfunction("赵航是一个中国人。黄海是海。东海是海。南海是海。亚洲是洲。非洲是洲。鸟有漂亮的翅膀。鸟有强壮的翅膀。");
+		mainfunction("赵航是一个中国人。黄海是海。东海是海。南海是海。亚洲是洲。非洲是洲。鸟有漂亮的翅膀。鸟有强壮的翅膀。麻雀吃昆虫。");
 	}
 
 	// 主方法调用的读字符串分析
@@ -320,6 +320,34 @@ public class HanLPMain {
 				_objectlist.add(_o);
 				thisstructclass.add(_o);
 				System.out.println("A有adj的B");
+//				
+//				_o.parent_object.add(root);
+//				_o.objectname = termList.get(t).word;
+//				_objectpredicate op = new _objectpredicate();
+//				op.objectpredicateverb = termList.get(t + 1).word;
+//				op.objectpredicateobject = termList.get(t + 4).word;
+//				_o.objectpredicate.add(op);
+//				_objectlist.add(_o);
+//				thisstructclass.add(_o);
+//				System.out.println("A有B");
+			}
+		}
+
+		// 主谓宾
+		for (int t = 0; t < termListSize - 2; t++) {
+			if (getParent(termList.get(t).nature.toString()).equals("n") && getParent(termList.get(t + 1).nature.toString()).equals("v")
+					&& getParent(termList.get(t + 2).nature.toString()).equals("n")) {
+				_object _o = new _object();
+				_o.parent_object.add(root);
+				_o.objectname = termList.get(t).word;
+				_objectpredicate op = new _objectpredicate();
+				op.objectpredicateverb = termList.get(t + 1).word;
+				op.objectpredicateobject = termList.get(t + 2).word;
+				_o.objectpredicate.add(op);
+
+				_objectlist.add(_o);
+				thisstructclass.add(_o);
+				System.out.println("主谓宾");
 			}
 		}
 
@@ -327,6 +355,7 @@ public class HanLPMain {
 		String parentobj = "";
 		String subobj = "";
 		String objproperty = "";
+		String objectpredicate = "";
 
 		while (x-- > 0) {
 			// object
@@ -367,13 +396,23 @@ public class HanLPMain {
 				}
 			else
 				tempinfo += "\t--->子类为空";
+
+			// predicate relation
+			if (thisstructclass.get(x).objectpredicate.size() > 0)
+				for (_objectpredicate op : thisstructclass.get(x).objectpredicate) {
+					String predicateverb = op.objectpredicateverb;
+					String predicateobject = op.objectpredicateobject;
+					tempinfo += "\n谓词：" + predicateverb + "宾语：" + predicateobject;
+				}
+			else
+				tempinfo += "";
+
 			System.out.println(tempinfo);
 			System.out.println("**************************");
 			getbackinfo += tempinfo + "\n";
 			inf = tempinfo;
 		}
 		System.out.println("----------------------------华丽的分割线----------------------------");
-
 		return thisstructclass;
 	}
 
