@@ -19,8 +19,8 @@ Java实现中文本体自动构建工具：A program about how to build an ontol
 # step2：参照.idea/libraries/* 添加jar包
 >都在**project_jars/**下
 
-# step3: 配置`src/hanlp.properties`和`bin/hanlp.properties`
->root地址修改为你的词典的绝对地址
+# step3: 配置hanlp.properties
+>`src/hanlp.properties`和`bin/hanlp.properties`:root地址修改为你的词典的绝对地址
 
 # step4: 运行src/mainView/MainForm
 >右键运行即可！
