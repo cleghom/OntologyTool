@@ -24,3 +24,7 @@ Java实现中文本体自动构建工具：A program about how to build an ontol
 
 ## step4: 运行src/mainView/MainForm
 >右键运行即可！
+
+
+---
+视频地址：[中文-本体模型自动构建工具](https://www.bilibili.com/video/BV1cs411W7BT)
