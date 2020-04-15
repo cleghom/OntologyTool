@@ -3,8 +3,8 @@ package mainView;
 import edu.stanford.smi.protege.exception.OntologyLoadException;
 import edu.stanford.smi.protegex.owl.ProtegeOWL;
 import edu.stanford.smi.protegex.owl.model.OWLModel;
-import getContent.GetContent;
-import hanLP._object;
+import webCrawlerGetContent.GetContent;
+import ontMainUtils.object;
 import ioOperation.WriteToFile;
 
 import java.awt.BorderLayout;
@@ -56,33 +56,29 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.UIManager;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 
 import org.eclipse.wb.swing.FocusTraversalOnArray;
 
-import staticvariable.staticvalue;
+import staticVariable.staticvalue;
 import translateTo3N.Get3NFormat;
-import webCrawler.Crawler;
-import webCrawlerforBD.HtmlUnitforBD;
+import webCrawler4Baidu.HtmlUnitforBD;
 
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.hp.hpl.jena.ontology.OntModel;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
-
 public class MainForm {
 	/**
-	 * ×Ô¶¨Òå²¿·Ö±äÁ¿
+	 * è‡ªå®šä¹‰éƒ¨åˆ†å˜é‡
 	 */
-	Crawler crawler;
-	// baiduËÑËØ²¿·ÖµÄ³õÊ¼±äÁ¿¶¨Òå
+	// baiduæœç´ éƒ¨åˆ†çš„åˆå§‹å˜é‡å®šä¹‰
 	private int baidu_num = 10;
-	private String baidu_word = "Äñ";
+	private String baidu_word = "é¸Ÿ";
 	HtmlUnitforBD hu;
 	private JFrame frame;
-	private static ArrayList<String> temp3N = new ArrayList<>();// ±£´æÔİ´æµÄ3N·¶Ê½
+	private static ArrayList<String> temp3N = new ArrayList<>();// ä¿å­˜æš‚å­˜çš„3NèŒƒå¼
 	private JTextField txtOwlBase;
 
 	/**
@@ -93,7 +89,7 @@ public class MainForm {
 			public void run() {
 				try {
 					MainForm window = new MainForm();
-					UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsClassicLookAndFeel");
+//					UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsClassicLookAndFeel");
 					// SwingUtilities.updateComponentTreeUI(window);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
@@ -119,7 +115,7 @@ public class MainForm {
 		int windowsHeight = 768;
 		int w = (Toolkit.getDefaultToolkit().getScreenSize().width - windowsWedth) / 2;
 		int h = (Toolkit.getDefaultToolkit().getScreenSize().height - windowsHeight) / 2;
-		System.out.println("¾ÓÖĞframe²Ù×÷\t×ø±ê£º(" + w + ":" + h + ")\t´óĞ¡£º" + windowsWedth + "¡Á" + windowsHeight);
+		System.out.println("å±…ä¸­frameæ“ä½œ\tåæ ‡ï¼š(" + w + ":" + h + ")\tå¤§å°ï¼š" + windowsWedth + "Ã—" + windowsHeight);
 
 		frame.setTitle("\u4E2D\u6587\u672C\u4F53\u81EA\u52A8\u6784\u5EFA\u5DE5\u5177");
 		frame.setBounds(w, h, 1017, 768);
@@ -156,27 +152,27 @@ public class MainForm {
 		JPanel panel_6 = new JPanel();
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
 		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(panel, GroupLayout.PREFERRED_SIZE, 491, GroupLayout.PREFERRED_SIZE)
-						.addComponent(panel_4, GroupLayout.PREFERRED_SIZE, 500, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-					.addComponent(panel_6, GroupLayout.PREFERRED_SIZE, 484, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap())
+				groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+								.addContainerGap()
+								.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+										.addComponent(panel, GroupLayout.PREFERRED_SIZE, 491, GroupLayout.PREFERRED_SIZE)
+										.addComponent(panel_4, GroupLayout.PREFERRED_SIZE, 500, GroupLayout.PREFERRED_SIZE))
+								.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(panel_6, GroupLayout.PREFERRED_SIZE, 484, GroupLayout.PREFERRED_SIZE)
+								.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(panel_6, GroupLayout.DEFAULT_SIZE, 689, Short.MAX_VALUE)
+				groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(panel, GroupLayout.PREFERRED_SIZE, 148, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(panel_4, GroupLayout.DEFAULT_SIZE, 535, Short.MAX_VALUE)))
-					.addContainerGap())
+								.addContainerGap()
+								.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+										.addComponent(panel_6, GroupLayout.DEFAULT_SIZE, 689, Short.MAX_VALUE)
+										.addGroup(groupLayout.createSequentialGroup()
+												.addComponent(panel, GroupLayout.PREFERRED_SIZE, 148, GroupLayout.PREFERRED_SIZE)
+												.addPreferredGap(ComponentPlacement.RELATED)
+												.addComponent(panel_4, GroupLayout.DEFAULT_SIZE, 535, Short.MAX_VALUE)))
+								.addContainerGap())
 		);
 
 		JPanel panel_7 = new JPanel();
@@ -215,16 +211,16 @@ public class MainForm {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				textPane_6.setText(null);
-				label_13.setText("ĞÅÏ¢·´À¡£º");
+				label_13.setText("ä¿¡æ¯åé¦ˆï¼š");
 				FileDialog fd;
 				Frame f = null;
 				File file1 = null;
-				fd = new FileDialog(f, "ÇëÑ¡ÔñÒ»¸öÎÄ±¾ÎÄ¼ş", FileDialog.LOAD);
-				fd.setVisible(true); // ´´½¨²¢ÏÔÊ¾´ò¿ªÎÄ¼ş¶Ô»°¿ò
+				fd = new FileDialog(f, "è¯·é€‰æ‹©ä¸€ä¸ªæ–‡æœ¬æ–‡ä»¶", FileDialog.LOAD);
+				fd.setVisible(true); // åˆ›å»ºå¹¶æ˜¾ç¤ºæ‰“å¼€æ–‡ä»¶å¯¹è¯æ¡†
 				file1 = new File(fd.getDirectory(), fd.getFile());
 				if (file1.getAbsolutePath().endsWith(".txt")) {
 					try {
-						label_13.setText("ĞÅÏ¢·´À¡£º´ò¿ªÎÄ¼ş³É¹¦£¬Â·¾¶£º" + file1.getAbsolutePath());
+						label_13.setText("ä¿¡æ¯åé¦ˆï¼šæ‰“å¼€æ–‡ä»¶æˆåŠŸï¼Œè·¯å¾„ï¼š" + file1.getAbsolutePath());
 						FileReader fr = new FileReader(file1);
 						BufferedReader br = new BufferedReader(fr);
 						String aline;
@@ -237,8 +233,8 @@ public class MainForm {
 
 					}
 				} else if (file1.getAbsolutePath().endsWith(".owl")) {
-					label_13.setText("ĞÅÏ¢·´À¡£º´ò¿ªowlÎÄ¼ş³É¹¦");
-					textPane_6.setText("owlÎÄ¼ş¼ÓÔØÍê±Ï£¬¿ÉÒÔÖ´ĞĞÏÂÒ»²½²Ù×÷¡£");
+					label_13.setText("ä¿¡æ¯åé¦ˆï¼šæ‰“å¼€owlæ–‡ä»¶æˆåŠŸ");
+					textPane_6.setText("owlæ–‡ä»¶åŠ è½½å®Œæ¯•ï¼Œå¯ä»¥æ‰§è¡Œä¸‹ä¸€æ­¥æ“ä½œã€‚");
 				}
 			}
 		});
@@ -269,7 +265,7 @@ public class MainForm {
 				}
 				try {
 					Desktop.getDesktop().open(new File(staticvalue.localaddr + "\\" + staticvalue.tempfilename + "-update.owl"));
-					label_14.setText("Ö´ĞĞ·´À¡£ºÖ´ĞĞ½áÊø²¢ÒÑ¾­Êä³öµ½ÎÄ¼ş" + staticvalue.localaddr);
+					label_14.setText("æ‰§è¡Œåé¦ˆï¼šæ‰§è¡Œç»“æŸå¹¶å·²ç»è¾“å‡ºåˆ°æ–‡ä»¶" + staticvalue.localaddr);
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
@@ -336,7 +332,7 @@ public class MainForm {
 			public void mousePressed(MouseEvent e) {
 				if (rdbtnrdf.isSelected()) {
 					OntModel ontmodel = ModelFactory.createOntologyModel();
-					textPane_5.setText("ĞÂ½¨OntModelÄ£ĞÍ½áÊø\n");
+					textPane_5.setText("æ–°å»ºOntModelæ¨¡å‹ç»“æŸ\n");
 					String outFileuri = staticvalue.localaddr + "\\" + staticvalue.tempfilename + ".rdf";
 					String content = textPane_1.getText();
 					String newcontent = "";
@@ -368,7 +364,7 @@ public class MainForm {
 				}
 
 				if (rdbtnowl.isSelected()) {
-					textPane_5.setText("¿ªÊ¼½¨Á¢owlÄ£ĞÍ¡£¡£¡£");
+					textPane_5.setText("å¼€å§‹å»ºç«‹owlæ¨¡å‹ã€‚ã€‚ã€‚");
 
 					Format format = new SimpleDateFormat("yyMMdd-hhmmss");
 					String time = format.format(new Date());
@@ -378,15 +374,15 @@ public class MainForm {
 					info = GetContent.getcontent(info, info);
 					System.out.println(info);
 					try {
-						OWLModel newowlmodel = ProtegeOWL.createJenaOWLModel();// ±¾´¦ÊÇĞÂ½¨Ò»¸öĞÂµÄowl±¾Ìå£¬Êµ¼ÊÉÏ¿ÉÒÔµ÷³öÔ­ÓĞµÄowl±¾ÌåÎÄ¼ş£¬Ö»ĞèÒª°Ñ´Ë´¦µÄowlmodel²ÉÓÃÎÄ¼ş´ò¿ªµÄ·½Ê½´ò¿ª¼´¿É
+						OWLModel newowlmodel = ProtegeOWL.createJenaOWLModel();// æœ¬å¤„æ˜¯æ–°å»ºä¸€ä¸ªæ–°çš„owlæœ¬ä½“ï¼Œå®é™…ä¸Šå¯ä»¥è°ƒå‡ºåŸæœ‰çš„owlæœ¬ä½“æ–‡ä»¶ï¼Œåªéœ€è¦æŠŠæ­¤å¤„çš„owlmodelé‡‡ç”¨æ–‡ä»¶æ‰“å¼€çš„æ–¹å¼æ‰“å¼€å³å¯
 						newowlmodel = translateStructclassToOWL.TranslateStructclassToOWLMain.mainfunction(info, base);
 						SimpleAttributeSet set = new SimpleAttributeSet();
 						StyleConstants.setBackground(set, Color.YELLOW);
 						WriteToFile.writetoFile(newowlmodel, staticvalue.localaddr + "\\" + staticvalue.tempfilename + ".owl");
 						textPane_5.getDocument().insertString(
 								textPane_5.getDocument().getLength(),
-								"\nÓÉÓÚjava protegeµÄAPIÖ±½Ó½âÎöOWLÎÄ¼şµ½javaÏîÄ¿ÖĞµÄ¹ı³ÌÖĞutf-8¸ñÊ½´æÔÚÓëUnicode±àÂë¸ñÊ½ÂÒÂë²»¼æÈİ£¬´¦Àí¹ı³Ì½ÏÂé·³£¬ÒòÎª¸Ã´¦Ö»×öÕ¹Ê¾¹ı³Ì£¬¹Ê´Ë´¦Ê¹ÓÃ¿É½âÎöowlµÄä¯ÀÀÆ÷´ò¿ª²¢ÏÔÊ¾ÎÄ¼ş¡£"
-										+ "\nÊä³öµ½ÎÄ¼ş" + staticvalue.localaddr + "\\" + staticvalue.tempfilename + ".owl", set);
+								"\nç”±äºjava protegeçš„APIç›´æ¥è§£æOWLæ–‡ä»¶åˆ°javaé¡¹ç›®ä¸­çš„è¿‡ç¨‹ä¸­utf-8æ ¼å¼å­˜åœ¨ä¸Unicodeç¼–ç æ ¼å¼ä¹±ç ä¸å…¼å®¹ï¼Œå¤„ç†è¿‡ç¨‹è¾ƒéº»çƒ¦ï¼Œå› ä¸ºè¯¥å¤„åªåšå±•ç¤ºè¿‡ç¨‹ï¼Œæ•…æ­¤å¤„ä½¿ç”¨å¯è§£æowlçš„æµè§ˆå™¨æ‰“å¼€å¹¶æ˜¾ç¤ºæ–‡ä»¶ã€‚"
+										+ "\nè¾“å‡ºåˆ°æ–‡ä»¶" + staticvalue.localaddr + "\\" + staticvalue.tempfilename + ".owl", set);
 					} catch (OntologyLoadException | IOException | BadLocationException e1) {
 						e1.printStackTrace();
 					}
@@ -506,19 +502,18 @@ public class MainForm {
 		button_1.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				if (radioButton_2.isSelected()) {
-					textPane_4.setText("^  .  ^~       ÕıÔÚÉú³ÉÀà ÊôĞÔ ¹ØÏµÁĞ±í £¬ÇëÉÔºò ¡£¡£¡£\n");
-					String temp = textPane_2.getText();// ±£´æÔ­Ê¼ÎÄ±¾
-					ArrayList<String> al = new ArrayList<String>();// ±£´æ·Ö¾ä
-					al = hanLP.HanLPMain.separateString(temp);// ·Ö¾ä¸³Öµ¸øal
+					textPane_4.setText("^  .  ^~       æ­£åœ¨ç”Ÿæˆç±» å±æ€§ å…³ç³»åˆ—è¡¨ ï¼Œè¯·ç¨å€™ ã€‚ã€‚ã€‚\n");
+					String temp = textPane_2.getText();// ä¿å­˜åŸå§‹æ–‡æœ¬
+					ArrayList<String> al = new ArrayList<String>();// ä¿å­˜åˆ†å¥
+					al = ontMainUtils.HanLPMain.separateString(temp);// åˆ†å¥èµ‹å€¼ç»™al
 					String[] eachstring = temp.split("\r\n");
 					int alsize = al.size();
 					int num = 0;
 					String inf = "";
 					while (num < alsize) {
 						@SuppressWarnings("unused")
-						ArrayList<_object> newtemp = hanLP.HanLPMain.getObject(
-								hanLP.HanLPMain.getAdvancedTermOfthisSentencs(hanLP.HanLPMain.getBaseTermOfthisSentence(eachstring[num])), inf);
-						String info = hanLP.HanLPMain.getinf();
+						ArrayList<object> newtemp = ontMainUtils.HanLPMain.getObject(ontMainUtils.HanLPMain.getAdvancedTermOfthisSentencs(ontMainUtils.HanLPMain.getBaseTermOfthisSentence(eachstring[num])), inf);
+						String info = ontMainUtils.HanLPMain.getinf();
 						System.out.println("YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY");
 						SimpleAttributeSet set = new SimpleAttributeSet();
 						try {
@@ -533,33 +528,33 @@ public class MainForm {
 		});
 		GroupLayout gl_panel_8 = new GroupLayout(panel_8);
 		gl_panel_8.setHorizontalGroup(
-			gl_panel_8.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel_8.createSequentialGroup()
-					.addComponent(label_12)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(radioButton_2)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(radioButton_3)
-					.addGap(18)
-					.addComponent(button_1)
-					.addContainerGap(149, Short.MAX_VALUE))
+				gl_panel_8.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel_8.createSequentialGroup()
+								.addComponent(label_12)
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(radioButton_2)
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(radioButton_3)
+								.addGap(18)
+								.addComponent(button_1)
+								.addContainerGap(149, Short.MAX_VALUE))
 		);
 		gl_panel_8.setVerticalGroup(
-			gl_panel_8.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel_8.createSequentialGroup()
-					.addGroup(gl_panel_8.createParallelGroup(Alignment.BASELINE)
-						.addComponent(label_12)
-						.addComponent(radioButton_2)
-						.addComponent(radioButton_3)
-						.addComponent(button_1))
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+				gl_panel_8.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel_8.createSequentialGroup()
+								.addGroup(gl_panel_8.createParallelGroup(Alignment.BASELINE)
+										.addComponent(label_12)
+										.addComponent(radioButton_2)
+										.addComponent(radioButton_3)
+										.addComponent(button_1))
+								.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		panel_8.setLayout(gl_panel_8);
 		panel_7.setLayout(gl_panel_7);
 		panel_6.setLayout(gl_panel_6);
 
 		JScrollPane scrollPane = new JScrollPane();
-		JLabel lblNewLabel_2 = new JLabel("ÍøÂç½¨Ä£¶ÁÈ¡¹ı³Ì·´À¡");
+		JLabel lblNewLabel_2 = new JLabel("ç½‘ç»œå»ºæ¨¡è¯»å–è¿‡ç¨‹åé¦ˆ");
 		scrollPane.setColumnHeaderView(lblNewLabel_2);
 
 		final JTextPane textPane = new JTextPane();
@@ -573,7 +568,7 @@ public class MainForm {
 
 		scrollPane_1.setViewportView(textPane_1);
 
-		JLabel lblNewLabel_1 = new JLabel("ÏµÍ³ÔËĞĞ·´À¡");
+		JLabel lblNewLabel_1 = new JLabel("ç³»ç»Ÿè¿è¡Œåé¦ˆ");
 
 		JButton btnNewButton = new JButton("\u5BF9\u4EE5\u4E0A\u4E2D\u6587\u4FE1\u606F\u751F\u6210\u65AD\u8A00");
 		btnNewButton.addMouseListener(new MouseAdapter() {
@@ -584,7 +579,7 @@ public class MainForm {
 				Matcher matcher = pattern.matcher(tp1text);
 				String temp = "";
 				while (matcher.find()) {
-					System.out.println("½á¹û£º" + matcher.group());
+					System.out.println("ç»“æœï¼š" + matcher.group());
 					temp += matcher.group() + ".\r\n";
 				}
 				textPane_2.setText(temp);
@@ -599,8 +594,8 @@ public class MainForm {
 				FileDialog fd;
 				Frame f = null;
 				File file1 = null;
-				fd = new FileDialog(f, "ÇëÑ¡ÔñÒ»¸öÎÄ±¾ÎÄ¼ş", FileDialog.LOAD);
-				fd.setVisible(true); // ´´½¨²¢ÏÔÊ¾´ò¿ªÎÄ¼ş¶Ô»°¿ò
+				fd = new FileDialog(f, "è¯·é€‰æ‹©ä¸€ä¸ªæ–‡æœ¬æ–‡ä»¶", FileDialog.LOAD);
+				fd.setVisible(true); // åˆ›å»ºå¹¶æ˜¾ç¤ºæ‰“å¼€æ–‡ä»¶å¯¹è¯æ¡†
 				try {
 					textPane_2.setText("");
 					file1 = new File(fd.getDirectory(), fd.getFile());
@@ -687,7 +682,7 @@ public class MainForm {
 		button.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				if (radioButton.isSelected()) {
-					textPane_3.setText("^  .  ^~       ÕıÔÚ¼ÓÔØÄ£°å£¬ÇëÉÔµÈ ¡£¡£¡£\n");
+					textPane_3.setText("^  .  ^~       æ­£åœ¨åŠ è½½æ¨¡æ¿ï¼Œè¯·ç¨ç­‰ ã€‚ã€‚ã€‚\n");
 					String tp2text = textPane_2.getText();
 					System.out.println("!!!" + tp2text);
 					String[] a = tp2text.split("\r\n");
@@ -709,19 +704,19 @@ public class MainForm {
 					}
 
 					System.out.println(temp3N);
-					label_11.setText("·Ö´Ê½áÊøÇÒÒÑ¾­Éú³É3-N½á¹¹Ê½×Ó");
+					label_11.setText("åˆ†è¯ç»“æŸä¸”å·²ç»ç”Ÿæˆ3-Nç»“æ„å¼å­");
 					label_11.setBackground(Color.gray);
 				}
 				if (rdbtnHanlp.isSelected()) {
-					textPane_3.setText("^  .  ^~       ÕıÔÚ¼ÓÔØHanLP¹¤¾ß£¬ÇëÉÔµÈ ¡£¡£¡£\n");
-					String temp = textPane_2.getText();// ±£´æÔ­Ê¼ÎÄ±¾
-					ArrayList<String> al = new ArrayList<String>();// ±£´æ·Ö¾ä
-					al = hanLP.HanLPMain.separateString(temp);// ·Ö¾ä¸³Öµ¸øal
+					textPane_3.setText("^  .  ^~       æ­£åœ¨åŠ è½½HanLPå·¥å…·ï¼Œè¯·ç¨ç­‰ ã€‚ã€‚ã€‚\n");
+					String temp = textPane_2.getText();// ä¿å­˜åŸå§‹æ–‡æœ¬
+					ArrayList<String> al = new ArrayList<String>();// ä¿å­˜åˆ†å¥
+					al = ontMainUtils.HanLPMain.separateString(temp);// åˆ†å¥èµ‹å€¼ç»™al
 					String[] eachstring = temp.split("\r\n");
 					int alsize = al.size();
 					int num = 0;
 					while (num < alsize) {
-						String newtemp = hanLP.HanLPMain.getAdvancedTermOfthisSentencs(hanLP.HanLPMain.getBaseTermOfthisSentence(eachstring[num]))
+						String newtemp = ontMainUtils.HanLPMain.getAdvancedTermOfthisSentencs(ontMainUtils.HanLPMain.getBaseTermOfthisSentence(eachstring[num]))
 								.toString();
 						SimpleAttributeSet set = new SimpleAttributeSet();
 						try {
@@ -780,7 +775,7 @@ public class MainForm {
 		panel.add(tabbedPane, BorderLayout.CENTER);
 
 		JPanel panel_1 = new JPanel();
-		tabbedPane.addTab("°Ù¶ÈËÑË÷ÒıÇæ", null, panel_1, null);
+		tabbedPane.addTab("ç™¾åº¦æœç´¢å¼•æ“", null, panel_1, null);
 		GridBagLayout gbl_panel_1 = new GridBagLayout();
 		gbl_panel_1.columnWidths = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 		gbl_panel_1.rowHeights = new int[] { 0, 0, 0, 0, 0 };
@@ -825,7 +820,7 @@ public class MainForm {
 		bd_keyword.setText(baidu_word + "");
 		bd_num.setText(baidu_num + "");
 
-		JButton bdsearch_startbt = new JButton("¿ªÊ¼");
+		JButton bdsearch_startbt = new JButton("å¼€å§‹");
 		bdsearch_startbt.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -846,7 +841,7 @@ public class MainForm {
 		gbc_bdsearch_startbt.gridy = 3;
 		panel_1.add(bdsearch_startbt, gbc_bdsearch_startbt);
 
-		JButton bdsearch_stopbt = new JButton("Í£Ö¹");
+		JButton bdsearch_stopbt = new JButton("åœæ­¢");
 		bdsearch_stopbt.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -859,7 +854,7 @@ public class MainForm {
 		panel_1.add(bdsearch_stopbt, gbc_bdsearch_stopbt);
 
 		Panel panel_2 = new Panel();
-		tabbedPane.addTab("ÀûÓÃ±¾µØÎÄ¼ş½¨Ä£", null, panel_2, null);
+		tabbedPane.addTab("åˆ©ç”¨æœ¬åœ°æ–‡ä»¶å»ºæ¨¡", null, panel_2, null);
 		GridBagLayout gbl_panel_2 = new GridBagLayout();
 		gbl_panel_2.columnWidths = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 		gbl_panel_2.rowHeights = new int[] { 0, 0, 0, 0, 0 };
@@ -867,14 +862,14 @@ public class MainForm {
 		gbl_panel_2.rowWeights = new double[] { 1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		panel_2.setLayout(gbl_panel_2);
 
-		JLabel lblNewLabel_3 = new JLabel("ÀûÓÃ±¾µØµÄÎÄ±¾ÊµÏÖÖªÊ¶±¾ÌåµÄ¹¹½¨");
+		JLabel lblNewLabel_3 = new JLabel("åˆ©ç”¨æœ¬åœ°çš„æ–‡æœ¬å®ç°çŸ¥è¯†æœ¬ä½“çš„æ„å»º");
 		GridBagConstraints gbc_lblNewLabel_3 = new GridBagConstraints();
 		gbc_lblNewLabel_3.gridwidth = 3;
 		gbc_lblNewLabel_3.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNewLabel_3.gridx = 0;
 		gbc_lblNewLabel_3.gridy = 0;
 		panel_2.add(lblNewLabel_3, gbc_lblNewLabel_3);
-		JButton btnNewButton_1 = new JButton("´ò¿ª±¾µØÎÄ¼ş");
+		JButton btnNewButton_1 = new JButton("æ‰“å¼€æœ¬åœ°æ–‡ä»¶");
 
 		final JLabel label_fname = new JLabel("null");
 		GridBagConstraints gbc_label_fname = new GridBagConstraints();
@@ -890,15 +885,15 @@ public class MainForm {
 				SimpleAttributeSet set = new SimpleAttributeSet();
 				StyleConstants.setBackground(set, Color.YELLOW);
 				try {
-					textPane.getDocument().insertString(textPane.getDocument().getLength(), "ÎŞÍøÂç½¨Ä££¬´Ë´¦²»ĞèÒªÏÔÊ¾\n", set);
+					textPane.getDocument().insertString(textPane.getDocument().getLength(), "æ— ç½‘ç»œå»ºæ¨¡ï¼Œæ­¤å¤„ä¸éœ€è¦æ˜¾ç¤º\n", set);
 				} catch (BadLocationException e1) {
 					e1.printStackTrace();
 				}
 				FileDialog fd;
 				Frame f = null;
 				File file1 = null;
-				fd = new FileDialog(f, "ÇëÑ¡ÔñÒ»¸öÎÄ±¾ÎÄ¼ş", FileDialog.LOAD);
-				fd.setVisible(true); // ´´½¨²¢ÏÔÊ¾´ò¿ªÎÄ¼ş¶Ô»°¿ò
+				fd = new FileDialog(f, "è¯·é€‰æ‹©ä¸€ä¸ªæ–‡æœ¬æ–‡ä»¶", FileDialog.LOAD);
+				fd.setVisible(true); // åˆ›å»ºå¹¶æ˜¾ç¤ºæ‰“å¼€æ–‡ä»¶å¯¹è¯æ¡†
 				try {
 					textPane_1.setText("");
 					file1 = new File(fd.getDirectory(), fd.getFile());
@@ -908,7 +903,7 @@ public class MainForm {
 					String aline;
 					SimpleAttributeSet set2 = new SimpleAttributeSet();
 					while ((aline = br.readLine()) != null)
-						// °´ĞĞ¶ÁÈ¡ÎÄ±¾
+						// æŒ‰è¡Œè¯»å–æ–‡æœ¬
 						textPane_1.getDocument().insertString(textPane_1.getDocument().getLength(), aline + "\n", set2);
 					fr.close();
 					br.close();

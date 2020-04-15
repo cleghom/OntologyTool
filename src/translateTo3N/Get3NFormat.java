@@ -31,20 +31,20 @@ public class Get3NFormat {
 		String NS = "http://OWLTEST/Things#";
 		while ((temp = br.readLine()) != null) {
 			System.out.println(temp);
-			if (temp.contains("µÄ") & temp.contains("ÊÇ")) {
+			if (temp.contains("çš„") & temp.contains("æ˜¯")) {
 
-				String Subject = temp.substring(0, temp.indexOf("µÄ"));
-				System.out.print("\tÖ÷Ìå:" + Subject);
+				String Subject = temp.substring(0, temp.indexOf("çš„"));
+				System.out.print("\tä¸»ä½“:" + Subject);
 				// Resource s1 = ontmodel1.createResource(Subject);
 				OntClass oc1 = ontmodel1.createClass(NS + Subject);
 
-				String Property = temp.substring(temp.indexOf("µÄ") + 1, temp.indexOf("ÊÇ"));
-				System.out.print("\tÊôĞÔ:" + Property);
+				String Property = temp.substring(temp.indexOf("çš„") + 1, temp.indexOf("æ˜¯"));
+				System.out.print("\tå±æ€§:" + Property);
 				// Property p = ontmodel1.createProperty(NS, Property);
 				OntProperty op1 = ontmodel1.createObjectProperty(NS + Property);
 
-				String Object = temp.substring(temp.indexOf("ÊÇ") + 1, temp.length());
-				System.out.println("\t¿ÍÌå:" + Object);
+				String Object = temp.substring(temp.indexOf("æ˜¯") + 1, temp.length());
+				System.out.println("\tå®¢ä½“:" + Object);
 				Resource s2 = ontmodel1.createResource(Object);
 				// s1.addProperty(p, s2);
 
@@ -53,20 +53,20 @@ public class Get3NFormat {
 				ontmodel1.add(statement);
 				// ontmodel1.write(System.out);
 
-			} else if (temp.contains("²»»á")) {
+			} else if (temp.contains("ä¸ä¼š")) {
 				System.out.println("find it!!!");
-				// Subject = temp.substring(0, temp.indexOf("²»"));
-				// Property = temp.substring(temp.indexOf("»á"), temp.length());
-				// Object = "·ñ";
+				// Subject = temp.substring(0, temp.indexOf("ä¸"));
+				// Property = temp.substring(temp.indexOf("ä¼š"), temp.length());
+				// Object = "å¦";
 
-			} else if (temp.contains("»á")) {
-				if (temp.charAt(temp.indexOf("»á") - 1) != '²»') {
-					System.out.println("»áµÄÎ»ÖÃ£º" + temp.indexOf("»á"));
-					System.out.println("»áÖ®Ç°µÄ×Ö·û£º" + temp.charAt(temp.indexOf("»á") - 1));
+			} else if (temp.contains("ä¼š")) {
+				if (temp.charAt(temp.indexOf("ä¼š") - 1) != 'ä¸') {
+					System.out.println("ä¼šçš„ä½ç½®ï¼š" + temp.indexOf("ä¼š"));
+					System.out.println("ä¼šä¹‹å‰çš„å­—ç¬¦ï¼š" + temp.charAt(temp.indexOf("ä¼š") - 1));
 				}
-				// Subject ="!!"+ temp.substring(0, temp.indexOf("»á"));
-				// Property = temp.substring(temp.indexOf("»á"), temp.length());
-				// Object = "ÊÇ";
+				// Subject ="!!"+ temp.substring(0, temp.indexOf("ä¼š"));
+				// Property = temp.substring(temp.indexOf("ä¼š"), temp.length());
+				// Object = "æ˜¯";
 			}
 		}
 		System.out.println(ontmodel1);
@@ -78,19 +78,19 @@ public class Get3NFormat {
 		String Subject = null;
 		String Object = null;
 		String Property = null;
-		if (temp.contains("µÄ") & temp.contains("ÊÇ")) {
-			Subject = temp.substring(0, temp.indexOf("µÄ"));
-			System.out.print("\tÖ÷Ìå:" + Subject);
+		if (temp.contains("çš„") & temp.contains("æ˜¯")) {
+			Subject = temp.substring(0, temp.indexOf("çš„"));
+			System.out.print("\tä¸»ä½“:" + Subject);
 			// Resource s1 = ontmodel1.createResource(Subject);
 			// OntClass oc1 = ontmodel1.createClass(NS + Subject);
 
-			Property = temp.substring(temp.indexOf("µÄ") + 1, temp.indexOf("ÊÇ"));
-			System.out.print("\tÊôĞÔ:" + Property);
+			Property = temp.substring(temp.indexOf("çš„") + 1, temp.indexOf("æ˜¯"));
+			System.out.print("\tå±æ€§:" + Property);
 			// Property p = ontmodel1.createProperty(NS, Property);
 			// OntProperty op1 = ontmodel1.createObjectProperty(NS + Property);
 
-			Object = temp.substring(temp.indexOf("ÊÇ") + 1, temp.length());
-			System.out.println("\t¿ÍÌå:" + Object);
+			Object = temp.substring(temp.indexOf("æ˜¯") + 1, temp.length());
+			System.out.println("\tå®¢ä½“:" + Object);
 			// Resource s2 = ontmodel1.createResource(Object);
 			// s1.addProperty(p, s2);
 
@@ -100,19 +100,19 @@ public class Get3NFormat {
 			// ontmodel1.write(System.out);
 			System.out.println(Subject + ":" + Property + ":" + Object);
 
-		} else if (temp.contains("²»»á")) {
+		} else if (temp.contains("ä¸ä¼š")) {
 			System.out.println("find it!!!");
-			Subject = temp.substring(0, temp.indexOf("²»"));
-			Property = temp.substring(temp.indexOf("»á"), temp.length());
-			Object = "·ñ";
+			Subject = temp.substring(0, temp.indexOf("ä¸"));
+			Property = temp.substring(temp.indexOf("ä¼š"), temp.length());
+			Object = "å¦";
 
-		} else if (temp.contains("»á")) {
-			if (temp.charAt(temp.indexOf("»á") - 1) != '²»') {
-				System.out.println("»áµÄÎ»ÖÃ£º" + temp.indexOf("»á"));
-				System.out.println("»áÖ®Ç°µÄ×Ö·û£º" + temp.charAt(temp.indexOf("»á") - 1));
-				Subject = temp.substring(0, temp.indexOf("»á"));
-				Property = temp.substring(temp.indexOf("»á"), temp.length());
-				Object = "ÊÇ";
+		} else if (temp.contains("ä¼š")) {
+			if (temp.indexOf(temp.indexOf("ä¼š") - 1) != 'ä¸') {
+				System.out.println("ä¼šçš„ä½ç½®ï¼š" + temp.indexOf("ä¼š"));
+				System.out.println("ä¼šä¹‹å‰çš„å­—ç¬¦ï¼š" + temp.charAt(temp.indexOf("ä¼š") - 1));
+				Subject = temp.substring(0, temp.indexOf("ä¼š"));
+				Property = temp.substring(temp.indexOf("ä¼š"), temp.length());
+				Object = "æ˜¯";
 			}
 		}
 		if (Subject == null)

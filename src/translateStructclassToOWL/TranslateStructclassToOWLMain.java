@@ -1,9 +1,9 @@
 package translateStructclassToOWL;
 
-import hanLP.HanLPMain;
-import hanLP._object;
-import hanLP._objectpredicate;
-import hanLP._objectproperty;
+import ontMainUtils.HanLPMain;
+import ontMainUtils.object;
+import ontMainUtils.objectPredicate;
+import ontMainUtils.objectProperty;
 import ioOperation.WriteToFile;
 
 import java.io.FileOutputStream;
@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
-import staticvariable.staticvalue;
 import edu.stanford.smi.protege.exception.OntologyLoadException;
 import edu.stanford.smi.protegex.owl.ProtegeOWL;
 import edu.stanford.smi.protegex.owl.model.OWLIndividual;
@@ -26,8 +25,10 @@ import edu.stanford.smi.protegex.owl.model.OWLObjectProperty;
 import edu.stanford.smi.protegex.owl.model.OWLProperty;
 import edu.stanford.smi.protegex.owl.writer.rdfxml.rdfwriter.OWLModelWriter;
 
+
+import staticVariable.staticvalue;
 /*
- * ±¾·½·¨Ö÷ÒªÊ¹ÓÃÁËsmiµÄprotege3.5µÄÏà¹Øjar°ü
+ * æœ¬æ–¹æ³•ä¸»è¦ä½¿ç”¨äº†smiçš„protege3.5çš„ç›¸å…³jaråŒ…
  */
 public class TranslateStructclassToOWLMain {
 	/**
@@ -37,13 +38,13 @@ public class TranslateStructclassToOWLMain {
 	 */
 
 	public static void main(String[] args) throws OntologyLoadException, IOException {
-//		String s = "Ö²ÎïÊÇÉúÎï¡£ÈËÊÇÖÇ»ÛÉúÎï¡£ÈËÊÇÀÍ¶¯¹¤¾ß¡£ÖÇ»ÛÉúÎïÊÇÉúÎï¡£ÀÍ¶¯¹¤¾ßÊÇ¹¤¾ß¡£ÈËÊÇ¶¯Îï£¬¶¯ÎïÊÇÉúÎï¡£ÁõÏşÌÎÊÇÒ»¸öÖĞ¹úÈË¡£µÂ¹úÊÇÒ»¸öÕşÈ¨×éÖ¯¡£EclipseÊÇÒ»¸ö´úÂë¹¤¾ß£¬´úÂë¹¤¾ßÊÇ¹¤¾ßÖĞ¹úÈËÊÇÈË¡£ÃÀ¹úÈËÊÇÈË¡£°Â°ÍÂíÊÇÒ»¸öÃÀ¹úÈË¡£µÂ¹úÊÇÒ»¸ö¹ú¼Ò¡£°Â°ÍÂíÊÇÒ»¸öÃÀ¹úÈË¡£";
-//		String ss = "Ğ¡ÁõµÄêÇ³ÆÊÇÁõ¶ş£¬Ğ¡ÁõÊÇÒ»¸ö³øÊ¦£¬Áõ´óÎ°µÄêÇ³ÆÊÇÎ°Î°¡£Áõ´óÎ°ÊÇÒ»¸ö³øÊ¦¡£Ğ¡ÍõµÄĞÔ±ğÊÇÄĞ£¬Ğ¡ÍõµÄÄêÁäÊÇ27.Ğ¡ÍõµÄ¸¸Ç×ÊÇÀÏÍõ£¬Ğ¡ÍõµÄÄ¸Ç×ÊÇÕÅÀö¡£ÕÅÀöÊÇÒ»¸ö½ÌÊ¦¡£ÀÏÍõÊÇÒ»¸ö¹¤ÈË¡£Ğ¡ÍõÊÇÒ»¸ö³øÊ¦£¬Ğ¡ÍõÊÇÒ»¸ö²Ã·ì¡£Ö²ÎïÊÇÉúÎï¡£ÈËÊÇÖÇ»ÛÉúÎï¡£ÈËÊÇÀÍ¶¯¹¤¾ß¡£ÖÇ»ÛÉúÎïÊÇÉúÎï¡£ÁõÌÎµÄµç»°ºÅÂëÊÇ13866655333¡£ÕÔº½µÄµç»°ºÅÂëÊÇ14787806414¡£ÕÔº½µÄÑ§ÉúÖ¤·âÃæÑÕÉ«ÊÇºìµÄ¡£ÕÔº½ÊÇÒ»¸öÖĞ¹úÈË¡£";
-//		String sss = "¼¦ÊÇÃùÇİ£¬¼¦ÊÇÄñ¡£ÃùÇİÊÇÄñ¡£°¬×Ì²¡µÄ´æ»îÂÊÊÇµÍµÄ¡£¶ìÊÇÄñ¡£°©Ö¢µÄÖÂËÀÂÊÊÇ¸ßµÄ¡£°©Ö¢µÄÇ±·üÆÚÊÇ5ÄêµÄ¡£°©Ö¢ÊÇÒ»¸ö¼²²¡¡£°¬×Ì²¡µÄÇ±·üÆÚÊÇ12Äê¡£°¬×Ì²¡µÄ¸ĞÈ¾ĞÔÊÇÇ¿µÄ¡£°¬×Ì²¡µÄ¼²²¡´«²¥·½Ê½ÊÇĞÔ´«²¥¡£Ã«Ã«ÊÇÒ»¸öÂéÈ¸¡£ÄñµÄ³á°ò¸öÊıÊÇ2£¬´óÑãÊÇÄñ¡£Å£Å£µÄÄêÁäÊÇ10.Å£Å£ÊÇÒ»¸ö´óÑã£¬ÂéÈ¸µÄ³á°ò¸öÊıÊÇ2£¬ÂéÈ¸ÊÇÄñ¡£";
-//		String ssss = "EclipseµÄĞÔÄÜÊÇokµÄ¡£¸ĞÃ°µÄÇ±·üÆÚÊÇ2Ìì¡£¸ĞÃ°ÊÇÒ»¸ö¼²²¡¡£Ö²ÎïÊÇÉúÎï¡£¶ìÊÇÄñ¡£´óÑãÊÇÄñ¡£ÈµÑãÊÇÄñ¡£ºÚ³¤Î²ïôÊÇÌ¨ÍåµÄÒ°ÉúÄñÀà¡£´óÑãµÄÓğÃ«ÑÕÉ«ÊÇ°×É«µÄ¡£¶ìµÄÓğÃ«ÑÕÉ«ÊÇ°×É«µÄ.Ğ¡ÃÀÖŞºÚÑãÍ·¾±²¿³ÊºÚÉ«¡£ÑàöÀÊôöÀĞÎÄ¿öÀ¿ÆöÀÊô£¬ÑàöÀÉÏÌåÊÇÉîÀ¶ºÖÉ«µÄ£¬ÑàöÀÊÇÖĞ¹ú¹ú¼Ò¶ş¼¶±£»¤¶¯Îï¡£ËÄ´¨¹àÄ¾İºÊÇĞÂÎïÖÖ¡£ÂÌ³áÑãÊÇ±ôÎ£ÄñÀà¡£ÄñÓĞÆ¯ÁÁµÄ³á°ò¡£";
-		mainfunction("ÉúÎï³ÔÊ³Îï¡£ÂÌ³áÑãÊÇ±ôÎ£ÄñÀà¡£ÄñÓĞÆ¯ÁÁµÄ³á°ò¡£¼¦ÊÇÃùÇİ£¬¼¦ÊÇÄñ¡£ÃùÇİÊÇÄñ¡£ÂéÈ¸ÊÇÄñ¡£×ÄÄ¾ÄñÊÇÄñ¡£Î¢ÉúÎïÊÇÉúÎï¡£ÎÚÑ»ÊÇÄñ¡£¶¯ÎïÊÇÉúÎï¡£ÄñÊÇ¶¯Îï¡£ÈµÑãÊÇÄñ¡£Äñ³ÔÀ¥³æ¡£ÂìòÆÊÇÀ¥³æ¡£", "base");
+//		String s = "æ¤ç‰©æ˜¯ç”Ÿç‰©ã€‚äººæ˜¯æ™ºæ…§ç”Ÿç‰©ã€‚äººæ˜¯åŠ³åŠ¨å·¥å…·ã€‚æ™ºæ…§ç”Ÿç‰©æ˜¯ç”Ÿç‰©ã€‚åŠ³åŠ¨å·¥å…·æ˜¯å·¥å…·ã€‚äººæ˜¯åŠ¨ç‰©ï¼ŒåŠ¨ç‰©æ˜¯ç”Ÿç‰©ã€‚åˆ˜æ™“æ¶›æ˜¯ä¸€ä¸ªä¸­å›½äººã€‚å¾·å›½æ˜¯ä¸€ä¸ªæ”¿æƒç»„ç»‡ã€‚Eclipseæ˜¯ä¸€ä¸ªä»£ç å·¥å…·ï¼Œä»£ç å·¥å…·æ˜¯å·¥å…·ä¸­å›½äººæ˜¯äººã€‚ç¾å›½äººæ˜¯äººã€‚å¥¥å·´é©¬æ˜¯ä¸€ä¸ªç¾å›½äººã€‚å¾·å›½æ˜¯ä¸€ä¸ªå›½å®¶ã€‚å¥¥å·´é©¬æ˜¯ä¸€ä¸ªç¾å›½äººã€‚";
+//		String ss = "å°åˆ˜çš„æ˜µç§°æ˜¯åˆ˜äºŒï¼Œå°åˆ˜æ˜¯ä¸€ä¸ªå¨å¸ˆï¼Œåˆ˜å¤§ä¼Ÿçš„æ˜µç§°æ˜¯ä¼Ÿä¼Ÿã€‚åˆ˜å¤§ä¼Ÿæ˜¯ä¸€ä¸ªå¨å¸ˆã€‚å°ç‹çš„æ€§åˆ«æ˜¯ç”·ï¼Œå°ç‹çš„å¹´é¾„æ˜¯27.å°ç‹çš„çˆ¶äº²æ˜¯è€ç‹ï¼Œå°ç‹çš„æ¯äº²æ˜¯å¼ ä¸½ã€‚å¼ ä¸½æ˜¯ä¸€ä¸ªæ•™å¸ˆã€‚è€ç‹æ˜¯ä¸€ä¸ªå·¥äººã€‚å°ç‹æ˜¯ä¸€ä¸ªå¨å¸ˆï¼Œå°ç‹æ˜¯ä¸€ä¸ªè£ç¼ã€‚æ¤ç‰©æ˜¯ç”Ÿç‰©ã€‚äººæ˜¯æ™ºæ…§ç”Ÿç‰©ã€‚äººæ˜¯åŠ³åŠ¨å·¥å…·ã€‚æ™ºæ…§ç”Ÿç‰©æ˜¯ç”Ÿç‰©ã€‚åˆ˜æ¶›çš„ç”µè¯å·ç æ˜¯13866655333ã€‚èµµèˆªçš„ç”µè¯å·ç æ˜¯14787806414ã€‚èµµèˆªçš„å­¦ç”Ÿè¯å°é¢é¢œè‰²æ˜¯çº¢çš„ã€‚èµµèˆªæ˜¯ä¸€ä¸ªä¸­å›½äººã€‚";
+//		String sss = "é¸¡æ˜¯é¸£ç¦½ï¼Œé¸¡æ˜¯é¸Ÿã€‚é¸£ç¦½æ˜¯é¸Ÿã€‚è‰¾æ»‹ç—…çš„å­˜æ´»ç‡æ˜¯ä½çš„ã€‚é¹…æ˜¯é¸Ÿã€‚ç™Œç—‡çš„è‡´æ­»ç‡æ˜¯é«˜çš„ã€‚ç™Œç—‡çš„æ½œä¼æœŸæ˜¯5å¹´çš„ã€‚ç™Œç—‡æ˜¯ä¸€ä¸ªç–¾ç—…ã€‚è‰¾æ»‹ç—…çš„æ½œä¼æœŸæ˜¯12å¹´ã€‚è‰¾æ»‹ç—…çš„æ„ŸæŸ“æ€§æ˜¯å¼ºçš„ã€‚è‰¾æ»‹ç—…çš„ç–¾ç—…ä¼ æ’­æ–¹å¼æ˜¯æ€§ä¼ æ’­ã€‚æ¯›æ¯›æ˜¯ä¸€ä¸ªéº»é›€ã€‚é¸Ÿçš„ç¿…è†€ä¸ªæ•°æ˜¯2ï¼Œå¤§é›æ˜¯é¸Ÿã€‚ç‰›ç‰›çš„å¹´é¾„æ˜¯10.ç‰›ç‰›æ˜¯ä¸€ä¸ªå¤§é›ï¼Œéº»é›€çš„ç¿…è†€ä¸ªæ•°æ˜¯2ï¼Œéº»é›€æ˜¯é¸Ÿã€‚";
+//		String ssss = "Eclipseçš„æ€§èƒ½æ˜¯okçš„ã€‚æ„Ÿå†’çš„æ½œä¼æœŸæ˜¯2å¤©ã€‚æ„Ÿå†’æ˜¯ä¸€ä¸ªç–¾ç—…ã€‚æ¤ç‰©æ˜¯ç”Ÿç‰©ã€‚é¹…æ˜¯é¸Ÿã€‚å¤§é›æ˜¯é¸Ÿã€‚é¹Šé›æ˜¯é¸Ÿã€‚é»‘é•¿å°¾é›‰æ˜¯å°æ¹¾çš„é‡ç”Ÿé¸Ÿç±»ã€‚å¤§é›çš„ç¾½æ¯›é¢œè‰²æ˜¯ç™½è‰²çš„ã€‚é¹…çš„ç¾½æ¯›é¢œè‰²æ˜¯ç™½è‰²çš„.å°ç¾æ´²é»‘é›å¤´é¢ˆéƒ¨å‘ˆé»‘è‰²ã€‚ç‡•éš¼å±éš¼å½¢ç›®éš¼ç§‘éš¼å±ï¼Œç‡•éš¼ä¸Šä½“æ˜¯æ·±è“è¤è‰²çš„ï¼Œç‡•éš¼æ˜¯ä¸­å›½å›½å®¶äºŒçº§ä¿æŠ¤åŠ¨ç‰©ã€‚å››å·çŒæœ¨èºæ˜¯æ–°ç‰©ç§ã€‚ç»¿ç¿…é›æ˜¯æ¿’å±é¸Ÿç±»ã€‚é¸Ÿæœ‰æ¼‚äº®çš„ç¿…è†€ã€‚";
+		mainfunction("ç”Ÿç‰©åƒé£Ÿç‰©ã€‚ç»¿ç¿…é›æ˜¯æ¿’å±é¸Ÿç±»ã€‚é¸Ÿæœ‰æ¼‚äº®çš„ç¿…è†€ã€‚é¸¡æ˜¯é¸£ç¦½ï¼Œé¸¡æ˜¯é¸Ÿã€‚é¸£ç¦½æ˜¯é¸Ÿã€‚éº»é›€æ˜¯é¸Ÿã€‚å•„æœ¨é¸Ÿæ˜¯é¸Ÿã€‚å¾®ç”Ÿç‰©æ˜¯ç”Ÿç‰©ã€‚ä¹Œé¸¦æ˜¯é¸Ÿã€‚åŠ¨ç‰©æ˜¯ç”Ÿç‰©ã€‚é¸Ÿæ˜¯åŠ¨ç‰©ã€‚é¹Šé›æ˜¯é¸Ÿã€‚é¸Ÿåƒæ˜†è™«ã€‚èš‚èš±æ˜¯æ˜†è™«ã€‚", "base");
 	}
-	
+
 	public static void writetotempFile(OWLModel o) throws IOException{
 		String localaddr = staticvalue.localaddr;
 		String filePathOut01 = localaddr + "/" + "tempowl.owl";
@@ -53,7 +54,7 @@ public class TranslateStructclassToOWLMain {
 		omw.write();
 		out.close();
 	}
-	
+
 	public static boolean class_exist(OWLModel o, String class_) {
 		boolean flag = false;
 		OWLNamedClass on = o.getOWLNamedClass(class_);
@@ -63,7 +64,7 @@ public class TranslateStructclassToOWLMain {
 			flag = true;
 		return flag;
 	}
-	
+
 	public static boolean individual_exist(OWLModel o, String individual_) {
 		boolean flag = false;
 		if(!class_exist(o, individual_)){
@@ -75,7 +76,7 @@ public class TranslateStructclassToOWLMain {
 		}
 		return flag;
 	}
-	
+
 	public static boolean property_exist(OWLModel o,String prop){
 		boolean flag = false;
 		OWLProperty op = o.getOWLProperty(prop);
@@ -84,7 +85,7 @@ public class TranslateStructclassToOWLMain {
 		}
 		else
 			flag = true;
-		
+
 		return flag;
 	}
 
@@ -97,7 +98,7 @@ public class TranslateStructclassToOWLMain {
 			flag = true;
 		return flag;
 	}
-	
+
 	public static boolean i_c_conflict(OWLModel o ,String cls){// new class is conflicted with the instance existing in ont
 		boolean flag = false;
 		if (!class_exist(o, cls)){
@@ -109,127 +110,127 @@ public class TranslateStructclassToOWLMain {
 		}
 		return flag;
 	}
-	
+
 	public static void donothing(){}
-	
+
 	public static OWLModel mainfunction(OWLModel o, String string) throws IOException {
 		/*
-		 * ÊäÈë±¾Ìå£¬ÁíÒ»²¿·ÖÎªĞÂµÄÎÄ±¾£¬ÔÚÔ­À´µÄmodel»ù´¡ÉÏ¼ÌĞøÌí¼ÓĞÂµÄ±¾Ìå
-		 * ¶ş´Î½¨Á¢±¾Ìå
+		 * è¾“å…¥æœ¬ä½“ï¼Œå¦ä¸€éƒ¨åˆ†ä¸ºæ–°çš„æ–‡æœ¬ï¼Œåœ¨åŸæ¥çš„modelåŸºç¡€ä¸Šç»§ç»­æ·»åŠ æ–°çš„æœ¬ä½“
+		 * äºŒæ¬¡å»ºç«‹æœ¬ä½“
 		 */
-		ArrayList<_object> _objlist = new ArrayList<_object>();
-		HanLPMain.mainfunction(string);// ´¦ÀíºóµÄ¾ä×ÓÉú³ÉµÄ½á¹¹ÌåÀà¸³Öµ¸øsc
+		ArrayList<object> _objlist = new ArrayList<object>();
+		HanLPMain.mainfunction(string);// å¤„ç†åçš„å¥å­ç”Ÿæˆçš„ç»“æ„ä½“ç±»èµ‹å€¼ç»™sc
 		_objlist = HanLPMain.getStructclass();
-		
-		for (_object _o : _objlist) {
-			int _object_type = _o.objecttype;
-			String _object_name = _o.objectname;
-			ArrayList<_object> _object_parent = _o.parent_object;
-			ArrayList<_object> _object_sub = _o.sub_object;
-			ArrayList<_objectproperty> _object_property = _o.objectproperty;
-			ArrayList<_objectpredicate> _object_predicate = _o.objectpredicate;
-			
+
+		for (object _o : _objlist) {
+			int object_type = _o.objectType;
+			String object_name = _o.objectName;
+			ArrayList<object> object_parent = _o.parentObject;
+			ArrayList<object> object_sub = _o.subObject;
+			ArrayList<objectProperty> object_property = _o.objectproperty;
+			ArrayList<objectPredicate> object_predicate = _o.objectpredicate;
+
 			boolean hasproperty = false;
 			boolean haspredicate = false;
-			if (_object_property != null) {// if property exists in this ont
+			if (object_property != null) {// if property exists in this ont
 				hasproperty = true;
-				for (_objectproperty _op : _object_property)
-					if (!property_exist(o, _op.propertyname))
-						o.createOWLObjectProperty(_op.propertyname);
+				for (objectProperty _op : object_property)
+					if (!property_exist(o, _op.propertyName))
+						o.createOWLObjectProperty(_op.propertyName);
 			}
-			
-			if(_object_predicate != null){//Ìí¼Ó·Ç¹ØÏµĞÍÊôĞÔÁĞ±í
+
+			if(object_predicate != null){//æ·»åŠ éå…³ç³»å‹å±æ€§åˆ—è¡¨
 				haspredicate = true;
-				for(_objectpredicate _opre:_object_predicate)
-					if (!property_exist(o, _opre.objectpredicateverb))
-						o.createOWLObjectProperty(_opre.objectpredicateverb);
+				for(objectPredicate _opre:object_predicate)
+					if (!property_exist(o, _opre.objectPredicateVerb))
+						o.createOWLObjectProperty(_opre.objectPredicateVerb);
 			}
-			
-			if (_object_type == 0) {// if object is a class
-				if (!class_exist(o, _object_name)) {// if class does't exists
-					o.createOWLNamedClass(_object_name);// create this class
-					if (_object_parent != null) {// if parent classes exist
-						for (_object oparent : _object_parent) {// add this class's parent classes
-							if (!class_exist(o, oparent.objectname)) {// if parent classes don't exist
-								o.createOWLNamedClass(oparent.objectname);// add parent classes
+
+			if (object_type == 0) {// if object is a class
+				if (!class_exist(o, object_name)) {// if class does't exists
+					o.createOWLNamedClass(object_name);// create this class
+					if (object_parent != null) {// if parent classes exist
+						for (object oparent : object_parent) {// add this class's parent classes
+							if (!class_exist(o, oparent.objectName)) {// if parent classes don't exist
+								o.createOWLNamedClass(oparent.objectName);// add parent classes
 							}
-							if (!(oparent.objectname).equals("root")) {
-								o.getOWLNamedClass(_object_name).addSuperclass(o.getOWLNamedClass(oparent.objectname));
-								o.getOWLNamedClass(_object_name).removeSuperclass(o.getOWLThingClass());
+							if (!(oparent.objectName).equals("root")) {
+								o.getOWLNamedClass(object_name).addSuperclass(o.getOWLNamedClass(oparent.objectName));
+								o.getOWLNamedClass(object_name).removeSuperclass(o.getOWLThingClass());
 							}
 						}
 					}
 					if (hasproperty) {// if this class has properties
-						for (_objectproperty oprop : _object_property) {// add properties
-							OWLObjectProperty oop = o.getOWLObjectProperty(oprop.propertyname);
-							o.getOWLNamedClass(_object_name).setPropertyValue(oop, oprop.propertyvalue);
+						for (objectProperty oprop : object_property) {// add properties
+							OWLObjectProperty oop = o.getOWLObjectProperty(oprop.propertyName);
+							o.getOWLNamedClass(object_name).setPropertyValue(oop, oprop.propertyValue);
 						}
 					}
 					if(haspredicate){
-						for(_objectpredicate opre:_object_predicate){
-							OWLObjectProperty oopre = o.getOWLObjectProperty(opre.objectpredicateverb);//»ñÈ¡·Ç¹ØÏµĞÍÊôĞÔÎ½´Ê
-							oopre.addUnionDomainClass(o.getOWLNamedClass(_object_name));
-							if(!class_exist(o, opre.objectpredicateobject))
-								o.createOWLNamedClass(opre.objectpredicateobject);
-							oopre.addUnionRangeClass(o.getOWLNamedClass(opre.objectpredicateobject));
+						for(objectPredicate opre:object_predicate){
+							OWLObjectProperty oopre = o.getOWLObjectProperty(opre.objectPredicateVerb);//è·å–éå…³ç³»å‹å±æ€§è°“è¯
+							oopre.addUnionDomainClass(o.getOWLNamedClass(object_name));
+							if(!class_exist(o, opre.objectPredicateObject))
+								o.createOWLNamedClass(opre.objectPredicateObject);
+							oopre.addUnionRangeClass(o.getOWLNamedClass(opre.objectPredicateObject));
 						}
 					}
-					if (_object_sub != null) {// if subclasses exist
-						for (_object osub : _object_sub) {// add sub classes
-							if (osub.objecttype == 0) {// sub is class
-								if (!class_exist(o, osub.objectname)) {// if this class not exist
-									o.createOWLNamedClass(osub.objectname); // create this class
+					if (object_sub != null) {// if subclasses exist
+						for (object osub : object_sub) {// add sub classes
+							if (osub.objectType == 0) {// sub is class
+								if (!class_exist(o, osub.objectName)) {// if this class not exist
+									o.createOWLNamedClass(osub.objectName); // create this class
 								}
-								o.getOWLNamedClass(osub.objectname).addSuperclass(o.getOWLNamedClass(_object_name));
+								o.getOWLNamedClass(osub.objectName).addSuperclass(o.getOWLNamedClass(object_name));
 							}
-							if (osub.objecttype == 1) {// sub is anindividual
-								if (!individual_exist(o, osub.objectname) & !class_exist(o, osub.objectname)) {
-									o.getOWLNamedClass(_object_name).createOWLIndividual(osub.objectname);
+							if (osub.objectType == 1) {// sub is anindividual
+								if (!individual_exist(o, osub.objectName) & !class_exist(o, osub.objectName)) {
+									o.getOWLNamedClass(object_name).createOWLIndividual(osub.objectName);
 								}
 							}
 						}
 					}
-				} else if (class_exist(o, _object_name)) {// if class exists
-					if (i_c_conflict(o, _object_name)) {// if this class does't have a instance-class conflict
+				} else if (class_exist(o, object_name)) {// if class exists
+					if (i_c_conflict(o, object_name)) {// if this class does't have a instance-class conflict
 						donothing();
-					} else if (!i_c_conflict(o, _object_name)) {// if this class doesn't have a instance-class conflict
-						if (_object_parent != null) {
-							for (_object oparent : _object_parent) {// add this class's parent classes
-								if (!class_exist(o, oparent.objectname)) {// if parent classes don't exist
-									o.createOWLNamedClass(oparent.objectname);// add parent classes
+					} else if (!i_c_conflict(o, object_name)) {// if this class doesn't have a instance-class conflict
+						if (object_parent != null) {
+							for (object oparent : object_parent) {// add this class's parent classes
+								if (!class_exist(o, oparent.objectName)) {// if parent classes don't exist
+									o.createOWLNamedClass(oparent.objectName);// add parent classes
 								}
-								if (!(oparent.objectname).equals("root")) {
-									o.getOWLNamedClass(_object_name).addSuperclass(o.getOWLNamedClass(oparent.objectname));
-									o.getOWLNamedClass(_object_name).removeSuperclass(o.getOWLThingClass());
+								if (!(oparent.objectName).equals("root")) {
+									o.getOWLNamedClass(object_name).addSuperclass(o.getOWLNamedClass(oparent.objectName));
+									o.getOWLNamedClass(object_name).removeSuperclass(o.getOWLThingClass());
 								}
 							}
 						}
 						if (hasproperty) {// if this class has properties
-							for (_objectproperty oprop : _object_property) {// add properties
-								OWLObjectProperty oop = o.getOWLObjectProperty(oprop.propertyname);
-								o.getOWLNamedClass(_object_name).setPropertyValue(oop, oprop.propertyvalue);
+							for (objectProperty oprop : object_property) {// add properties
+								OWLObjectProperty oop = o.getOWLObjectProperty(oprop.propertyName);
+								o.getOWLNamedClass(object_name).setPropertyValue(oop, oprop.propertyValue);
 							}
 						}
 						if(haspredicate){
-							for(_objectpredicate opre:_object_predicate){
-								OWLObjectProperty oopre = o.getOWLObjectProperty(opre.objectpredicateverb);//»ñÈ¡·Ç¹ØÏµĞÍÊôĞÔÎ½´Ê
-								oopre.addUnionDomainClass(o.getOWLNamedClass(_object_name));
-								if(!class_exist(o, opre.objectpredicateobject))
-									o.createOWLNamedClass(opre.objectpredicateobject);
-								oopre.addUnionRangeClass(o.getOWLNamedClass(opre.objectpredicateobject));
+							for(objectPredicate opre:object_predicate){
+								OWLObjectProperty oopre = o.getOWLObjectProperty(opre.objectPredicateVerb);//è·å–éå…³ç³»å‹å±æ€§è°“è¯
+								oopre.addUnionDomainClass(o.getOWLNamedClass(object_name));
+								if(!class_exist(o, opre.objectPredicateObject))
+									o.createOWLNamedClass(opre.objectPredicateObject);
+								oopre.addUnionRangeClass(o.getOWLNamedClass(opre.objectPredicateObject));
 							}
 						}
-						if (_object_sub != null) {// if subclasses exist
-							for (_object osub : _object_sub) {// add sub classes
-								if (osub.objecttype == 0) {// sub is class
-									if (!class_exist(o, osub.objectname)) {// if this class not exist
-										o.createOWLNamedClass(osub.objectname); // create this class
+						if (object_sub != null) {// if subclasses exist
+							for (object osub : object_sub) {// add sub classes
+								if (osub.objectType == 0) {// sub is class
+									if (!class_exist(o, osub.objectName)) {// if this class not exist
+										o.createOWLNamedClass(osub.objectName); // create this class
 									}
-									o.getOWLNamedClass(osub.objectname).addSuperclass(o.getOWLNamedClass(_object_name));
+									o.getOWLNamedClass(osub.objectName).addSuperclass(o.getOWLNamedClass(object_name));
 								}
-								if (osub.objecttype == 1) {// sub is anindividual
-									if (!individual_exist(o, osub.objectname) & !class_exist(o, osub.objectname)) {
-										o.getOWLNamedClass(_object_name).createOWLIndividual(osub.objectname);
+								if (osub.objectType == 1) {// sub is anindividual
+									if (!individual_exist(o, osub.objectName) & !class_exist(o, osub.objectName)) {
+										o.getOWLNamedClass(object_name).createOWLIndividual(osub.objectName);
 									}
 								}
 							}
@@ -237,48 +238,48 @@ public class TranslateStructclassToOWLMain {
 					}
 				}
 			}
-			if (_object_type == 1) {// if object is an instance
-				if (individual_exist(o, _object_name)) {// if this instance exists in ont'
+			if (object_type == 1) {// if object is an instance
+				if (individual_exist(o, object_name)) {// if this instance exists in ont'
 					System.out.println("instance exists.");
-					if (c_i_conflict(o, _object_name)) {// if this instance has a class-instance conflict
+					if (c_i_conflict(o, object_name)) {// if this instance has a class-instance conflict
 						@SuppressWarnings("unchecked")
-						Collection<OWLNamedClass> onc = o.getOWLNamedClass(_object_name).getNamedSuperclasses();
+						Collection<OWLNamedClass> onc = o.getOWLNamedClass(object_name).getNamedSuperclasses();
 						for (OWLNamedClass _onc : onc) {
-							_onc.createOWLIndividual(_object_name);
+							_onc.createOWLIndividual(object_name);
 						}
 						@SuppressWarnings({ "rawtypes", "unused" })
-						Collection op = o.getOWLNamedClass(_object_name).getRDFProperties();
+						Collection op = o.getOWLNamedClass(object_name).getRDFProperties();
 
-						o.getOWLNamedClass(_object_name).delete();
-						if (_object_parent != null) {
-							for (_object oparent : _object_parent) {// add this class's parent classes
-								if (!class_exist(o, oparent.objectname)) {// if parent classes don't exist
-									o.createOWLNamedClass(oparent.objectname);// add parent classes
+						o.getOWLNamedClass(object_name).delete();
+						if (object_parent != null) {
+							for (object oparent : object_parent) {// add this class's parent classes
+								if (!class_exist(o, oparent.objectName)) {// if parent classes don't exist
+									o.createOWLNamedClass(oparent.objectName);// add parent classes
 								}
-								o.getOWLNamedClass(_object_name).addSuperclass(o.getOWLNamedClass(oparent.objectname));
+								o.getOWLNamedClass(object_name).addSuperclass(o.getOWLNamedClass(oparent.objectName));
 							}
 						}
 						if (hasproperty) {// if this class has properties
-							for (_objectproperty oprop : _object_property) {// add properties
-								OWLObjectProperty oop = o.getOWLObjectProperty(oprop.propertyname);
-								o.getOWLIndividual(_object_name).setPropertyValue(oop, oprop.propertyvalue);
+							for (objectProperty oprop : object_property) {// add properties
+								OWLObjectProperty oop = o.getOWLObjectProperty(oprop.propertyName);
+								o.getOWLIndividual(object_name).setPropertyValue(oop, oprop.propertyValue);
 							}
 						}
 					}
-				} else if (!individual_exist(o, _object_name)) {
-					if (_object_parent != null) {
-						for (_object oparent : _object_parent) {// add this class's parent classes
-							if (!class_exist(o, oparent.objectname)) {// if parent classes don't exist
-								o.createOWLNamedClass(oparent.objectname);// add parent classes
+				} else if (!individual_exist(o, object_name)) {
+					if (object_parent != null) {
+						for (object oparent : object_parent) {// add this class's parent classes
+							if (!class_exist(o, oparent.objectName)) {// if parent classes don't exist
+								o.createOWLNamedClass(oparent.objectName);// add parent classes
 							}
-							// o.getOWLNamedClass(_object_name).addSuperclass(o.getOWLNamedClass(oparent.objectname));
-							o.getOWLNamedClass(oparent.objectname).createOWLIndividual(_object_name);
+							// o.getOWLNamedClass(object_name).addSuperclass(o.getOWLNamedClass(oparent.objectName));
+							o.getOWLNamedClass(oparent.objectName).createOWLIndividual(object_name);
 						}
 					}
 					if (hasproperty) {// if this class has properties
-						for (_objectproperty oprop : _object_property) {// add properties
-							OWLObjectProperty oop = o.getOWLObjectProperty(oprop.propertyname);
-							o.getOWLIndividual(_object_name).setPropertyValue(oop, oprop.propertyvalue);
+						for (objectProperty oprop : object_property) {// add properties
+							OWLObjectProperty oop = o.getOWLObjectProperty(oprop.propertyName);
+							o.getOWLIndividual(object_name).setPropertyValue(oop, oprop.propertyValue);
 						}
 					}
 				}
@@ -294,123 +295,123 @@ public class TranslateStructclassToOWLMain {
 
 	public static OWLModel mainfunction(String string, String Resource) throws OntologyLoadException, IOException {
 		/*
-		 * Ê×´Î½¨Á¢ string:ÎÄ±¾ÄÚÈİ Resource:±¾ÌåµÄ¸ù½ÚµãÄÚÈİ£¨ÎÄ±¾´Ê»ãĞÎÊ½£©
+		 * é¦–æ¬¡å»ºç«‹ string:æ–‡æœ¬å†…å®¹ Resource:æœ¬ä½“çš„æ ¹èŠ‚ç‚¹å†…å®¹ï¼ˆæ–‡æœ¬è¯æ±‡å½¢å¼ï¼‰
 		 */
 		OWLModel o = ProtegeOWL.createJenaOWLModel();
 		o.getNamespaceManager().setDefaultNamespace("http://" + Resource + "#");
 
-		ArrayList<_object> _objlist = new ArrayList<_object>();
-		HanLPMain.mainfunction(string);// ´¦ÀíºóµÄ¾ä×ÓÉú³ÉµÄ½á¹¹ÌåÀà¸³Öµ¸øsc
+		ArrayList<object> _objlist = new ArrayList<object>();
+		HanLPMain.mainfunction(string);// å¤„ç†åçš„å¥å­ç”Ÿæˆçš„ç»“æ„ä½“ç±»èµ‹å€¼ç»™sc
 		_objlist = HanLPMain.getStructclass();
 
-		for (_object _o : _objlist) {
-			int _object_type = _o.objecttype;
-			String _object_name = _o.objectname;
-			ArrayList<_object> _object_parent = _o.parent_object;
-			ArrayList<_object> _object_sub = _o.sub_object;
-			ArrayList<_objectproperty> _object_property = _o.objectproperty;
-			ArrayList<_objectpredicate> _object_predicate = _o.objectpredicate;
-			
+		for (object _o : _objlist) {
+			int object_type = _o.objectType;
+			String object_name = _o.objectName;
+			ArrayList<object> object_parent = _o.parentObject;
+			ArrayList<object> object_sub = _o.subObject;
+			ArrayList<objectProperty> object_property = _o.objectproperty;
+			ArrayList<objectPredicate> object_predicate = _o.objectpredicate;
+
 			boolean hasproperty = false;
 			boolean haspredicate = false;
-			if (_object_property != null) {// if property exists in this ont
+			if (object_property != null) {// if property exists in this ont
 				hasproperty = true;
-				for (_objectproperty _op : _object_property)
-					if (!property_exist(o, _op.propertyname))
-						o.createOWLObjectProperty(_op.propertyname);
+				for (objectProperty _op : object_property)
+					if (!property_exist(o, _op.propertyName))
+						o.createOWLObjectProperty(_op.propertyName);
 			}
-			if(_object_predicate != null){//Ìí¼Ó·Ç¹ØÏµĞÍÊôĞÔÁĞ±í
+			if(object_predicate != null){//æ·»åŠ éå…³ç³»å‹å±æ€§åˆ—è¡¨
 				haspredicate = true;
-				for(_objectpredicate _opre:_object_predicate)
-					if (!property_exist(o, _opre.objectpredicateverb))
-						o.createOWLObjectProperty(_opre.objectpredicateverb);
+				for(objectPredicate _opre:object_predicate)
+					if (!property_exist(o, _opre.objectPredicateVerb))
+						o.createOWLObjectProperty(_opre.objectPredicateVerb);
 			}
-			if (_object_type == 0) {// if object is a class
-				if (!class_exist(o, _object_name)) {// if class does't exists
-					o.createOWLNamedClass(_object_name);// create this class
-					if (_object_parent != null) {// if parent classes exist
-						for (_object oparent : _object_parent) {// add this class's parent classes
-							if (!class_exist(o, oparent.objectname)) {// if parent classes don't exist
-								o.createOWLNamedClass(oparent.objectname);// add parent classes
+			if (object_type == 0) {// if object is a class
+				if (!class_exist(o, object_name)) {// if class does't exists
+					o.createOWLNamedClass(object_name);// create this class
+					if (object_parent != null) {// if parent classes exist
+						for (object oparent : object_parent) {// add this class's parent classes
+							if (!class_exist(o, oparent.objectName)) {// if parent classes don't exist
+								o.createOWLNamedClass(oparent.objectName);// add parent classes
 							}
-							if (!(oparent.objectname).equals("root")) {
-								o.getOWLNamedClass(_object_name).addSuperclass(o.getOWLNamedClass(oparent.objectname));
-								o.getOWLNamedClass(_object_name).removeSuperclass(o.getOWLThingClass());
+							if (!(oparent.objectName).equals("root")) {
+								o.getOWLNamedClass(object_name).addSuperclass(o.getOWLNamedClass(oparent.objectName));
+								o.getOWLNamedClass(object_name).removeSuperclass(o.getOWLThingClass());
 							}
 						}
 					}
 					if (hasproperty) {// if this class has properties
-						for (_objectproperty oprop : _object_property) {// add
-																		// properties
-							OWLObjectProperty oop = o.getOWLObjectProperty(oprop.propertyname);
-							o.getOWLNamedClass(_object_name).setPropertyValue(oop, oprop.propertyvalue);
+						for (objectProperty oprop : object_property) {// add
+							// properties
+							OWLObjectProperty oop = o.getOWLObjectProperty(oprop.propertyName);
+							o.getOWLNamedClass(object_name).setPropertyValue(oop, oprop.propertyValue);
 						}
 					}
 					if(haspredicate){
-						for(_objectpredicate opre:_object_predicate){
-							OWLObjectProperty oopre = o.getOWLObjectProperty(opre.objectpredicateverb);//»ñÈ¡·Ç¹ØÏµĞÍÊôĞÔÎ½´Ê
-							oopre.addUnionDomainClass(o.getOWLNamedClass(_object_name));
-							if(!class_exist(o, opre.objectpredicateobject))
-								o.createOWLNamedClass(opre.objectpredicateobject);
-							oopre.addUnionRangeClass(o.getOWLNamedClass(opre.objectpredicateobject));
+						for(objectPredicate opre:object_predicate){
+							OWLObjectProperty oopre = o.getOWLObjectProperty(opre.objectPredicateVerb);//è·å–éå…³ç³»å‹å±æ€§è°“è¯
+							oopre.addUnionDomainClass(o.getOWLNamedClass(object_name));
+							if(!class_exist(o, opre.objectPredicateObject))
+								o.createOWLNamedClass(opre.objectPredicateObject);
+							oopre.addUnionRangeClass(o.getOWLNamedClass(opre.objectPredicateObject));
 						}
 					}
-					if (_object_sub != null) {// if subclasses exist
-						for (_object osub : _object_sub) {// add sub classes
-							if (osub.objecttype == 0) {// sub is class
-								if (!class_exist(o, osub.objectname)) {// if this class not exist
-									o.createOWLNamedClass(osub.objectname); // create this class
+					if (object_sub != null) {// if subclasses exist
+						for (object osub : object_sub) {// add sub classes
+							if (osub.objectType == 0) {// sub is class
+								if (!class_exist(o, osub.objectName)) {// if this class not exist
+									o.createOWLNamedClass(osub.objectName); // create this class
 								}
-								o.getOWLNamedClass(osub.objectname).addSuperclass(o.getOWLNamedClass(_object_name));
+								o.getOWLNamedClass(osub.objectName).addSuperclass(o.getOWLNamedClass(object_name));
 							}
-							if (osub.objecttype == 1) {// sub is anindividual
-								if (!individual_exist(o, osub.objectname) & !class_exist(o, osub.objectname)) {
-									o.getOWLNamedClass(_object_name).createOWLIndividual(osub.objectname);
+							if (osub.objectType == 1) {// sub is anindividual
+								if (!individual_exist(o, osub.objectName) & !class_exist(o, osub.objectName)) {
+									o.getOWLNamedClass(object_name).createOWLIndividual(osub.objectName);
 								}
 							}
 						}
 					}
-				} else if (class_exist(o, _object_name)) {// if class exists
-					if (i_c_conflict(o, _object_name)) {// if this class does't have a instance-class conflict
+				} else if (class_exist(o, object_name)) {// if class exists
+					if (i_c_conflict(o, object_name)) {// if this class does't have a instance-class conflict
 						donothing();
-					} else if (!i_c_conflict(o, _object_name)) {// if this class doesn't have a instance-class conflict
-						if (_object_parent != null) {
-							for (_object oparent : _object_parent) {// add this class's parent classes
-								if (!class_exist(o, oparent.objectname)) {// if parent classes don't exist
-									o.createOWLNamedClass(oparent.objectname);// add parent classes
+					} else if (!i_c_conflict(o, object_name)) {// if this class doesn't have a instance-class conflict
+						if (object_parent != null) {
+							for (object oparent : object_parent) {// add this class's parent classes
+								if (!class_exist(o, oparent.objectName)) {// if parent classes don't exist
+									o.createOWLNamedClass(oparent.objectName);// add parent classes
 								}
-								if (!(oparent.objectname).equals("root")) {
-									o.getOWLNamedClass(_object_name).addSuperclass(o.getOWLNamedClass(oparent.objectname));
-									o.getOWLNamedClass(_object_name).removeSuperclass(o.getOWLThingClass());
+								if (!(oparent.objectName).equals("root")) {
+									o.getOWLNamedClass(object_name).addSuperclass(o.getOWLNamedClass(oparent.objectName));
+									o.getOWLNamedClass(object_name).removeSuperclass(o.getOWLThingClass());
 								}
 							}
 						}
 						if (hasproperty) {// if this class has properties
-							for (_objectproperty oprop : _object_property) {// add properties
-								OWLObjectProperty oop = o.getOWLObjectProperty(oprop.propertyname);
-								o.getOWLNamedClass(_object_name).setPropertyValue(oop, oprop.propertyvalue);
+							for (objectProperty oprop : object_property) {// add properties
+								OWLObjectProperty oop = o.getOWLObjectProperty(oprop.propertyName);
+								o.getOWLNamedClass(object_name).setPropertyValue(oop, oprop.propertyValue);
 							}
 						}
 						if(haspredicate){
-							for(_objectpredicate opre:_object_predicate){
-								OWLObjectProperty oopre = o.getOWLObjectProperty(opre.objectpredicateverb);//»ñÈ¡·Ç¹ØÏµĞÍÊôĞÔÎ½´Ê
-								oopre.addUnionDomainClass(o.getOWLNamedClass(_object_name));
-								if(!class_exist(o, opre.objectpredicateobject))
-									o.createOWLNamedClass(opre.objectpredicateobject);
-								oopre.addUnionRangeClass(o.getOWLNamedClass(opre.objectpredicateobject));
+							for(objectPredicate opre:object_predicate){
+								OWLObjectProperty oopre = o.getOWLObjectProperty(opre.objectPredicateVerb);//è·å–éå…³ç³»å‹å±æ€§è°“è¯
+								oopre.addUnionDomainClass(o.getOWLNamedClass(object_name));
+								if(!class_exist(o, opre.objectPredicateObject))
+									o.createOWLNamedClass(opre.objectPredicateObject);
+								oopre.addUnionRangeClass(o.getOWLNamedClass(opre.objectPredicateObject));
 							}
 						}
-						if (_object_sub != null) {// if subclasses exist
-							for (_object osub : _object_sub) {// add sub classes
-								if (osub.objecttype == 0) {// sub is class
-									if (!class_exist(o, osub.objectname)) {// if this class not exist
-										o.createOWLNamedClass(osub.objectname); // create this class
+						if (object_sub != null) {// if subclasses exist
+							for (object osub : object_sub) {// add sub classes
+								if (osub.objectType == 0) {// sub is class
+									if (!class_exist(o, osub.objectName)) {// if this class not exist
+										o.createOWLNamedClass(osub.objectName); // create this class
 									}
-									o.getOWLNamedClass(osub.objectname).addSuperclass(o.getOWLNamedClass(_object_name));
+									o.getOWLNamedClass(osub.objectName).addSuperclass(o.getOWLNamedClass(object_name));
 								}
-								if (osub.objecttype == 1) {// sub is anindividual
-									if (!individual_exist(o, osub.objectname) & !class_exist(o, osub.objectname)) {
-										o.getOWLNamedClass(_object_name).createOWLIndividual(osub.objectname);
+								if (osub.objectType == 1) {// sub is anindividual
+									if (!individual_exist(o, osub.objectName) & !class_exist(o, osub.objectName)) {
+										o.getOWLNamedClass(object_name).createOWLIndividual(osub.objectName);
 									}
 								}
 							}
@@ -418,49 +419,49 @@ public class TranslateStructclassToOWLMain {
 					}
 				}
 			}
-			if (_object_type == 1) {// if object is an instance
-				if (individual_exist(o, _object_name)) {// if this instance exists in ont'
+			if (object_type == 1) {// if object is an instance
+				if (individual_exist(o, object_name)) {// if this instance exists in ont'
 					System.out.println("instance exists.");
-					if (c_i_conflict(o, _object_name)) {// if this instance has a class-instance conflict
+					if (c_i_conflict(o, object_name)) {// if this instance has a class-instance conflict
 						@SuppressWarnings("unchecked")
-						Collection<OWLNamedClass> onc = o.getOWLNamedClass(_object_name).getNamedSuperclasses();
+						Collection<OWLNamedClass> onc = o.getOWLNamedClass(object_name).getNamedSuperclasses();
 						for (OWLNamedClass _onc : onc) {
-							_onc.createOWLIndividual(_object_name);
+							_onc.createOWLIndividual(object_name);
 						}
 						@SuppressWarnings("rawtypes")
-						Collection op = o.getOWLNamedClass(_object_name).getRDFProperties();
+						Collection op = o.getOWLNamedClass(object_name).getRDFProperties();
 						System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"+op);
 
-						o.getOWLNamedClass(_object_name).delete();
-						if (_object_parent != null) {
-							for (_object oparent : _object_parent) {// add this class's parent classes
-								if (!class_exist(o, oparent.objectname)) {// if parent classes don't exist
-									o.createOWLNamedClass(oparent.objectname);// add parent classes
+						o.getOWLNamedClass(object_name).delete();
+						if (object_parent != null) {
+							for (object oparent : object_parent) {// add this class's parent classes
+								if (!class_exist(o, oparent.objectName)) {// if parent classes don't exist
+									o.createOWLNamedClass(oparent.objectName);// add parent classes
 								}
-								o.getOWLNamedClass(_object_name).addSuperclass(o.getOWLNamedClass(oparent.objectname));
+								o.getOWLNamedClass(object_name).addSuperclass(o.getOWLNamedClass(oparent.objectName));
 							}
 						}
 						if (hasproperty) {// if this class has properties
-							for (_objectproperty oprop : _object_property) {// add properties
-								OWLObjectProperty oop = o.getOWLObjectProperty(oprop.propertyname);
-								o.getOWLIndividual(_object_name).setPropertyValue(oop, oprop.propertyvalue);
+							for (objectProperty oprop : object_property) {// add properties
+								OWLObjectProperty oop = o.getOWLObjectProperty(oprop.propertyName);
+								o.getOWLIndividual(object_name).setPropertyValue(oop, oprop.propertyValue);
 							}
 						}
 					}
-				} else if (!individual_exist(o, _object_name)) {
-					if (_object_parent != null) {
-						for (_object oparent : _object_parent) {// add this class's parent classes
-							if (!class_exist(o, oparent.objectname)) {// if parent classes don't exist
-								o.createOWLNamedClass(oparent.objectname);// add parent classes
+				} else if (!individual_exist(o, object_name)) {
+					if (object_parent != null) {
+						for (object oparent : object_parent) {// add this class's parent classes
+							if (!class_exist(o, oparent.objectName)) {// if parent classes don't exist
+								o.createOWLNamedClass(oparent.objectName);// add parent classes
 							}
-							// o.getOWLNamedClass(_object_name).addSuperclass(o.getOWLNamedClass(oparent.objectname));
-							o.getOWLNamedClass(oparent.objectname).createOWLIndividual(_object_name);
+							// o.getOWLNamedClass(object_name).addSuperclass(o.getOWLNamedClass(oparent.objectName));
+							o.getOWLNamedClass(oparent.objectName).createOWLIndividual(object_name);
 						}
 					}
 					if (hasproperty) {// if this class has properties
-						for (_objectproperty oprop : _object_property) {// add properties
-							OWLObjectProperty oop = o.getOWLObjectProperty(oprop.propertyname);
-							o.getOWLIndividual(_object_name).setPropertyValue(oop, oprop.propertyvalue);
+						for (objectProperty oprop : object_property) {// add properties
+							OWLObjectProperty oop = o.getOWLObjectProperty(oprop.propertyName);
+							o.getOWLIndividual(object_name).setPropertyValue(oop, oprop.propertyValue);
 						}
 					}
 				}

@@ -1,5 +1,5 @@
 eclipse.preferences.version=1
-encoding//src/hanLP/HanLPMain.java=UTF-8
+encoding//src/ontMainUtils/HanLPMain.java=UTF-8
 encoding//src/mainView/MainForm.java=GBK
 encoding//src/translateStructclassToRDF=UTF-8
 encoding//src/translateStructclassToRDF/TranslateStructclassToRDFMain.java=UTF-8

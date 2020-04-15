@@ -1,0 +1,52 @@
+<component name="libraryTable">
+  <library name="antlr-2.7.5">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/project_jars/Protege_3.5/plugins/edu.stanford.smi.protegex.owl/antlr-2.7.5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/project_jars/Protege_3.5/plugins/edu.stanford.smi.protegex.owl/antlr-runtime-3.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/project_jars/Protege_3.5/plugins/edu.stanford.smi.protegex.owl/arq-extra.jar!/" />
+      <root url="jar://$PROJECT_DIR$/project_jars/Protege_3.5/plugins/edu.stanford.smi.protegex.owl/arq.jar!/" />
+      <root url="jar://$PROJECT_DIR$/project_jars/Protege_3.5/plugins/edu.stanford.smi.protegex.owl/axis.jar!/" />
+      <root url="jar://$PROJECT_DIR$/project_jars/Protege_3.5/plugins/edu.stanford.smi.protegex.owl/commons-discovery-0.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/project_jars/Protege_3.5/plugins/edu.stanford.smi.protegex.owl/commons-lang-2.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/project_jars/Protege_3.5/plugins/edu.stanford.smi.protegex.owl/commons-logging-1.1.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/project_jars/Protege_3.5/plugins/edu.stanford.smi.protegex.owl/concurrent.jar!/" />
+      <root url="jar://$PROJECT_DIR$/project_jars/Protege_3.5/plugins/edu.stanford.smi.protegex.owl/drools-compiler-5.4.0-SNAPSHOT.jar!/" />
+      <root url="jar://$PROJECT_DIR$/project_jars/Protege_3.5/plugins/edu.stanford.smi.protegex.owl/drools-core-5.4.0-SNAPSHOT.jar!/" />
+      <root url="jar://$PROJECT_DIR$/project_jars/Protege_3.5/plugins/edu.stanford.smi.protegex.owl/edtftpj-1.5.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/project_jars/Protege_3.5/plugins/edu.stanford.smi.protegex.owl/ekitspell.jar!/" />
+      <root url="jar://$PROJECT_DIR$/project_jars/Protege_3.5/plugins/edu.stanford.smi.protegex.owl/icu4j_3.4.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/project_jars/Protege_3.5/plugins/edu.stanford.smi.protegex.owl/iri.jar!/" />
+      <root url="jar://$PROJECT_DIR$/project_jars/Protege_3.5/plugins/edu.stanford.smi.protegex.owl/jcalendar.jar!/" />
+      <root url="jar://$PROJECT_DIR$/project_jars/Protege_3.5/plugins/edu.stanford.smi.protegex.owl/jdom.jar!/" />
+      <root url="jar://$PROJECT_DIR$/project_jars/Protege_3.5/plugins/edu.stanford.smi.protegex.owl/jena-dig.jar!/" />
+      <root url="jar://$PROJECT_DIR$/project_jars/Protege_3.5/plugins/edu.stanford.smi.protegex.owl/jena.jar!/" />
+      <root url="jar://$PROJECT_DIR$/project_jars/Protege_3.5/plugins/edu.stanford.smi.protegex.owl/jep-2.4.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/project_jars/Protege_3.5/plugins/edu.stanford.smi.protegex.owl/json.jar!/" />
+      <root url="jar://$PROJECT_DIR$/project_jars/Protege_3.5/plugins/edu.stanford.smi.protegex.owl/junit.jar!/" />
+      <root url="jar://$PROJECT_DIR$/project_jars/Protege_3.5/plugins/edu.stanford.smi.protegex.owl/kazuki.jar!/" />
+      <root url="jar://$PROJECT_DIR$/project_jars/Protege_3.5/plugins/edu.stanford.smi.protegex.owl/knowledge-api-5.4.0-SNAPSHOT.jar!/" />
+      <root url="jar://$PROJECT_DIR$/project_jars/Protege_3.5/plugins/edu.stanford.smi.protegex.owl/knowledge-internal-api-5.4.0-SNAPSHOT.jar!/" />
+      <root url="jar://$PROJECT_DIR$/project_jars/Protege_3.5/plugins/edu.stanford.smi.protegex.owl/log4j-1.2.12.jar!/" />
+      <root url="jar://$PROJECT_DIR$/project_jars/Protege_3.5/plugins/edu.stanford.smi.protegex.owl/mvel2-2.1.0.drools8.jar!/" />
+      <root url="jar://$PROJECT_DIR$/project_jars/Protege_3.5/plugins/edu.stanford.smi.protegex.owl/org.eclipse.jdt.core_3.7.0.v_B61.jar!/" />
+      <root url="jar://$PROJECT_DIR$/project_jars/Protege_3.5/plugins/edu.stanford.smi.protegex.owl/orphanNodesAlg.jar!/" />
+      <root url="jar://$PROJECT_DIR$/project_jars/Protege_3.5/plugins/edu.stanford.smi.protegex.owl/owl-portability-p3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/project_jars/Protege_3.5/plugins/edu.stanford.smi.protegex.owl/owl-portability.jar!/" />
+      <root url="jar://$PROJECT_DIR$/project_jars/Protege_3.5/plugins/edu.stanford.smi.protegex.owl/owlsyntax.jar!/" />
+      <root url="jar://$PROJECT_DIR$/project_jars/Protege_3.5/plugins/edu.stanford.smi.protegex.owl/protege-owl.jar!/" />
+      <root url="jar://$PROJECT_DIR$/project_jars/Protege_3.5/plugins/edu.stanford.smi.protegex.owl/slf4j-api-1.5.8.jar!/" />
+      <root url="jar://$PROJECT_DIR$/project_jars/Protege_3.5/plugins/edu.stanford.smi.protegex.owl/slf4j-log4j12-1.5.8.jar!/" />
+      <root url="jar://$PROJECT_DIR$/project_jars/Protege_3.5/plugins/edu.stanford.smi.protegex.owl/stax-api-1.0.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/project_jars/Protege_3.5/plugins/edu.stanford.smi.protegex.owl/swingx-1.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/project_jars/Protege_3.5/plugins/edu.stanford.smi.protegex.owl/swrl-api.jar!/" />
+      <root url="jar://$PROJECT_DIR$/project_jars/Protege_3.5/plugins/edu.stanford.smi.protegex.owl/swrl-drools-bridge.jar!/" />
+      <root url="jar://$PROJECT_DIR$/project_jars/Protege_3.5/plugins/edu.stanford.smi.protegex.owl/swrl-jess-bridge.jar!/" />
+      <root url="jar://$PROJECT_DIR$/project_jars/Protege_3.5/plugins/edu.stanford.smi.protegex.owl/swrl-tab-p3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/project_jars/Protege_3.5/plugins/edu.stanford.smi.protegex.owl/wstx-asl-3.2.9.jar!/" />
+      <root url="jar://$PROJECT_DIR$/project_jars/Protege_3.5/plugins/edu.stanford.smi.protegex.owl/xercesImpl.jar!/" />
+      <root url="jar://$PROJECT_DIR$/project_jars/Protege_3.5/plugins/edu.stanford.smi.protegex.owl/xml-apis.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

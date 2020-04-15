@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="dom4j-1.6.1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/project_jars/dom4j-1.6.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/project_jars/forms-1.3.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/project_jars/jsoup-1.7.2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

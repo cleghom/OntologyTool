@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="driver">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/project_jars/Protege_3.5/driver.jar!/" />
+      <root url="jar://$PROJECT_DIR$/project_jars/Protege_3.5/driver1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/project_jars/Protege_3.5/lax.jar!/" />
+      <root url="jar://$PROJECT_DIR$/project_jars/Protege_3.5/looks.jar!/" />
+      <root url="jar://$PROJECT_DIR$/project_jars/Protege_3.5/protege.jar!/" />
+      <root url="jar://$PROJECT_DIR$/project_jars/Protege_3.5/unicode_panel.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
