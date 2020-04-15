@@ -5,9 +5,9 @@ Java实现中文本体自动构建工具：A program about how to build an ontol
 ---
 
 ## step1：下载相关需要额外配置的内容
->[下载地址](暂时为定义！)
->配置方法：将下载后的project_jars放置在OntologyTool路径下
->路径下内容如下：
+>链接: https://pan.baidu.com/s/1cLJShvwCqN65loO3QBg2lQ 提取码: avhd  
+>配置方法：将下载后的project_jars放置在OntologyTool路径下  
+>路径下内容如下：  
 - **project_jars/**  
  -- **HanLP/**(文件夹)  
  -- **htmlunit-2.15-bin/**(文件夹)  
